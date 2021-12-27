@@ -1,0 +1,25 @@
+﻿using System;
+using System.Collections.Generic;
+using Utils.Infrastructure.Interfaces.Models;
+
+namespace Data.Models
+{
+    /// <summary>
+    /// Stores (including store contacts) that sell Adventure Works Cycles products to consumers.
+    /// </summary>
+    public class VStoreWithContact : IBaseModel
+    {
+        public int BusinessEntityId { get; set; }
+        public string Name { get; set; } = null!;
+        public string ContactType { get; set; } = null!;
+        public string? Title { get; set; }
+        public string FirstName { get; set; } = null!;
+        public string? MiddleName { get; set; }
+        public string LastName { get; set; } = null!;
+        public string? Suffix { get; set; }
+        public string? PhoneNumber { get; set; }
+        public string? PhoneNumberType { get; set; }
+        public string? EmailAddress { get; set; }
+        public int EmailPromotion { get; set; }
+    }
+}
