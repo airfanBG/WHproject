@@ -797,7 +797,7 @@ namespace Data.WarehouseContext.Models
 
                 entity.HasComment("Where to send a person email.");
 
-                entity.HasIndex(e => e.EmailAddress1, "IX_EmailAddress_EmailAddress");
+                entity.HasIndex(e => e.Email, "IX_EmailAddress_EmailAddress");
 
                 entity.Property(e => e.BusinessEntityId)
                     .HasColumnName("BusinessEntityID")
@@ -808,7 +808,7 @@ namespace Data.WarehouseContext.Models
                     .HasColumnName("EmailAddressID")
                     .HasComment("Primary key. ID of this email address.");
 
-                entity.Property(e => e.EmailAddress1)
+                entity.Property(e => e.Email)
                     .HasMaxLength(50)
                     .HasColumnName("EmailAddress")
                     .HasComment("E-mail address for the person.");

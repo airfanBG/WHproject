@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using Utils.Infrastructure.Interfaces.Models;
 
 namespace Data.Models
@@ -20,7 +21,8 @@ namespace Data.Models
         /// <summary>
         /// E-mail address for the person.
         /// </summary>
-        public string? EmailAddress1 { get; set; }
+        [Column("EmailAddress")]
+        public string? Email { get; set; }
         /// <summary>
         /// ROWGUIDCOL number uniquely identifying the record. Used to support a merge replication sample.
         /// </summary>
