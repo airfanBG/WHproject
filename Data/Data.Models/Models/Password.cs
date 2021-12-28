@@ -26,6 +26,7 @@ namespace Data.Models
         /// Date and time the record was last updated.
         /// </summary>
         public DateTime ModifiedDate { get; set; }
+        public bool isRegistered { get; set; }
 
         public Person BusinessEntity { get; set; } = null!;
     }

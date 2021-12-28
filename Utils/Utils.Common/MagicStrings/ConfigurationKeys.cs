@@ -12,6 +12,5 @@ namespace Utils.Common.MagicStrings
         public static string JWT_ValidIssuer = "JWT:ValidIssuer";
         public static string JWT_ValidAudience = "JWT:ValidAudience";
         public static string JWT_Expiration = "JWT:Expiration";
-        public static string Hash_iterations = "Iterations";
     }
 }

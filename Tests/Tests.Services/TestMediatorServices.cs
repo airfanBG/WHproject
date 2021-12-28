@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Utils.Infrastructure.Interfaces.Services;
-using Utils.Services.Mediator;
+using Utils.Services.DataServices;
 using Xunit;
 
 namespace Tests.Services
@@ -16,13 +16,12 @@ namespace Tests.Services
         [Fact]
         public async Task Test_GetAll_service()
         {
-            var wareHouse = new Mock<IBasicWarehouseService<Product>>();
-            wareHouse.Setup(x => x.GetByIdAsync(1));
-            GetProductCommand command = new GetProductCommand();
-            command.Id = 1;
-            GetProductCommandHandler getProductCommandHandler = new GetProductCommandHandler(wareHouse.Object);
+            //var wareHouse = new Mock<ApplicationDbContext>();
+           
 
-            Assert.Equal(1, getProductCommandHandler.Handle(command, default).Id);
+            //WarehouseService<Product> getProductCommandHandler = new WarehouseService<Product>(wareHouse.Object);
+
+            //Assert.Equal(1, getProductCommandHandler.);
         }
     }
 }

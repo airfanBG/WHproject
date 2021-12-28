@@ -5,7 +5,7 @@ using Utils.Infrastructure.Interfaces.Services;
 
 namespace Utils.Services.DataServices
 {
-    internal class WarehouseService<T> : IBasicWarehouseService<T>where T:BaseModel
+    public class WarehouseService<T> : IBasicWarehouseService<T>where T:BaseModel
     {
         public IDatabaseService DatabaseService { get; set; }
 
@@ -26,6 +26,7 @@ namespace Utils.Services.DataServices
             var entity= this.DatabaseService.Context.Set<T>().FirstOrDefault(x => CompareIds(id));
             return entity;
         }
+
         private bool CompareIds(int id)
         {
             var keyValue = DatabaseService.Context.GetKeyValue(typeof(T));           

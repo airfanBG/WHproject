@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Data\Data.WarehouseContext\Data.WarehouseContext.csproj" />
+    <ProjectReference Include="..\..\Utils\Utils.Common\Utils.Common.csproj" />
+    <ProjectReference Include="..\..\Utils\Utils.Infrastructure\Utils.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Utils\Utils.Services\Utils.Services.csproj" />
+  </ItemGroup>
+
+</Project>
