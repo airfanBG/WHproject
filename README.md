@@ -1,8 +1,13 @@
 Web API project based on AdwentureWorks2019 database.
+If you want to consume API, first step is to get one Email from bottom emails and make registration. After that you must **Login** and take your **Bearer** token to login.
+# API routings:
+## In progress...
 
 
 
-Emails:
+
+
+<b>Emails</b>:
 ken0@adventure-works.com
 terri0@adventure-works.com
 roberto0@adventure-works.com
