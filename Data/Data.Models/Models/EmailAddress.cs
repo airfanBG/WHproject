@@ -23,6 +23,7 @@ namespace Data.Models
         /// </summary>
         [Column("EmailAddress")]
         public string? Email { get; set; }
+        public string Name { get; set; }
         /// <summary>
         /// ROWGUIDCOL number uniquely identifying the record. Used to support a merge replication sample.
         /// </summary>

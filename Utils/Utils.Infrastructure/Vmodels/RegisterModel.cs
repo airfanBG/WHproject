@@ -12,6 +12,7 @@ namespace Utils.Infrastructure.Vmodels
         
         [Required]
         public string Email { get; set; }
+        public string Name { get; set; }
         [Required]
         [Compare("ConfirmPassword")]
         public string Password { get; set; }

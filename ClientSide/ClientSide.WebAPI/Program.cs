@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using Serilog;
+using Serilog.Sinks.MSSqlServer;
 using System.Reflection;
 using System.Text;
 using Utils.Common.MagicStrings;
@@ -16,12 +18,30 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
+
+//configuration
 IConfiguration configuration = new ConfigurationBuilder()
        .SetBasePath(Directory.GetCurrentDirectory())
        .AddJsonFile("appSettings.json", false)
        .Build();
 builder.Services.AddSingleton<IConfiguration>(configuration);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+//Serilog
+
+builder.Host.UseSerilog((ctx,lc)=>
+   lc.WriteTo.MSSqlServer(
+                   connectionString: configuration.GetConnectionString("DefaultConnection"),
+                   tableName: configuration.GetSection("Serilog:TableName").Value,
+                   appConfiguration: configuration,
+                   autoCreateSqlTable: true,
+                   columnOptionsSection: configuration.GetSection("Serilog:ColumnOptions"),
+                   schemaName: configuration.GetSection("Serilog:SchemaName").Value)
+               );
+
+
+//services
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -31,6 +51,7 @@ builder.Services.AddScoped<IDatabaseService, ApplicationDbContext>();
 builder.Services.AddScoped<DbContext, AdventureWorks2019Context>();
 builder.Services.AddDbContext<AdventureWorks2019Context>(o => { o.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")); });
 
+//JWT
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -55,6 +76,7 @@ builder.Services.AddAuthentication(options =>
 
 var app = builder.Build();
 
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -63,7 +85,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

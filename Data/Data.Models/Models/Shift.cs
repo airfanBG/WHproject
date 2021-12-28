@@ -17,7 +17,7 @@ namespace Data.Models
         /// <summary>
         /// Primary key for Shift records.
         /// </summary>
-        public byte ShiftId { get; set; }
+        public int ShiftId { get; set; }
         /// <summary>
         /// Shift description.
         /// </summary>

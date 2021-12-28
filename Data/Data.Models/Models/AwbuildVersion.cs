@@ -12,7 +12,7 @@ namespace Data.Models
         /// <summary>
         /// Primary key for AWBuildVersion records.
         /// </summary>
-        public byte SystemInformationId { get; set; }
+        public int SystemInformationId { get; set; }
         /// <summary>
         /// Version number of the database in 9.yy.mm.dd.00 format.
         /// </summary>
