@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Cross-reference table mapping sales orders to sales reason codes.
     /// </summary>
-    public class SalesOrderHeaderSalesReason : IBaseModel
+    public class SalesOrderHeaderSalesReason : BaseModel
     {
         /// <summary>
         /// Primary key. Foreign key to SalesOrderHeader.SalesOrderID.

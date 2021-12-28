@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// General purchase order information. See PurchaseOrderDetail.
     /// </summary>
-    public class PurchaseOrderHeader : IBaseModel
+    public class PurchaseOrderHeader : BaseModel
     {
         public PurchaseOrderHeader()
         {

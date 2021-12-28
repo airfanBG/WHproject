@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Product model classification.
     /// </summary>
-    public class ProductModel : IBaseModel
+    public class ProductModel : BaseModel
     {
         public ProductModel()
         {

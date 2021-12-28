@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Cross-reference table mapping products and product photos.
     /// </summary>
-    public class ProductProductPhoto : IBaseModel
+    public class ProductProductPhoto : BaseModel
     {
         /// <summary>
         /// Product identification number. Foreign key to Product.ProductID.

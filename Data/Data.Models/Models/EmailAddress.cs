@@ -8,7 +8,7 @@ namespace Data.Models
     /// <summary>
     /// Where to send a person email.
     /// </summary>
-    public class EmailAddress : IBaseModel
+    public class EmailAddress : BaseModel
     {
         /// <summary>
         /// Primary key. Person associated with this email address.  Foreign key to Person.BusinessEntityID

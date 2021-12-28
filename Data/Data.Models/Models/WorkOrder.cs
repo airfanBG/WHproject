@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Manufacturing work orders.
     /// </summary>
-    public class WorkOrder : IBaseModel
+    public class WorkOrder : BaseModel
     {
         public WorkOrder()
         {

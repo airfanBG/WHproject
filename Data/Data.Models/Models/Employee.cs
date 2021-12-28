@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Employee information such as salary, department, and title.
     /// </summary>
-    public class Employee : IBaseModel
+    public class Employee : BaseModel
     {
         public Employee()
         {

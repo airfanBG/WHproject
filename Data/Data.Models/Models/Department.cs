@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Lookup table containing the departments within the Adventure Works Cycles company.
     /// </summary>
-    public class Department : IBaseModel
+    public class Department : BaseModel
     {
         public Department()
         {

@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Items required to make bicycles and bicycle subassemblies. It identifies the heirarchical relationship between a parent product and its components.
     /// </summary>
-    public class BillOfMaterial:IBaseModel
+    public class BillOfMaterial:BaseModel
     {
         /// <summary>
         /// Primary key for BillOfMaterials records.

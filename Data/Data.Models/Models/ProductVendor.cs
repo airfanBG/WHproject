@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Cross-reference table mapping vendors with the products they supply.
     /// </summary>
-    public class ProductVendor : IBaseModel
+    public class ProductVendor : BaseModel
     {
         /// <summary>
         /// Primary key. Foreign key to Product.ProductID.

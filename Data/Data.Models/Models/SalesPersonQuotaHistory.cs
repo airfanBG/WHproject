@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Sales performance tracking.
     /// </summary>
-    public class SalesPersonQuotaHistory : IBaseModel
+    public class SalesPersonQuotaHistory : BaseModel
     {
         /// <summary>
         /// Sales person identification number. Foreign key to SalesPerson.BusinessEntityID.

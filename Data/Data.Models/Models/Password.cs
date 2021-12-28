@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// One way hashed authentication information
     /// </summary>
-    public class Password : IBaseModel
+    public class Password : BaseModel
     {
         public int BusinessEntityId { get; set; }
         /// <summary>

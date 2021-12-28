@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Displays the content from each element in the xml column Demographics for each customer in the Person.Person table.
     /// </summary>
-    public class VPersonDemographic : IBaseModel
+    public class VPersonDemographic : BaseModel
     {
         public int BusinessEntityId { get; set; }
         public decimal? TotalPurchaseYtd { get; set; }

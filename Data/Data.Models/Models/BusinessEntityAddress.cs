@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Cross-reference table mapping customers, vendors, and employees to their addresses.
     /// </summary>
-    public class BusinessEntityAddress: IBaseModel
+    public class BusinessEntityAddress: BaseModel
     {
         /// <summary>
         /// Primary key. Foreign key to BusinessEntity.BusinessEntityID.

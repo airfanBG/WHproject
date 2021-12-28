@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Human beings involved with AdventureWorks: employees, customer contacts, and vendor contacts.
     /// </summary>
-    public class Person : IBaseModel
+    public class Person : BaseModel
     {
         public Person()
         {

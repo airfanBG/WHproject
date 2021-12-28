@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Lookup table containing standard ISO currencies.
     /// </summary>
-    public class Currency : IBaseModel
+    public class Currency : BaseModel
     {
         public Currency()
         {

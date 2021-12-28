@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Contains online customer orders until the order is submitted or cancelled.
     /// </summary>
-    public class ShoppingCartItem : IBaseModel
+    public class ShoppingCartItem : BaseModel
     {
         /// <summary>
         /// Primary key for ShoppingCartItem records.

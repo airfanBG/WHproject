@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Manufacturing failure reasons lookup table.
     /// </summary>
-    public class ScrapReason : IBaseModel
+    public class ScrapReason : BaseModel
     {
         public ScrapReason()
         {

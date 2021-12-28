@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Product inventory and manufacturing locations.
     /// </summary>
-    public class Location : IBaseModel
+    public class Location : BaseModel
     {
         public Location()
         {

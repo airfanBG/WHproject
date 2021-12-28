@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Work order details.
     /// </summary>
-    public class WorkOrderRouting : IBaseModel
+    public class WorkOrderRouting : BaseModel
     {
         /// <summary>
         /// Primary key. Foreign key to WorkOrder.WorkOrderID.

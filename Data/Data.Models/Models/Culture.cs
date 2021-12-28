@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Lookup table containing the languages in which some AdventureWorks data is stored.
     /// </summary>
-    public class Culture : IBaseModel
+    public class Culture : BaseModel
     {
         public Culture()
         {

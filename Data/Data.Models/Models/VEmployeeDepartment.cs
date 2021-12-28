@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Returns employee name, title, and current department.
     /// </summary>
-    public class VEmployeeDepartment : IBaseModel
+    public class VEmployeeDepartment : BaseModel
     {
         public int BusinessEntityId { get; set; }
         public string? Title { get; set; }

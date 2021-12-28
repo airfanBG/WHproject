@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Sales representative transfers to other sales territories.
     /// </summary>
-    public class SalesTerritoryHistory : IBaseModel
+    public class SalesTerritoryHistory : BaseModel
     {
         /// <summary>
         /// Primary key. The sales rep.  Foreign key to SalesPerson.BusinessEntityID.

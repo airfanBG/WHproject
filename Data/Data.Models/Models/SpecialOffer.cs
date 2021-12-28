@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Sale discounts lookup table.
     /// </summary>
-    public class SpecialOffer : IBaseModel
+    public class SpecialOffer : BaseModel
     {
         public SpecialOffer()
         {

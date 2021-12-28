@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Customer credit card information.
     /// </summary>
-    public class CreditCard:IBaseModel
+    public class CreditCard:BaseModel
     {
         public CreditCard()
         {

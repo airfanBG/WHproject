@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Utils.Infrastructure.Interfaces.Models
 {
-    public interface IBaseModel
+    public class BaseModel
     {
+       // public virtual int Id { get; set; }
     }
 }

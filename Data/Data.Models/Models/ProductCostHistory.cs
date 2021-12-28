@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Changes in the cost of a product over time.
     /// </summary>
-    public class ProductCostHistory : IBaseModel
+    public class ProductCostHistory : BaseModel
     {
         /// <summary>
         /// Product identification number. Foreign key to Product.ProductID

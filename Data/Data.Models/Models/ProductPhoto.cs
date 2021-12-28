@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Product images.
     /// </summary>
-    public class ProductPhoto : IBaseModel
+    public class ProductPhoto : BaseModel
     {
         public ProductPhoto()
         {

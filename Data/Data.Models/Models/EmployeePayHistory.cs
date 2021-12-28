@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Employee pay history.
     /// </summary>
-    public class EmployeePayHistory : IBaseModel
+    public class EmployeePayHistory : BaseModel
     {
         /// <summary>
         /// Employee identification number. Foreign key to Employee.BusinessEntityID.

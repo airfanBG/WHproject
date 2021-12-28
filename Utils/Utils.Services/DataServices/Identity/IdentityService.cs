@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+using Utils.Common.MagicStrings;
 using Utils.Common.Security;
 using Utils.Infrastructure.Interfaces.Services;
 using Utils.Infrastructure.Vmodels;
@@ -34,12 +35,12 @@ namespace Utils.Services.DataServices.Identity
                 if (!verify) return new JwtSecurityToken();
                 else
                 {
-                    var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:TokenSecret"]));
+                    var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration[ConfigurationKeys.JWT_TokenSecret]));
 
                     var token = new JwtSecurityToken(
-                        issuer: Configuration["JWT:ValidIssuer"],
-                        audience: Configuration["JWT:ValidAudience"],
-                        expires: DateTime.Now.AddHours(double.Parse(Configuration["JWT:Expiration"])),
+                        issuer: Configuration[ConfigurationKeys.JWT_ValidIssuer],
+                        audience: Configuration[ConfigurationKeys.JWT_ValidAudience],
+                        expires: DateTime.Now.AddHours(double.Parse(Configuration[ConfigurationKeys.JWT_Expiration])),
                         signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
                         );
                     return token;
@@ -56,7 +57,7 @@ namespace Utils.Services.DataServices.Identity
             if (userExists != null)
             {
                 Password password = await DatabaseService.Context.Set<Password>().FirstOrDefaultAsync(x => x.BusinessEntityId == userExists.BusinessEntityId);
-                var hashed = SecurePasswordHasher.Hash(model.Password);
+                var hashed = SecurePasswordHasher.Hash(model.Password,int.Parse(Configuration[ConfigurationKeys.Hash_iterations]));
                 password.PasswordHash = hashed;
 
                 DatabaseService.Context.Set<Password>().Update(password);

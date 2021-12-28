@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Cross-reference table mapping people to their credit card information in the CreditCard table. 
     /// </summary>
-    public class PersonCreditCard : IBaseModel
+    public class PersonCreditCard : BaseModel
     {
         /// <summary>
         /// Business entity identification number. Foreign key to Person.BusinessEntityID.

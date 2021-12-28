@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Stores (including store addresses) that sell Adventure Works Cycles products to consumers.
     /// </summary>
-    public class VStoreWithAddress : IBaseModel
+    public class VStoreWithAddress : BaseModel
     {
         public int BusinessEntityId { get; set; }
         public string Name { get; set; } = null!;

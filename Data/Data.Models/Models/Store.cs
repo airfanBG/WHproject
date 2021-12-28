@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Customers (resellers) of Adventure Works products.
     /// </summary>
-    public class Store : IBaseModel
+    public class Store : BaseModel
     {
         public Store()
         {

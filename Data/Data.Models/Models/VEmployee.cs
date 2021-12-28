@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Employee names and addresses.
     /// </summary>
-    public class VEmployee : IBaseModel
+    public class VEmployee : BaseModel
     {
         public int BusinessEntityId { get; set; }
         public string? Title { get; set; }

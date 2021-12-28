@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Product subcategories. See ProductCategory table.
     /// </summary>
-    public class ProductSubcategory : IBaseModel
+    public class ProductSubcategory : BaseModel
     {
         public ProductSubcategory()
         {

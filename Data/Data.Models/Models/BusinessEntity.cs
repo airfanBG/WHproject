@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Source of the ID that connects vendors, customers, and employees with address and contact information.
     /// </summary>
-    public class BusinessEntity:IBaseModel
+    public class BusinessEntity:BaseModel
     {
         public BusinessEntity()
         {

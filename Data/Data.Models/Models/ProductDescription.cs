@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Product descriptions in several languages.
     /// </summary>
-    public class ProductDescription : IBaseModel
+    public class ProductDescription : BaseModel
     {
         public ProductDescription()
         {

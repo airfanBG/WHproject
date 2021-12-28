@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Individual customers (names and addresses) that purchase Adventure Works Cycles products online.
     /// </summary>
-    public class VIndividualCustomer : IBaseModel
+    public class VIndividualCustomer : BaseModel
     {
         public int BusinessEntityId { get; set; }
         public string? Title { get; set; }

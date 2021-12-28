@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Uses PIVOT to return aggregated sales information for each sales representative.
     /// </summary>
-    public class VSalesPersonSalesByFiscalYear : IBaseModel
+    public class VSalesPersonSalesByFiscalYear : BaseModel
     {
         public int? SalesPersonId { get; set; }
         public string? FullName { get; set; }

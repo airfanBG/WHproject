@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Work shift lookup table.
     /// </summary>
-    public class Shift : IBaseModel
+    public class Shift : BaseModel
     {
         public Shift()
         {

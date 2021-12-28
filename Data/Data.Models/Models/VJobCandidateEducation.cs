@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Displays the content from each education related element in the xml column Resume in the HumanResources.JobCandidate table. The content has been localized into French, Simplified Chinese and Thai. Some data may not display correctly unless supplemental language support is installed.
     /// </summary>
-    public class VJobCandidateEducation : IBaseModel
+    public class VJobCandidateEducation : BaseModel
     {
         public int JobCandidateId { get; set; }
         public string? EduLevel { get; set; }

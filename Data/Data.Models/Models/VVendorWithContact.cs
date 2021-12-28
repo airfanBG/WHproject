@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Vendor (company) names  and the names of vendor employees to contact.
     /// </summary>
-    public class VVendorWithContact : IBaseModel
+    public class VVendorWithContact : BaseModel
     {
         public int BusinessEntityId { get; set; }
         public string Name { get; set; } = null!;

@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// General sales order information.
     /// </summary>
-    public class SalesOrderHeader : IBaseModel
+    public class SalesOrderHeader : BaseModel
     {
         public SalesOrderHeader()
         {

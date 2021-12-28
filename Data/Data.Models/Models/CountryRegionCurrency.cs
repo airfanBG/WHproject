@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Cross-reference table mapping ISO currency codes to a country or region.
     /// </summary>
-    public class CountryRegionCurrency: IBaseModel
+    public class CountryRegionCurrency: BaseModel
     {
         /// <summary>
         /// ISO code for countries and regions. Foreign key to CountryRegion.CountryRegionCode.

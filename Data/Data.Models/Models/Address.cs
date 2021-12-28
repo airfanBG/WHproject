@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Street address information for customers, employees, and vendors.
     /// </summary>
-    public class Address:IBaseModel
+    public class Address:BaseModel
     {
         public Address()
         {

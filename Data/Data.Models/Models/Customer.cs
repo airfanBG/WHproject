@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Current customer information. Also see the Person and Store tables.
     /// </summary>
-    public class Customer:IBaseModel
+    public class Customer:BaseModel
     {
         public Customer()
         {

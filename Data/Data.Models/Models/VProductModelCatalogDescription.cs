@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Displays the content from each element in the xml column CatalogDescription for each product in the Production.ProductModel table that has catalog data.
     /// </summary>
-    public class VProductModelCatalogDescription : IBaseModel
+    public class VProductModelCatalogDescription : BaseModel
     {
         public int ProductModelId { get; set; }
         public string Name { get; set; } = null!;

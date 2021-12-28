@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Type of phone number of a person.
     /// </summary>
-    public class PhoneNumberType : IBaseModel
+    public class PhoneNumberType : BaseModel
     {
         public PhoneNumberType()
         {

@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Bicycle assembly diagrams.
     /// </summary>
-    public class Illustration : IBaseModel
+    public class Illustration : BaseModel
     {
         public Illustration()
         {

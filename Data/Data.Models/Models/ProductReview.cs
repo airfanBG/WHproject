@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Customer reviews of products they have purchased.
     /// </summary>
-    public class ProductReview : IBaseModel
+    public class ProductReview : BaseModel
     {
         /// <summary>
         /// Primary key for ProductReview records.

@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Lookup table containing the ISO standard codes for countries and regions.
     /// </summary>
-    public class CountryRegion: IBaseModel
+    public class CountryRegion: BaseModel
     {
         public CountryRegion()
         {

@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Lookup table of customer purchase reasons.
     /// </summary>
-    public class SalesReason : IBaseModel
+    public class SalesReason : BaseModel
     {
         public SalesReason()
         {

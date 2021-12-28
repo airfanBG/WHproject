@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Cross-reference table mapping product descriptions and the language the description is written in.
     /// </summary>
-    public class ProductModelProductDescriptionCulture : IBaseModel
+    public class ProductModelProductDescriptionCulture : BaseModel
     {
         /// <summary>
         /// Primary key. Foreign key to ProductModel.ProductModelID.

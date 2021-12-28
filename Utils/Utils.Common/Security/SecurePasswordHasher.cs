@@ -12,7 +12,7 @@ namespace Utils.Common.Security
      /// Size of salt.
      /// </summary>
         private const int SaltSize = 16;
-        private const int Iterations = 1000;
+        private static int Iterations = 10;
         /// <summary>
         /// Size of hash.
         /// </summary>
@@ -24,25 +24,24 @@ namespace Utils.Common.Security
         /// <param name="password">The password.</param>
         /// <param name="iterations">Number of iterations.</param>
         /// <returns>The hash.</returns>
-        public static string Hash(string password)
+        public static string Hash(string password, int iterations)
         {
-            // Create salt
-           
-                byte[] salt;
-                RandomNumberGenerator.Create().GetBytes(salt = new byte[SaltSize]);
-                using (var pbkdf2 = new Rfc2898DeriveBytes(password, salt, Iterations))
-                {
-                    var hash = pbkdf2.GetBytes(HashSize);
-                    // Combine salt and hash
-                    var hashBytes = new byte[SaltSize + HashSize];
-                    Array.Copy(salt, 0, hashBytes, 0, SaltSize);
-                    Array.Copy(hash, 0, hashBytes, SaltSize, HashSize);
-                    // Convert to base64
-                    var base64Hash = Convert.ToBase64String(hashBytes);
+            Iterations = iterations;
+            byte[] salt;
+            RandomNumberGenerator.Create().GetBytes(salt = new byte[SaltSize]);
+            using (var pbkdf2 = new Rfc2898DeriveBytes(password, salt, iterations))
+            {
+                var hash = pbkdf2.GetBytes(HashSize);
+                // Combine salt and hash
+                var hashBytes = new byte[SaltSize + HashSize];
+                Array.Copy(salt, 0, hashBytes, 0, SaltSize);
+                Array.Copy(hash, 0, hashBytes, SaltSize, HashSize);
+                // Convert to base64
+                var base64Hash = Convert.ToBase64String(hashBytes);
 
-                    return base64Hash;
-                }
-            
+                return base64Hash;
+            }
+
 
         }
 

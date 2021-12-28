@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Cross-reference table mapping product models and illustrations.
     /// </summary>
-    public class ProductModelIllustration : IBaseModel
+    public class ProductModelIllustration : BaseModel
     {
         /// <summary>
         /// Primary key. Foreign key to ProductModel.ProductModelID.

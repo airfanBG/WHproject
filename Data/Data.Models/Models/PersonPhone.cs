@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Telephone number and type of a person.
     /// </summary>
-    public class PersonPhone : IBaseModel
+    public class PersonPhone : BaseModel
     {
         /// <summary>
         /// Business entity identification number. Foreign key to Person.BusinessEntityID.

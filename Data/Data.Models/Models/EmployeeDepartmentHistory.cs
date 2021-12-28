@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Employee department transfers.
     /// </summary>
-    public class EmployeeDepartmentHistory : IBaseModel
+    public class EmployeeDepartmentHistory : BaseModel
     {
         /// <summary>
         /// Employee identification number. Foreign key to Employee.BusinessEntityID.

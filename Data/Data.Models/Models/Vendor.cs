@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Companies from whom Adventure Works Cycles purchases parts or other goods.
     /// </summary>
-    public class Vendor : IBaseModel
+    public class Vendor : BaseModel
     {
         public Vendor()
         {

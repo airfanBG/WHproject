@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Displays the content from each element in the xml column Instructions for each product in the Production.ProductModel table that has manufacturing instructions.
     /// </summary>
-    public class VProductModelInstruction : IBaseModel
+    public class VProductModelInstruction : BaseModel
     {
         public int ProductModelId { get; set; }
         public string Name { get; set; } = null!;

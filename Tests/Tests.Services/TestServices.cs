@@ -28,5 +28,19 @@ namespace Tests.Services
 
             Assert.NotEmpty(await services.GetAllAsync());
         }
+        [Fact]
+        public async Task Test_GetById_service()
+        {
+            //var wareHouse = new Mock<IBasicWarehouseService>();
+            AdventureWorks2019Context context = new AdventureWorks2019Context(options);
+
+            var db = new ApplicationDbContext(context);
+
+            var services = new WarehouseService<Product>(db);
+            var product = await services.GetByIdAsync(1);
+
+            Assert.NotNull(product);
+        }
+
     }
 }

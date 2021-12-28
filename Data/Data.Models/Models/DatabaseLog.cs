@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Audit table tracking all DDL changes made to the AdventureWorks database. Data is captured by the database trigger ddlDatabaseTriggerLog.
     /// </summary>
-    public class DatabaseLog : IBaseModel
+    public class DatabaseLog : BaseModel
     {
         /// <summary>
         /// Primary key for DatabaseLog records.

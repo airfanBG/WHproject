@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Product inventory information.
     /// </summary>
-    public class ProductInventory : IBaseModel
+    public class ProductInventory : BaseModel
     {
         /// <summary>
         /// Product identification number. Foreign key to Product.ProductID.

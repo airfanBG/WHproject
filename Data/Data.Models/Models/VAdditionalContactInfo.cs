@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Displays the contact name and content from each element in the xml column AdditionalContactInfo for that person.
     /// </summary>
-    public class VAdditionalContactInfo : IBaseModel
+    public class VAdditionalContactInfo : BaseModel
     {
         public int BusinessEntityId { get; set; }
         public string FirstName { get; set; } = null!;

@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Currency exchange rates.
     /// </summary>
-    public class CurrencyRate : IBaseModel
+    public class CurrencyRate : BaseModel
     {
         public CurrencyRate()
         {

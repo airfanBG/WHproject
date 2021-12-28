@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Sales representative current information.
     /// </summary>
-    public class SalesPerson : IBaseModel
+    public class SalesPerson : BaseModel
     {
         public SalesPerson()
         {

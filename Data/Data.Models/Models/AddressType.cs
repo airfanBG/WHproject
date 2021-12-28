@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Types of addresses stored in the Address table. 
     /// </summary>
-    public class AddressType: IBaseModel
+    public class AddressType: BaseModel
     {
         public AddressType()
         {

@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Sales representiatives (names and addresses) and their sales-related information.
     /// </summary>
-    public class VSalesPerson : IBaseModel
+    public class VSalesPerson : BaseModel
     {
         public int BusinessEntityId { get; set; }
         public string? Title { get; set; }

@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Tax rate lookup table.
     /// </summary>
-    public class SalesTaxRate : IBaseModel
+    public class SalesTaxRate : BaseModel
     {
         /// <summary>
         /// Primary key for SalesTaxRate records.

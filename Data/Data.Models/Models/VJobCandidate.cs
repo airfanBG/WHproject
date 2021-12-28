@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Job candidate names and resumes.
     /// </summary>
-    public class VJobCandidate : IBaseModel
+    public class VJobCandidate : BaseModel
     {
         public int JobCandidateId { get; set; }
         public int? BusinessEntityId { get; set; }

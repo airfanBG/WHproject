@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Résumés submitted to Human Resources by job applicants.
     /// </summary>
-    public class JobCandidate : IBaseModel
+    public class JobCandidate : BaseModel
     {
         /// <summary>
         /// Primary key for JobCandidate records.

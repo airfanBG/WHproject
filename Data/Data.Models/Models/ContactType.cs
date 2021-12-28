@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Lookup table containing the types of business entity contacts.
     /// </summary>
-    public class ContactType: IBaseModel
+    public class ContactType: BaseModel
     {
         public ContactType()
         {

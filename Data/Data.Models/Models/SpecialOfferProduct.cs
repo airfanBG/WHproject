@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Cross-reference table mapping products to special offer discounts.
     /// </summary>
-    public class SpecialOfferProduct : IBaseModel
+    public class SpecialOfferProduct : BaseModel
     {
         public SpecialOfferProduct()
         {

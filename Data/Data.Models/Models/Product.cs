@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Products sold or used in the manfacturing of sold products.
     /// </summary>
-    public class Product : IBaseModel
+    public class Product : BaseModel
     {
         public Product()
         {

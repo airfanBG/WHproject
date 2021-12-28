@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Current version number of the AdventureWorks 2016 sample database. 
     /// </summary>
-    public class AwbuildVersion: IBaseModel
+    public class AwbuildVersion: BaseModel
     {
         /// <summary>
         /// Primary key for AWBuildVersion records.

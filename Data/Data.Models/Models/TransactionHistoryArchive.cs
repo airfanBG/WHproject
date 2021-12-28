@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Transactions for previous years.
     /// </summary>
-    public class TransactionHistoryArchive : IBaseModel
+    public class TransactionHistoryArchive : BaseModel
     {
         /// <summary>
         /// Primary key for TransactionHistoryArchive records.

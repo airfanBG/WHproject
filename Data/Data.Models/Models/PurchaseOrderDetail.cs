@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Individual products associated with a specific purchase order. See PurchaseOrderHeader.
     /// </summary>
-    public class PurchaseOrderDetail : IBaseModel
+    public class PurchaseOrderDetail : BaseModel
     {
         /// <summary>
         /// Primary key. Foreign key to PurchaseOrderHeader.PurchaseOrderID.

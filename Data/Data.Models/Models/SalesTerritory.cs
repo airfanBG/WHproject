@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Sales territory lookup table.
     /// </summary>
-    public class SalesTerritory : IBaseModel
+    public class SalesTerritory : BaseModel
     {
         public SalesTerritory()
         {

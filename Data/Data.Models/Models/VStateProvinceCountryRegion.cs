@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Joins StateProvince table with CountryRegion table.
     /// </summary>
-    public class VStateProvinceCountryRegion : IBaseModel
+    public class VStateProvinceCountryRegion : BaseModel
     {
         public int StateProvinceId { get; set; }
         public string StateProvinceCode { get; set; } = null!;

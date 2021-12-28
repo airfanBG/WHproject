@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Individual products associated with a specific sales order. See SalesOrderHeader.
     /// </summary>
-    public class SalesOrderDetail : IBaseModel
+    public class SalesOrderDetail : BaseModel
     {
         /// <summary>
         /// Primary key. Foreign key to SalesOrderHeader.SalesOrderID.

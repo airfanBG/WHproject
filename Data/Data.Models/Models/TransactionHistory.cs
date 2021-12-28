@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Record of each purchase order, sales order, or work order transaction year to date.
     /// </summary>
-    public class TransactionHistory : IBaseModel
+    public class TransactionHistory : BaseModel
     {
         /// <summary>
         /// Primary key for TransactionHistory records.

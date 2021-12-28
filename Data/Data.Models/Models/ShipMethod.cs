@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Shipping company lookup table.
     /// </summary>
-    public class ShipMethod : IBaseModel
+    public class ShipMethod : BaseModel
     {
         public ShipMethod()
         {

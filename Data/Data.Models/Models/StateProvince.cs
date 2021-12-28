@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// State and province lookup table.
     /// </summary>
-    public class StateProvince : IBaseModel
+    public class StateProvince : BaseModel
     {
         public StateProvince()
         {

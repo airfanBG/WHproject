@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// High-level product categorization.
     /// </summary>
-    public class ProductCategory : IBaseModel
+    public class ProductCategory : BaseModel
     {
         public ProductCategory()
         {

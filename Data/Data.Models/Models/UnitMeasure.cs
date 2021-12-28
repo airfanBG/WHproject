@@ -7,7 +7,7 @@ namespace Data.Models
     /// <summary>
     /// Unit of measure lookup table.
     /// </summary>
-    public class UnitMeasure : IBaseModel
+    public class UnitMeasure : BaseModel
     {
         public UnitMeasure()
         {
