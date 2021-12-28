@@ -16,7 +16,7 @@ namespace Utils.Services.DataServices
 
         public async Task<List<T>> GetAllAsync()
         {
-            var res= await this.DatabaseService.Context.Set<T>().ToListAsync();
+            var res= await this.DatabaseService.Context.Set<T>().AsNoTracking().ToListAsync();
             return res;
         }
 
