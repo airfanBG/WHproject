@@ -20,8 +20,4 @@
     <ProjectReference Include="..\Utils.Common\Utils.Common.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Mediator\Identity\" />
-  </ItemGroup>
-
 </Project>
