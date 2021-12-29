@@ -133,7 +133,8 @@ cynthia23@adventure-works.com
 rachel53@adventure-works.com
 
 *Add new product schema:*
-```{
+```
+{
   "productId": 0,
   "name": null,
   "productNumber": null,
@@ -159,20 +160,23 @@ rachel53@adventure-works.com
   "discontinuedDate": "0001-01-01T00:00:00",
   
 }
-
+```
 
 **ProductModel**
 /api/productmodels/all_models **GET**
+```
 {
   "productModelId": 0,
   "name": null,
   "catalogDescription": null,
   "instructions": null
 }
+```
 
 **ProductCategory**
 returns category and subcategory
 /api/categories/all_categories **GET**
+```
 {
   "productCategoryId": 0,
   "name": null,
@@ -185,10 +189,10 @@ returns category and subcategory
 							}
   ]
 }
-
 ```
+#Order and it's relations#
+![This is an image](https://user-images.githubusercontent.com/15988325/147693165-528905e8-fcb5-47b2-a651-7bb9d671eac6.png)
 
-```
 
 #Orders#
 If you create order next schemas are required. Basic order is **SalesOrderHeader**
@@ -196,7 +200,8 @@ The API address is : api/orders/customers/place_order **POST** request . All oth
 
 **
 
-"SalesOrderHeader":
+SalesOrderHeader
+```
 {
   "salesOrderId": 0,
   "orderDate": "0001-01-01T00:00:00",
@@ -238,14 +243,9 @@ The API address is : api/orders/customers/place_order **POST** request . All oth
 		}
   ]
 }
-**SPecialOffer**
-/api/specialOffer/product_special_offer/{productId} **GET** returns special offer for concrete product
-
-/api/specialoffer/all_offers **GET** returns all offers with SpeciallOfferProduct data (product s Id's with offer)
-
 **Customer**
 /api/customers/{customerId} **GET**
-{
+```{
   "customerId": 0,
   "personId": 0,
   "storeId": 0,
@@ -258,15 +258,17 @@ The API address is : api/orders/customers/place_order **POST** request . All oth
 					  "countryRegionCodeNavigation": null
 					}
 }
+```
 **Countries**
 /api/regions/all_countries **GET**
-{
+```{
   "countryRegionCode": null,
   "name": null
 }
-
+```
 **CountryRegions**
 /api/regions/country_regions/{countryCode} **GET** -countryCode is -countryRegionCode-
+```
 {
   "stateProvinceId": 0,
   "stateProvinceCode": null,
@@ -274,9 +276,10 @@ The API address is : api/orders/customers/place_order **POST** request . All oth
   "name": null,
   "territoryId": 0
 }
-
+```
 **Addresses**
 /api/regions/addresses/{provinceId}  **GET** -provinceId is -stateProvinceId-
+```
 {
   "addressId": 0,
   "addressLine1": null,
@@ -285,10 +288,10 @@ The API address is : api/orders/customers/place_order **POST** request . All oth
   "stateProvinceId": 0,
   "postalCode": null
 }
-
+```
 **Territory**
 /api/territories/all_territories **GET**
-
+```
 {
   "territoryId": 0,
   "name": null,
@@ -296,4 +299,5 @@ The API address is : api/orders/customers/place_order **POST** request . All oth
   "group": null,
   "countryRegionCodeNavigation": null
 }
+```
 
