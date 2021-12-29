@@ -109,6 +109,7 @@ ranjit0@adventure-works.com
   "productModel": null,
   "productSubcategory": null
 }
+
 **ProductModel**
 {
   "productModelId": 0,
@@ -128,6 +129,7 @@ ranjit0@adventure-works.com
   "name": null,
   "productCategory": null
 }
+```
 
 **NOTE:** Product Subcategory it is optional
 ProductSubcategoryID|	ProductCategoryID|	Name
