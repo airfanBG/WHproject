@@ -228,6 +228,34 @@ SalesOrderHeader
 					  "countryRegionCodeNavigation": null
 					}
 }
+**Countries**
+/api/regions/all_countries **GET**
+{
+  "countryRegionCode": null,
+  "name": null
+}
+
+**CountryRegions**
+/api/regions/country_regions/{countryCode} **GET** -countryCode is -countryRegionCode-
+{
+  "stateProvinceId": 0,
+  "stateProvinceCode": null,
+  "countryRegionCode": null,
+  "name": null,
+  "territoryId": 0
+}
+
+**Addresses**
+/api/regions/addresses/{provinceId}  **GET** -provinceId is -stateProvinceId-
+{
+  "addressId": 0,
+  "addressLine1": null,
+  "addressLine2": null,
+  "city": null,
+  "stateProvinceId": 0,
+  "postalCode": null
+}
+
 **Territory**
 /api/territories/all_territories **GET**
 
