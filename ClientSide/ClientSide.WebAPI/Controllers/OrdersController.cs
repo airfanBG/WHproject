@@ -42,7 +42,6 @@ namespace ClientSide.WebAPI.Controllers
         public async Task<IActionResult> AddOrder(SalesOrderHeader model)
         {
             Logger.LogInformation($"User {User?.Identity?.Name} call AddOrder action");
-            model.SalesOrderNumber = Guid.NewGuid().ToString().Substring(0, 10);
             model.PurchaseOrderNumber = Guid.NewGuid().ToString().Substring(0, 10);
             model.AccountNumber = Guid.NewGuid().ToString().Substring(0,5);
 

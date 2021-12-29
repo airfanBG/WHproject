@@ -196,23 +196,53 @@ The API address is : api/orders/customers/place_order **POST** request . All oth
 
 **
 
-SalesOrderHeader
+"SalesOrderHeader":
 {
   "salesOrderId": 0,
   "orderDate": "0001-01-01T00:00:00",
   "dueDate": "0001-01-01T00:00:00",
   "shipDate": "0001-01-01T00:00:00",
   "customerId": 0,
-  "territoryId": 0,
   "billToAddressId": 0,
   "shipToAddressId": 0,
   "shipMethodId": 0,
   "subTotal": 0.0,
   "taxAmt": 0.0,
   "freight": 0.0,
-  "totalDue": 0.0,
-  "comment": null
+  "comment": null,
+  "salesOrderDetails":[
+			{
+			  "salesOrderId": 0,
+			  "salesOrderDetailId": 0,
+			  "orderQty": 0,
+			  "productId": 0,
+			  "specialOfferId": 0,
+			  "unitPrice": 0.0,
+			  "unitPriceDiscount": 0.0,
+			  "lineTotal": 0.0,
+			  "specialOfferProduct":{
+									  "specialOfferId": 0,
+									  "productId": 0,
+									  "specialOffer":{ 
+													  "specialOfferId": 0,
+													  "description": null,
+													  "discountPct": 0.0,
+													  "type": null,
+													  "category": null,
+													  "startDate": "0001-01-01T00:00:00",
+													  "endDate": "0001-01-01T00:00:00",
+													  "minQty": 0,
+													  "maxQty": 0
+													}
+									}
+		}
+  ]
 }
+**SPecialOffer**
+/api/specialOffer/product_special_offer/{productId} **GET** returns special offer for concrete product
+
+/api/specialoffer/all_offers **GET** returns all offers with SpeciallOfferProduct data (product s Id's with offer)
+
 **Customer**
 /api/customers/{customerId} **GET**
 {
