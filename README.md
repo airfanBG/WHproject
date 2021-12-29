@@ -81,8 +81,8 @@ jae0@adventure-works.com
 ranjit0@adventure-works.com
 
 
-*##Add new product schema:##*
-{
+*Add new product schema:*
+```{
   "productId": 0,
   "name": null,
   "productNumber": null,
@@ -108,7 +108,7 @@ ranjit0@adventure-works.com
   "discontinuedDate": "0001-01-01T00:00:00",
   "productModel": null,
   "productSubcategory": null
-}
+}```
 ##ProductModel##
 {
   "productModelId": 0,
