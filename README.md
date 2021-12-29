@@ -132,6 +132,7 @@ ranjit0@adventure-works.com
 ```
 
 **NOTE:** Product Subcategory it is optional
+```
 ProductSubcategoryID|	ProductCategoryID|	Name
                   1       1	Mountain Bikes
                   2       1	Road Bikes
@@ -308,3 +309,4 @@ ProductModelID	Name
 111	Water Bottle
 37	Women's Mountain Shorts
 38	Women's Tights
+```
