@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using Data.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Utils.Infrastructure.Interfaces.Models;
 using Utils.Infrastructure.Interfaces.Services;
 
 namespace Data.WarehouseContext.Models
@@ -107,6 +109,38 @@ namespace Data.WarehouseContext.Models
         public DbSet<Vendor> Vendors { get; set; } 
         public DbSet<WorkOrder> WorkOrders { get; set; } 
         public DbSet<WorkOrderRouting> WorkOrderRoutings { get; set; }
+
+
+
+        public override int SaveChanges() => this.SaveChanges(true);
+
+        public override int SaveChanges(bool acceptAllChangesOnSuccess)
+        {
+            this.ApplyAuditInfoRules();
+            return base.SaveChanges(acceptAllChangesOnSuccess);
+        }
+
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default) =>
+            this.SaveChangesAsync(true, cancellationToken);
+
+        public override Task<int> SaveChangesAsync(
+            bool acceptAllChangesOnSuccess,
+            CancellationToken cancellationToken = default)
+        {
+            this.ApplyAuditInfoRules();
+            return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
+        }
+        protected void ApplyAuditInfoRules()
+        {
+
+            var entries = this.ChangeTracker.Entries().Where(x => x.Entity is BaseModel && (x.State == EntityState.Added || x.State == EntityState.Deleted || x.State == EntityState.Modified)).ToList();
+
+            foreach (EntityEntry entry in entries)
+            {
+                var entity = (BaseModel)entry.Entity;
+                entity.ModifiedDate = DateTime.UtcNow;
+            }
+        }
 
         // Unable to generate entity type for table 'Production.Document' since its primary key could not be scaffolded. Please see the warning messages.
         // Unable to generate entity type for table 'Production.ProductDocument' since its primary key could not be scaffolded. Please see the warning messages.

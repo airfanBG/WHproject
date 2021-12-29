@@ -8,6 +8,7 @@ namespace Utils.Infrastructure.Interfaces.Models
 {
     public class BaseModel
     {
-       // public virtual int Id { get; set; }
+        // public virtual int Id { get; set; }
+        public DateTime ModifiedDate { get; set; }
     }
 }

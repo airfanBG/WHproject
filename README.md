@@ -2,7 +2,7 @@ Web API project based on AdwentureWorks2019 database.
 If you want to consume API, first step is to get one Email from bottom emails and make registration. All emails are **employes** in company. After that you must **Login** and take your **Bearer** token to login.
 # API routings:
 ## register address 
-at: "/api/auth/register" you must send **POST** request with one of emails below (if you want to use Products API you must select one email from **EMployees** else if you want to make orders select one from **Salespersons**). You must set { **Password, ConfirmPassword, Name(your name)**} and send data as **JSON**. After status code **200** go to "/api/auth/login" with your email and password to get **bearer token**. Each route demands token authentication.
+at: "/api/auth/register" you must send **POST** request with one of emails below (if you want to use Products API you must select one email from **EMployees** else if you want to make orders select one from **Salespersons**). You must set { **Password, ConfirmPassword, Name(your name)**} and send data as **JSON**. After status code **200** go to "/api/auth/login" with your email and password to get **bearer token**. Each route demands token authentication. **Remember! This is only registration for Employees**. Customers 
 ## In progress...
 
 
