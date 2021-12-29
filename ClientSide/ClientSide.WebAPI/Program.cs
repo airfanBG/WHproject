@@ -7,6 +7,7 @@ using Serilog;
 using Serilog.Sinks.MSSqlServer;
 using System.Reflection;
 using System.Text;
+using System.Text.Json.Serialization;
 using Utils.Common.MagicStrings;
 using Utils.Infrastructure.Interfaces.Services;
 using Utils.Services.DataServices;
@@ -50,7 +51,12 @@ builder.Services.AddScoped<IuserIdentityService, IdentityService>();
 builder.Services.AddScoped<IDatabaseService, ApplicationDbContext>();
 builder.Services.AddScoped<DbContext, AdventureWorks2019Context>();
 builder.Services.AddDbContext<AdventureWorks2019Context>(o => { o.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")); });
-
+//JSON
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+    options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault;
+});
 //JWT
 builder.Services.AddAuthentication(options =>
 {

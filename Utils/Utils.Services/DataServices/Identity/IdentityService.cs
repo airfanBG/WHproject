@@ -44,21 +44,27 @@ namespace Utils.Services.DataServices.Identity
                             var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration[ConfigurationKeys.JWT_TokenSecret]));
 
                             var tokenHandler = new JwtSecurityTokenHandler();
-
+                            Claim customerClaimId = null;
+                            if (user.BusinessEntity.PersonType=="IN")
+                            {
+                                customerClaimId = new Claim("CustomerId", user.BusinessEntity.BusinessEntityId.ToString());
+                            }
                             var tokenDescriptor = new SecurityTokenDescriptor
                             {
                                 Subject = new ClaimsIdentity(new Claim[]
                                 {
                                     new Claim(ClaimTypes.Name, user.Name),
                                     new Claim(ClaimTypes.Role, user.BusinessEntity.PersonType),
-                                    new Claim("Full_Name",String.Format($"{user.BusinessEntity.FirstName} {user.BusinessEntity.LastName}"))
+                                    new Claim("Full_Name",String.Format($"{user.BusinessEntity.FirstName} {user.BusinessEntity.LastName}")),
+                                    customerClaimId ?? null!
                                 }),
+
                                 Expires = DateTime.UtcNow.AddMinutes(int.Parse(Configuration[ConfigurationKeys.JWT_Expiration])),
                                 Issuer = Configuration[ConfigurationKeys.JWT_ValidIssuer],
                                 Audience = Configuration[ConfigurationKeys.JWT_ValidAudience],
                                 SigningCredentials = new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
                             };
-
+                            
                             var token = tokenHandler.CreateToken(tokenDescriptor);
 
                             return tokenHandler.WriteToken(token);

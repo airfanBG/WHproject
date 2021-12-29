@@ -22,7 +22,7 @@ namespace ClientSide.WebAPI.Controllers
 
 
         [HttpGet]
-        [Route("customers/{customerId}/all")]
+        [Route("{customerId}/all")]
         public async Task<IActionResult> GetAllOrders(int customerId)
         {
             Logger.LogInformation($"User {User?.Identity?.Name} call all GetAllOrders action");
@@ -30,7 +30,7 @@ namespace ClientSide.WebAPI.Controllers
             return new JsonResult(await Service.GetAllAsync(x=>x.CustomerId==customerId));
         }
         [HttpGet]
-        [Route("customers/order/{orderId}")]
+        [Route("order/{orderId}")]
         public async Task<IActionResult> GetOrder(int customerId, int orderId)
         {
             Logger.LogInformation($"User {User?.Identity?.Name} call GetOrder action");
@@ -38,7 +38,7 @@ namespace ClientSide.WebAPI.Controllers
             return new JsonResult(await Service.GetByIdAsync(orderId));
         }
         [HttpPost]
-        [Route("customers/place_order")]
+        [Route("place_order")]
         public async Task<IActionResult> AddOrder(SalesOrderHeader model)
         {
             Logger.LogInformation($"User {User?.Identity?.Name} call AddOrder action");
@@ -53,5 +53,6 @@ namespace ClientSide.WebAPI.Controllers
             model.ModifiedDate = DateTime.UtcNow;
             return new JsonResult(await Service.Add(model));
         }
+       
     }
 }

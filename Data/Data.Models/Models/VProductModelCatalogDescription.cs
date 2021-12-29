@@ -32,7 +32,7 @@ namespace Data.Models
         public string? ProductLine { get; set; }
         public string? Style { get; set; }
         public string? RiderExperience { get; set; }
-        public Guid Rowguid { get; set; }
+      //  public Guid Rowguid { get; set; }
       //  public DateTime ModifiedDate { get; set; }
     }
 }

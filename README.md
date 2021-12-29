@@ -157,30 +157,35 @@ rachel53@adventure-works.com
   "sellStartDate": "0001-01-01T00:00:00",
   "sellEndDate": "0001-01-01T00:00:00",
   "discontinuedDate": "0001-01-01T00:00:00",
-  "productModel": null,
-  "productSubcategory": null
+  
 }
 
 
 **ProductModel**
+/api/productmodels/all_models **GET**
 {
   "productModelId": 0,
   "name": null,
   "catalogDescription": null,
   "instructions": null
 }
+
 **ProductCategory**
+returns category and subcategory
+/api/categories/all_categories **GET**
 {
-  "productCategoryId": 0,
-  "name": null
-}
-**ProductSubCategory**
-{
-  "productSubcategoryId": 0,
   "productCategoryId": 0,
   "name": null,
-  "productCategory": null
+  "subCategories":[
+	  "ProductSubcategory":{
+							  "productSubcategoryId": 0,
+							  "productCategoryId": 0,
+							  "name": null,
+							  "productCategory": null
+							}
+  ]
 }
+
 ```
 
 ```
@@ -189,14 +194,15 @@ rachel53@adventure-works.com
 If you create order next schemas are required. Basic order is **SalesOrderHeader**
 The API address is : api/orders/customers/place_order **POST** request . All other required data for this request can be reached at next url's:
 
+**
+
 SalesOrderHeader
-```{
+{
   "salesOrderId": 0,
   "orderDate": "0001-01-01T00:00:00",
   "dueDate": "0001-01-01T00:00:00",
   "shipDate": "0001-01-01T00:00:00",
   "customerId": 0,
-  "salesPersonId": 0,
   "territoryId": 0,
   "billToAddressId": 0,
   "shipToAddressId": 0,
@@ -206,5 +212,30 @@ SalesOrderHeader
   "freight": 0.0,
   "totalDue": 0.0,
   "comment": null
+}
+**Customer**
+/api/customers/{customerId} **GET**
+{
+  "customerId": 0,
+  "personId": 0,
+  "storeId": 0,
+  "territoryId": 0,
+  "accountNumber": null,
+  "salesTerritory": {
+					  "territoryId": 0,
+					  "name": null,
+					  "countryRegionCode": null,
+					  "countryRegionCodeNavigation": null
+					}
+}
+**Territory**
+/api/territories/all_territories **GET**
+
+{
+  "territoryId": 0,
+  "name": null,
+  "countryRegionCode": null,
+  "group": null,
+  "countryRegionCodeNavigation": null
 }
 

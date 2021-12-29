@@ -17,11 +17,11 @@ namespace ClientSide.WebAPI.Controllers
             Service = service;
         }
         [HttpGet]
-        [Route("all")]
+        [Route("all_territories")]
         public async Task<IActionResult> GetAll(int customerId)
         {
-          
-            return new JsonResult(await Service.GetAllAsync());
+            var res = await Task.Run(() => Service.GetAllAsync().Result.Select(x => new SalesTerritory() {Group=x.Group,Name=x.Name,CountryRegionCode=x.CountryRegionCode,TerritoryId=x.TerritoryId }).ToList());
+            return new JsonResult(res);
         }
     }
 }

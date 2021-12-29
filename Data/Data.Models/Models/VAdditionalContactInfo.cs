@@ -24,7 +24,7 @@ namespace Data.Models
         public string? EmailAddress { get; set; }
         public string? EmailSpecialInstructions { get; set; }
         public string? EmailTelephoneNumber { get; set; }
-        public Guid Rowguid { get; set; }
+      //  public Guid Rowguid { get; set; }
       //  public DateTime ModifiedDate { get; set; }
     }
 }
