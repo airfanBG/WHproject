@@ -14,11 +14,20 @@ namespace Utils.Services.DataServices
             this.DatabaseService = databaseService;
         }
 
-        public async Task<List<T>> GetAllAsync()
+        public async Task<List<T>> GetAllAsync(Func<T,bool> func)
         {
             try
             {
-                var res = await this.DatabaseService.Context.Set<T>().AsNoTracking().ToListAsync();
+                List<T> res=null;
+                if (func==null)
+                {
+                   res = await this.DatabaseService.Context.Set<T>().AsNoTracking().ToListAsync();
+                }
+                else
+                {
+                    res = this.DatabaseService.Context.Set<T>().AsNoTracking().Where(func).ToList();
+                }
+                
                 return res;
             }
             catch (Exception)

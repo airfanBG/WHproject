@@ -30,15 +30,15 @@ namespace ClientSide.WebAPI.Controllers
         }
         [HttpPost]
         [Route("add")]
-        [Authorize(Policy ="SP")]
+        //[Authorize(Roles ="ЕМ")]
         public async Task<IActionResult> AddProduct([FromBody] Product model)
         {
             Logger.LogInformation($"User {User?.Identity?.Name} add product");
-            //var res=await Service.Add(model);
-            //if (res==1)
-            //{
-            //    return Ok();
-            //}
+            var res = await Service.Add(model);
+            if (res == 1)
+            {
+                return Ok();
+            }
             return BadRequest();
         }
     }

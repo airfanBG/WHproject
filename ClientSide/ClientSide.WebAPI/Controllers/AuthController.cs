@@ -40,10 +40,11 @@ namespace ClientSide.WebAPI.Controllers
             if (result!=null)
             {
                 var token = new JwtSecurityTokenHandler().ReadJwtToken(result);
-                var claim = token.Claims.First(c => c.Type == "unique_name").Value;
-                User.AddIdentity(new ClaimsIdentity(new Claim[] { new Claim(ClaimTypes.Name, claim.Trim())}));
+                var claimName = token.Claims.First(c => c.Type == "unique_name").Value;
+                var claimRole = token.Claims.First(c => c.Type == ClaimTypes.Role).Value;
+                User.AddIdentity(new ClaimsIdentity(new Claim[] { new Claim(ClaimTypes.Name, claimName.Trim()), new Claim(ClaimTypes.Role,claimRole)}));
                 
-                Logger.LogInformation($"User {claim.Trim()} is logged.");
+                Logger.LogInformation($"User {claimName.Trim()} is logged.");
                 return Ok(result);
             }
             return BadRequest();

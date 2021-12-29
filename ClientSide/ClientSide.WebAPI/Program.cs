@@ -56,7 +56,7 @@ builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+   
 })
 
            // Adding Jwt Bearer  
@@ -64,22 +64,19 @@ builder.Services.AddAuthentication(options =>
            {
                options.SaveToken = true;
                options.RequireHttpsMetadata = false;
+
                options.TokenValidationParameters = new TokenValidationParameters()
                {
+                  
                    ValidateIssuer = true,
                    ValidateAudience = true,
                    ValidAudience = builder.Configuration[ConfigurationKeys.JWT_ValidAudience],
                    ValidIssuer = builder.Configuration[ConfigurationKeys.JWT_ValidIssuer],
                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration[ConfigurationKeys.JWT_TokenSecret]))
                };
+
            });
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("EM", policy => policy.RequireClaim("Type"));
-    options.AddPolicy("SP", policy => policy.RequireClaim("Type"));
-    options.AddPolicy("EM", policy => policy.AddRequirements();
-  
-});
+builder.Services.AddAuthorization();
 var app = builder.Build();
 
 
@@ -89,7 +86,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.Use((i, o) =>
+{
+    var test = i;
+    return o.Invoke();
+});
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
