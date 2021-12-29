@@ -133,7 +133,8 @@ cynthia23@adventure-works.com
 rachel53@adventure-works.com
 
 *Add new product schema:*
-```{
+```
+{
   "productId": 0,
   "name": null,
   "productNumber": null,
@@ -159,20 +160,23 @@ rachel53@adventure-works.com
   "discontinuedDate": "0001-01-01T00:00:00",
   
 }
-
+```
 
 **ProductModel**
 /api/productmodels/all_models **GET**
+```
 {
   "productModelId": 0,
   "name": null,
   "catalogDescription": null,
   "instructions": null
 }
+```
 
 **ProductCategory**
 returns category and subcategory
 /api/categories/all_categories **GET**
+```
 {
   "productCategoryId": 0,
   "name": null,
@@ -185,7 +189,6 @@ returns category and subcategory
 							}
   ]
 }
-
 ```
 #Order and it's relations#
 ![This is an image](https://user-images.githubusercontent.com/15988325/147693165-528905e8-fcb5-47b2-a651-7bb9d671eac6.png)
@@ -198,6 +201,7 @@ The API address is : api/orders/customers/place_order **POST** request . All oth
 **
 
 SalesOrderHeader
+```
 {
   "salesOrderId": 0,
   "orderDate": "0001-01-01T00:00:00",
@@ -214,9 +218,10 @@ SalesOrderHeader
   "totalDue": 0.0,
   "comment": null
 }
+```
 **Customer**
 /api/customers/{customerId} **GET**
-{
+```{
   "customerId": 0,
   "personId": 0,
   "storeId": 0,
@@ -229,15 +234,17 @@ SalesOrderHeader
 					  "countryRegionCodeNavigation": null
 					}
 }
+```
 **Countries**
 /api/regions/all_countries **GET**
-{
+```{
   "countryRegionCode": null,
   "name": null
 }
-
+```
 **CountryRegions**
 /api/regions/country_regions/{countryCode} **GET** -countryCode is -countryRegionCode-
+```
 {
   "stateProvinceId": 0,
   "stateProvinceCode": null,
@@ -245,9 +252,10 @@ SalesOrderHeader
   "name": null,
   "territoryId": 0
 }
-
+```
 **Addresses**
 /api/regions/addresses/{provinceId}  **GET** -provinceId is -stateProvinceId-
+```
 {
   "addressId": 0,
   "addressLine1": null,
@@ -256,10 +264,10 @@ SalesOrderHeader
   "stateProvinceId": 0,
   "postalCode": null
 }
-
+```
 **Territory**
 /api/territories/all_territories **GET**
-
+```
 {
   "territoryId": 0,
   "name": null,
@@ -267,4 +275,5 @@ SalesOrderHeader
   "group": null,
   "countryRegionCodeNavigation": null
 }
+```
 
