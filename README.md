@@ -1,13 +1,9 @@
-Web API project based on AdwentureWorks2019 database.
+Web API project **Students Assignment** based on AdwentureWorks2019 database.
 If you want to consume API, first step is to get one Email from bottom emails and make registration. All emails are **employes** in company. After that you must **Login** and take your **Bearer** token to login.
 # API routings:
 ## register address 
-at: "/api/auth/register" you must send **POST** request with one of emails below (if you want to use Products API you must select one email from **EMployees** else if you want to make orders select one from **Salespersons**). You must set { **Password, ConfirmPassword, Name(your name)**} and send data as **JSON**. After status code **200** go to "/api/auth/login" with your email and password to get **bearer token**. Each route demands token authentication. **Remember! This is only registration for Employees**. Customers 
+at: "/api/auth/register" you must send **POST** request with one of emails below (if you want to use Products API you must select one email from **EMployees** else if you want to make orders select one from **Salespersons**). You must set { **Password, ConfirmPassword, Name(your name)**} and send data as **JSON**. After status code **200** go to "/api/auth/login" with your email and password to get **bearer token**. Each route demands token authentication. **Remember! If you want to register an Customer you must select one from section Customers**.  
 ## In progress...
-
-
-
-
 
 <b>Emails Employees</b>:
 ken0@adventure-works.com
@@ -80,6 +76,61 @@ rachel0@adventure-works.com
 jae0@adventure-works.com
 ranjit0@adventure-works.com
 
+<b>Customers</b>
+david22@adventure-works.com
+rebecca3@adventure-works.com
+dorothy3@adventure-works.com
+kristina10@adventure-works.com
+kristina11@adventure-works.com
+kristina12@adventure-works.com
+rachel36@adventure-works.com
+kristina13@adventure-works.com
+kristina14@adventure-works.com
+kristina15@adventure-works.com
+kristina16@adventure-works.com
+kristina17@adventure-works.com
+rachel37@adventure-works.com
+rachel38@adventure-works.com
+kristina18@adventure-works.com
+rachel39@adventure-works.com
+rachel40@adventure-works.com
+kristina19@adventure-works.com
+rachel41@adventure-works.com
+kristina20@adventure-works.com
+cynthia4@adventure-works.com
+rachel42@adventure-works.com
+cynthia5@adventure-works.com
+cynthia6@adventure-works.com
+rachel43@adventure-works.com
+cynthia7@adventure-works.com
+cynthia8@adventure-works.com
+cynthia9@adventure-works.com
+rachel44@adventure-works.com
+cynthia10@adventure-works.com
+rachel45@adventure-works.com
+byron8@adventure-works.com
+cynthia11@adventure-works.com
+cynthia12@adventure-works.com
+rachel46@adventure-works.com
+cynthia13@adventure-works.com
+cynthia14@adventure-works.com
+rachel47@adventure-works.com
+cynthia15@adventure-works.com
+rachel48@adventure-works.com
+cynthia16@adventure-works.com
+cynthia17@adventure-works.com
+rachel49@adventure-works.com
+cynthia18@adventure-works.com
+rachel50@adventure-works.com
+cynthia19@adventure-works.com
+rachel51@adventure-works.com
+cynthia20@adventure-works.com
+byron9@adventure-works.com
+cynthia21@adventure-works.com
+cynthia22@adventure-works.com
+rachel52@adventure-works.com
+cynthia23@adventure-works.com
+rachel53@adventure-works.com
 
 *Add new product schema:*
 ```{

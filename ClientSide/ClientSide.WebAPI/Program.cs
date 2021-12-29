@@ -77,6 +77,8 @@ builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("EM", policy => policy.RequireClaim("Type"));
     options.AddPolicy("SP", policy => policy.RequireClaim("Type"));
+    options.AddPolicy("EM", policy => policy.AddRequirements();
+  
 });
 var app = builder.Build();
 

@@ -97,8 +97,8 @@ namespace Utils.Services.DataServices.Identity
                         password.ModifiedDate = DateTime.UtcNow;
                         password.isRegistered = true;
                         password.PasswordSalt = hashed.Item2;
-                       userExists.Name= model.Name;
-
+                        userExists.Name= model.Name;
+                  
                         DatabaseService.Context.Set<EmailAddress>().Update(userExists);
                         DatabaseService.Context.Set<Password>().Update(password);
                         DatabaseService.Context.SaveChanges();
