@@ -169,14 +169,14 @@ ProductSubcategoryID|	ProductCategoryID|	Name
                   36      4	Pumps
                   37      4	Tires and Tubes
 
-** Product Category**
+-Product Category
 ProductCategoryID	Name
 4	Accessories
 1	Bikes
 3	Clothing
 2	Components
 
-**Product Model**
+-Product Model
 ProductModelID	Name
 122	All-Purpose Bike Stand
 119	Bike Wash
