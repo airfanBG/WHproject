@@ -132,7 +132,7 @@ rachel52@adventure-works.com
 cynthia23@adventure-works.com
 rachel53@adventure-works.com
 
-*Add new product schema:*
+*Add new product schema (only for Employees):*
 ```
 {
   "productId": 0,
@@ -181,12 +181,13 @@ returns category and subcategory
   "productCategoryId": 0,
   "name": null,
   "subCategories":[
-	  "ProductSubcategory":{
-							  "productSubcategoryId": 0,
-							  "productCategoryId": 0,
-							  "name": null,
-							  "productCategory": null
-							}
+	  "ProductSubcategory":
+	  {
+		"productSubcategoryId": 0,
+		"productCategoryId": 0,
+		"name": null,
+		"productCategory": null
+	}
   ]
 }
 ```
@@ -216,30 +217,30 @@ SalesOrderHeader
   "freight": 0.0,
   "comment": null,
   "salesOrderDetails":[
-			{
-			  "salesOrderId": 0,
-			  "salesOrderDetailId": 0,
-			  "orderQty": 0,
-			  "productId": 0,
-			  "specialOfferId": 0,
-			  "unitPrice": 0.0,
-			  "unitPriceDiscount": 0.0,
-			  "lineTotal": 0.0,
-			  "specialOfferProduct":{
-									  "specialOfferId": 0,
-									  "productId": 0,
-									  "specialOffer":{ 
-													  "specialOfferId": 0,
-													  "description": null,
-													  "discountPct": 0.0,
-													  "type": null,
-													  "category": null,
-													  "startDate": "0001-01-01T00:00:00",
-													  "endDate": "0001-01-01T00:00:00",
-													  "minQty": 0,
-													  "maxQty": 0
-													}
-									}
+		{
+			"salesOrderId": 0,
+			"salesOrderDetailId": 0,
+			"orderQty": 0,
+			"productId": 0,
+			"specialOfferId": 0,
+			"unitPrice": 0.0,
+			"unitPriceDiscount": 0.0,
+			"lineTotal": 0.0,
+			"specialOfferProduct":{
+			"specialOfferId": 0,
+			"productId": 0,
+			"specialOffer":{ 
+							"specialOfferId": 0,
+							"description": null,
+							"discountPct": 0.0,
+							"type": null,
+							"category": null,
+							"startDate": "0001-01-01T00:00:00",
+							"endDate": "0001-01-01T00:00:00",
+							"minQty": 0,
+							"maxQty": 0
+						}
+			}
 		}
   ]
 }
@@ -251,12 +252,13 @@ SalesOrderHeader
   "storeId": 0,
   "territoryId": 0,
   "accountNumber": null,
-  "salesTerritory": {
-					  "territoryId": 0,
-					  "name": null,
-					  "countryRegionCode": null,
-					  "countryRegionCodeNavigation": null
-					}
+  "salesTerritory": 
+  {
+	"territoryId": 0,
+	"name": null,
+	"countryRegionCode": null,
+	"countryRegionCodeNavigation": null
+}
 }
 ```
 **Countries**
