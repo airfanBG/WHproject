@@ -22,7 +22,23 @@ namespace ClientSide.WebAPI.Controllers
         [Route("all_categories")]
         public async Task<IActionResult> GetAllModels()
         {
-            var models = await Task.Run(() => Service.DatabaseService.Context.Set<ProductCategory>().Include(x=>x.ProductSubcategories).Select(x => new ProductCategory() { ProductCategoryId=x.ProductCategoryId,Name=x.Name,ProductSubcategories=x.ProductSubcategories.Select(z=>new ProductSubcategory() { ProductSubcategoryId=z.ProductSubcategoryId,Name=z.Name,ProductCategoryId=z.ProductCategoryId}).ToList()}).ToList());
+            var models = await Task.Run(() => Service.DatabaseService
+            .Context.Set<ProductCategory>()
+            .Include(x => x.ProductSubcategories)
+            .Select(x => new ProductCategory()
+            {
+                ProductCategoryId = x.ProductCategoryId,
+                Name = x.Name,
+                ProductSubcategories = x.ProductSubcategories
+                .Select(z => new ProductSubcategory()
+                {
+                    ProductSubcategoryId = z.ProductSubcategoryId,
+                    Name = z.Name,
+                    ProductCategoryId = z.ProductCategoryId
+                }
+                ).ToList()
+            })
+            .ToList());
             return new JsonResult(models);
         }
     }
