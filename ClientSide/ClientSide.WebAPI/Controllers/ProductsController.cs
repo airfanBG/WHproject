@@ -28,5 +28,18 @@ namespace ClientSide.WebAPI.Controllers
             Logger.LogInformation($"User {User?.Identity?.Name} call all products action");
             return new JsonResult(await Service.GetAllAsync());
         }
+        [HttpPost]
+        [Route("add")]
+        [Authorize(Policy ="SP")]
+        public async Task<IActionResult> AddProduct([FromBody] Product model)
+        {
+            Logger.LogInformation($"User {User?.Identity?.Name} add product");
+            //var res=await Service.Add(model);
+            //if (res==1)
+            //{
+            //    return Ok();
+            //}
+            return BadRequest();
+        }
     }
 }

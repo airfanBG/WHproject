@@ -32,7 +32,7 @@ namespace Utils.Services.DataServices.Identity
 
                 await using (DatabaseService)
                 {
-                    var user = DatabaseService.Context.Set<EmailAddress>().FirstOrDefault(x => x.Email == model.Email);
+                    var user = DatabaseService.Context.Set<EmailAddress>().Include(x=>x.BusinessEntity).FirstOrDefault(x => x.Email == model.Email);
                     if (user == null) return "";
                     else
                     {
@@ -49,13 +49,15 @@ namespace Utils.Services.DataServices.Identity
                                 Subject = new ClaimsIdentity(new Claim[]
                                 {
                                     new Claim(ClaimTypes.Name, user.Name),
+                                    new Claim("Type", user.BusinessEntity.PersonType),
+                                    new Claim("Full_Name",String.Format($"{user.BusinessEntity.FirstName} {user.BusinessEntity.LastName}"))
                                 }),
                                 Expires = DateTime.UtcNow.AddMinutes(int.Parse(Configuration[ConfigurationKeys.JWT_Expiration])),
                                 Issuer = Configuration[ConfigurationKeys.JWT_ValidIssuer],
                                 Audience = Configuration[ConfigurationKeys.JWT_ValidAudience],
                                 SigningCredentials = new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
                             };
-
+                          
                             var token = tokenHandler.CreateToken(tokenDescriptor);
 
                             return tokenHandler.WriteToken(token);
@@ -79,9 +81,9 @@ namespace Utils.Services.DataServices.Identity
                await using (DatabaseService)
                 {
                     var userExists = DatabaseService.Context.Set<EmailAddress>().FirstOrDefault(x => x.Email == model.Email);
+                    var username= DatabaseService.Context.Set<EmailAddress>().FirstOrDefault(x => x.Name == model.Name);
 
-
-                    if (userExists != null)
+                    if (userExists != null && username==null)
                     {
                         Password password = DatabaseService.Context.Set<Password>().FirstOrDefault(x => x.BusinessEntityId == userExists.BusinessEntityId && x.isRegistered == false)!;
 

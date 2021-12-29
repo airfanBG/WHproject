@@ -73,7 +73,11 @@ builder.Services.AddAuthentication(options =>
                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration[ConfigurationKeys.JWT_TokenSecret]))
                };
            });
-
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("EM", policy => policy.RequireClaim("Type"));
+    options.AddPolicy("SP", policy => policy.RequireClaim("Type"));
+});
 var app = builder.Build();
 
 

@@ -12,5 +12,10 @@ namespace Utils.Infrastructure.Interfaces.Services
         public IDatabaseService DatabaseService { get;protected set; }
         public Task<List<T>> GetAllAsync();
         public Task<T> GetByIdAsync(int id);
+        public Task<int> Add(T entity);
+        public Task<int> Update(T entity);
+        public Task<int> DeleteByIdAsync(int id);
+        
+
     }
 }

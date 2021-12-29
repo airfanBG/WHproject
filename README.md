@@ -2,14 +2,14 @@ Web API project based on AdwentureWorks2019 database.
 If you want to consume API, first step is to get one Email from bottom emails and make registration. All emails are **employes** in company. After that you must **Login** and take your **Bearer** token to login.
 # API routings:
 ## register address 
-at: "/api/auth/register" you must send **POST** request with one of emails below. You must set { **Password, ConfirmPassword, Name(your name)**} and send data as **JSON**. After status code **200** go to "/api/auth/login" with your email and password to get **bearer token**. Each route demands token authentication.
+at: "/api/auth/register" you must send **POST** request with one of emails below (if you want to use Products API you must select one email from **EMployees** else if you want to make orders select one from **Salespersons**). You must set { **Password, ConfirmPassword, Name(your name)**} and send data as **JSON**. After status code **200** go to "/api/auth/login" with your email and password to get **bearer token**. Each route demands token authentication.
 ## In progress...
 
 
 
 
 
-<b>Emails</b>:
+<b>Emails Employees</b>:
 ken0@adventure-works.com
 terri0@adventure-works.com
 roberto0@adventure-works.com
@@ -60,226 +60,249 @@ andrew0@adventure-works.com
 ruth0@adventure-works.com
 barry0@adventure-works.com
 sidney0@adventure-works.com
-jeffrey0@adventure-works.com
-doris0@adventure-works.com
-diane0@adventure-works.com
-bonnie0@adventure-works.com
-taylor0@adventure-works.com
-denise0@adventure-works.com
-frank1@adventure-works.com
-kendall0@adventure-works.com
-bob0@adventure-works.com
-pete0@adventure-works.com
-diane2@adventure-works.com
-john0@adventure-works.com
-maciej0@adventure-works.com
-michael7@adventure-works.com
-randy0@adventure-works.com
-karan0@adventure-works.com
-jay0@adventure-works.com
-charles0@adventure-works.com
-steve0@adventure-works.com
-david2@adventure-works.com
-michael3@adventure-works.com
-steven0@adventure-works.com
-carole0@adventure-works.com
-bjorn0@adventure-works.com
-michiko0@adventure-works.com
-carol0@adventure-works.com
-merav0@adventure-works.com
-reuben0@adventure-works.com
-eric1@adventure-works.com
-sandeep0@adventure-works.com
-mihail0@adventure-works.com
-jack1@adventure-works.com
-patrick1@adventure-works.com
-frank3@adventure-works.com
-brian2@adventure-works.com
-ryan0@adventure-works.com
-cristian0@adventure-works.com
-betsy0@adventure-works.com
-patrick0@adventure-works.com
-danielle0@adventure-works.com
-kimberly0@adventure-works.com
-tom0@adventure-works.com
-kok-ho0@adventure-works.com
-russell0@adventure-works.com
-jim0@adventure-works.com
-elizabeth0@adventure-works.com
-mandar0@adventure-works.com
-sameer0@adventure-works.com
-nuan0@adventure-works.com
-lolan0@adventure-works.com
-houman0@adventure-works.com
-zheng0@adventure-works.com
-ebru0@adventure-works.com
-mary1@adventure-works.com
-kevin2@adventure-works.com
-john4@adventure-works.com
-christopher0@adventure-works.com
-jinghao0@adventure-works.com
-alice0@adventure-works.com
-jun0@adventure-works.com
-suroor0@adventure-works.com
-john1@adventure-works.com
-linda0@adventure-works.com
-mindaugas0@adventure-works.com
-angela0@adventure-works.com
-michael2@adventure-works.com
-chad0@adventure-works.com
-don0@adventure-works.com
-michael4@adventure-works.com
-kitti0@adventure-works.com
-pilar0@adventure-works.com
-susan0@adventure-works.com
-vamsi0@adventure-works.com
-kim0@adventure-works.com
-matthias0@adventure-works.com
-jimmy0@adventure-works.com
-david4@adventure-works.com
-paul0@adventure-works.com
-gary0@adventure-works.com
-rob1@adventure-works.com
-baris0@adventure-works.com
-nicole0@adventure-works.com
-michael1@adventure-works.com
-eric0@adventure-works.com
-ivo0@adventure-works.com
-sylvester0@adventure-works.com
-anibal0@adventure-works.com
-samantha0@adventure-works.com
-hung-fu0@adventure-works.com
-prasanna0@adventure-works.com
-min0@adventure-works.com
-olinda0@adventure-works.com
-krishna0@adventure-works.com
-paul1@adventure-works.com
-cynthia0@adventure-works.com
-jianshuo0@adventure-works.com
-sandra0@adventure-works.com
-jason0@adventure-works.com
-andy0@adventure-works.com
-michael5@adventure-works.com
-rostislav0@adventure-works.com
-yuhong0@adventure-works.com
-hanying0@adventure-works.com
-raymond0@adventure-works.com
-fadi0@adventure-works.com
-lane0@adventure-works.com
-linda1@adventure-works.com
-shelley0@adventure-works.com
-terrence0@adventure-works.com
-jeff0@adventure-works.com
-kirk0@adventure-works.com
-laura0@adventure-works.com
-alex0@adventure-works.com
-andrew1@adventure-works.com
-chris0@adventure-works.com
-jack0@adventure-works.com
-david1@adventure-works.com
-garrett0@adventure-works.com
-susan1@adventure-works.com
-george0@adventure-works.com
-david3@adventure-works.com
-marc0@adventure-works.com
-eugene0@adventure-works.com
-benjamin0@adventure-works.com
-reed0@adventure-works.com
-david7@adventure-works.com
-russell1@adventure-works.com
-john3@adventure-works.com
-jan0@adventure-works.com
-katie0@adventure-works.com
-michael0@adventure-works.com
-nitin0@adventure-works.com
-barbara0@adventure-works.com
-john2@adventure-works.com
-stefen0@adventure-works.com
-shane0@adventure-works.com
-yvonne0@adventure-works.com
-douglas0@adventure-works.com
-janeth0@adventure-works.com
-robert0@adventure-works.com
-lionel0@adventure-works.com
-brenda0@adventure-works.com
-alejandro0@adventure-works.com
-fred0@adventure-works.com
-kevin1@adventure-works.com
-shammi0@adventure-works.com
-rajesh0@adventure-works.com
-lorraine0@adventure-works.com
-paula1@adventure-works.com
-frank0@adventure-works.com
-brian0@adventure-works.com
-tawana0@adventure-works.com
-ken1@adventure-works.com
-gabe0@adventure-works.com
-lori0@adventure-works.com
-stuart0@adventure-works.com
-greg0@adventure-works.com
-scott0@adventure-works.com
-kathie0@adventure-works.com
-belinda0@adventure-works.com
-hazem0@adventure-works.com
-peng0@adventure-works.com
-sootha0@adventure-works.com
-andreas0@adventure-works.com
-mark0@adventure-works.com
-sean0@adventure-works.com
-zainal0@adventure-works.com
-tengiz0@adventure-works.com
-sean1@adventure-works.com
-karen0@adventure-works.com
-chris1@adventure-works.com
-ascott0@adventure-works.com
-sairaj0@adventure-works.com
-william0@adventure-works.com
-alan0@adventure-works.com
-brian1@adventure-works.com
-gary1@adventure-works.com
-christian0@adventure-works.com
-lori1@adventure-works.com
-stuart1@adventure-works.com
-jo1@adventure-works.com
-pat0@adventure-works.com
-magnus0@adventure-works.com
-laura1@adventure-works.com
-paula0@adventure-works.com
-grant0@adventure-works.com
-hao0@adventure-works.com
-vidur0@adventure-works.com
-mindy0@adventure-works.com
-willis0@adventure-works.com
-david6@adventure-works.com
-deborah0@adventure-works.com
-candy0@adventure-works.com
-bryan1@adventure-works.com
-barbara1@adventure-works.com
-dragan0@adventure-works.com
-janet0@adventure-works.com
-mike0@adventure-works.com
-wendy0@adventure-works.com
-sheela0@adventure-works.com
-mikael0@adventure-works.com
-arvind0@adventure-works.com
-linda2@adventure-works.com
-fukiko0@adventure-works.com
-gordon0@adventure-works.com
-frank2@adventure-works.com
-eric2@adventure-works.com
-erin0@adventure-works.com
-ben0@adventure-works.com
-annette0@adventure-works.com
-reinout0@adventure-works.com
-david5@adventure-works.com
-jean0@adventure-works.com
-stephanie0@adventure-works.com
-ashvini0@adventure-works.com
-peter1@adventure-works.com
-karen1@adventure-works.com
-ramesh0@adventure-works.com
-dan0@adventure-works.com
-françois0@adventure-works.com
-dan1@adventure-works.com
-janaina0@adventure-works.com
-brian3@adventure-works.com
+
+<b>Emails Salespersons</b>:
+stephen0@adventure-works.com
+michael9@adventure-works.com
+linda3@adventure-works.com
+jillian0@adventure-works.com
+garrett1@adventure-works.com
+tsvi0@adventure-works.com
+pamela0@adventure-works.com
+shu0@adventure-works.com
+josé1@adventure-works.com
+david8@adventure-works.com
+tete0@adventure-works.com
+syed0@adventure-works.com
+lynn0@adventure-works.com
+amy0@adventure-works.com
+rachel0@adventure-works.com
+jae0@adventure-works.com
+ranjit0@adventure-works.com
+
+
+*##Add new product schema:##*
+{
+  "productId": 0,
+  "name": null,
+  "productNumber": null,
+  "makeFlag": false,
+  "finishedGoodsFlag": false,
+  "color": null,
+  "safetyStockLevel": 0,
+  "reorderPoint": 0,
+  "standardCost": 0.0,
+  "listPrice": 0.0,
+  "size": null,
+  "sizeUnitMeasureCode": null,
+  "weightUnitMeasureCode": null,
+  "weight": 0.0,
+  "daysToManufacture": 0,
+  "productLine": null,
+  "class": null,
+  "style": null,
+  "productSubcategoryId": 0,
+  "productModelId": null,
+  "sellStartDate": "0001-01-01T00:00:00",
+  "sellEndDate": "0001-01-01T00:00:00",
+  "discontinuedDate": "0001-01-01T00:00:00",
+  "productModel": null,
+  "productSubcategory": null
+}
+##ProductModel##
+{
+  "productModelId": 0,
+  "name": null,
+  "catalogDescription": null,
+  "instructions": null
+}
+##ProductCategory##
+{
+  "productCategoryId": 0,
+  "name": null
+}
+##ProductSubCategory##
+{
+  "productSubcategoryId": 0,
+  "productCategoryId": 0,
+  "name": null,
+  "productCategory": null
+}
+
+**NOTE:** Product Subcategory it is optional
+ProductSubcategoryID	ProductCategoryID	Name
+1										1	Mountain Bikes
+2										1	Road Bikes
+3										1	Touring Bikes
+4										2	Handlebars
+5										2	Bottom Brackets
+6										2	Brakes
+7										2	Chains
+8										2	Cranksets
+9										2	Derailleurs
+10										2	Forks
+11										2	Headsets
+12										2	Mountain Frames
+13										2	Pedals
+14										2	Road Frames
+15										2	Saddles
+16										2	Touring Frames
+17										2	Wheels
+18										3	Bib-Shorts
+19										3	Caps
+20										3	Gloves
+21										3	Jerseys
+22										3	Shorts
+23										3	Socks
+24										3	Tights
+25										3	Vests
+26										4	Bike Racks
+27										4	Bike Stands
+28										4	Bottles and Cages
+29										4	Cleaners
+30										4	Fenders
+31										4	Helmets
+32										4	Hydration Packs
+33										4	Lights
+34										4	Locks
+35										4	Panniers
+36										4	Pumps
+37										4	Tires and Tubes
+
+** Product Category**
+ProductCategoryID	Name
+4	Accessories
+1	Bikes
+3	Clothing
+2	Components
+
+**Product Model**
+ProductModelID	Name
+122	All-Purpose Bike Stand
+119	Bike Wash
+115	Cable Lock
+98	Chain
+1	Classic Vest
+2	Cycling Cap
+121	Fender Set - Mountain
+102	Front Brakes
+103	Front Derailleur
+3	Full-Finger Gloves
+4	Half-Finger Gloves
+109	Headlights - Dual-Beam
+110	Headlights - Weatherproof
+118	Hitch Rack - 4-Bike
+97	HL Bottom Bracket
+101	HL Crankset
+106	HL Fork
+61	HL Headset
+5	HL Mountain Frame
+46	HL Mountain Front Wheel
+55	HL Mountain Handlebars
+64	HL Mountain Pedal
+125	HL Mountain Rear Wheel
+73	HL Mountain Seat/Saddle 1
+81	HL Mountain Seat/Saddle 2
+87	HL Mountain Tire
+6	HL Road Frame
+51	HL Road Front Wheel
+58	HL Road Handlebars
+70	HL Road Pedal
+78	HL Road Rear Wheel
+76	HL Road Seat/Saddle 1
+84	HL Road Seat/Saddle 2
+90	HL Road Tire
+7	HL Touring Frame
+48	HL Touring Handlebars
+67	HL Touring Seat/Saddle
+107	Hydration Pack
+95	LL Bottom Bracket
+99	LL Crankset
+104	LL Fork
+59	LL Headset
+8	LL Mountain Frame
+42	LL Mountain Front Wheel
+52	LL Mountain Handlebars
+62	LL Mountain Pedal
+123	LL Mountain Rear Wheel
+71	LL Mountain Seat/Saddle 1
+79	LL Mountain Seat/Saddle 2
+85	LL Mountain Tire
+9	LL Road Frame
+49	LL Road Front Wheel
+56	LL Road Handlebars
+68	LL Road Pedal
+126	LL Road Rear Wheel
+82	LL Road Seat/Saddle 1
+74	LL Road Seat/Saddle 2
+88	LL Road Tire
+10	LL Touring Frame
+47	LL Touring Handlebars
+66	LL Touring Seat/Saddle
+11	Long-Sleeve Logo Jersey
+12	Men's Bib-Shorts
+13	Men's Sports Shorts
+116	Minipump
+96	ML Bottom Bracket
+100	ML Crankset
+105	ML Fork
+60	ML Headset
+14	ML Mountain Frame
+15	ML Mountain Frame-W
+45	ML Mountain Front Wheel
+54	ML Mountain Handlebars
+63	ML Mountain Pedal
+124	ML Mountain Rear Wheel
+72	ML Mountain Seat/Saddle 1
+80	ML Mountain Seat/Saddle 2
+86	ML Mountain Tire
+16	ML Road Frame
+17	ML Road Frame-W
+50	ML Road Front Wheel
+57	ML Road Handlebars
+69	ML Road Pedal
+77	ML Road Rear Wheel
+75	ML Road Seat/Saddle 1
+83	ML Road Seat/Saddle 2
+89	ML Road Tire
+65	ML Touring Seat/Saddle
+18	Mountain Bike Socks
+112	Mountain Bottle Cage
+117	Mountain Pump
+92	Mountain Tire Tube
+19	Mountain-100
+20	Mountain-200
+21	Mountain-300
+39	Mountain-400
+22	Mountain-400-W
+23	Mountain-500
+114	Patch kit
+24	Racing Socks
+128	Rear Brakes
+127	Rear Derailleur
+113	Road Bottle Cage
+93	Road Tire Tube
+25	Road-150
+26	Road-250
+41	Road-350
+27	Road-350-W
+28	Road-450
+40	Road-550
+29	Road-550-W
+30	Road-650
+31	Road-750
+32	Short-Sleeve Classic Jersey
+33	Sport-100
+108	Taillight
+44	Touring Front Wheel
+53	Touring Pedal
+43	Touring Rear Wheel
+91	Touring Tire
+94	Touring Tire Tube
+34	Touring-1000
+35	Touring-2000
+36	Touring-3000
+120	Touring-Panniers
+111	Water Bottle
+37	Women's Mountain Shorts
+38	Women's Tights
