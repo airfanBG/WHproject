@@ -207,5 +207,4 @@ SalesOrderHeader
   "totalDue": 0.0,
   "comment": null
 }
-```
 
