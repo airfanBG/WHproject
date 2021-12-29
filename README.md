@@ -189,9 +189,8 @@ rachel53@adventure-works.com
 If you create order next schemas are required. Basic order is **SalesOrderHeader**
 The API address is : api/orders/customers/place_order **POST** request . All other required data for this request can be reached at next url's:
 
-```
 SalesOrderHeader
-{
+```{
   "salesOrderId": 0,
   "orderDate": "0001-01-01T00:00:00",
   "dueDate": "0001-01-01T00:00:00",
@@ -207,5 +206,6 @@ SalesOrderHeader
   "freight": 0.0,
   "totalDue": 0.0,
   "comment": null
-}```
+}
+```
 
