@@ -19,6 +19,6 @@ namespace Data.Models
         public int? LotSize { get; set; }
         public string? Step { get; set; }
         public Guid Rowguid { get; set; }
-        public DateTime ModifiedDate { get; set; }
+      //  public DateTime ModifiedDate { get; set; }
     }
 }

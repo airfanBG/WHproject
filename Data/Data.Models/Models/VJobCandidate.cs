@@ -24,6 +24,6 @@ namespace Data.Models
         public string? AddrPostalCode { get; set; }
         public string? Email { get; set; }
         public string? WebSite { get; set; }
-        public DateTime ModifiedDate { get; set; }
+      //  public DateTime ModifiedDate { get; set; }
     }
 }

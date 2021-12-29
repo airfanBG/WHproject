@@ -57,7 +57,7 @@ namespace Data.Models
         /// <summary>
         /// Date and time the record was last updated.
         /// </summary>
-        public DateTime ModifiedDate { get; set; }
+      //  public DateTime ModifiedDate { get; set; }
 
         public CountryRegion CountryRegionCodeNavigation { get; set; } = null!;
         public ICollection<Customer> Customers { get; set; }

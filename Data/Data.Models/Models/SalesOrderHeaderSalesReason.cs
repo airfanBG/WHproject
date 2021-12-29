@@ -20,7 +20,7 @@ namespace Data.Models
         /// <summary>
         /// Date and time the record was last updated.
         /// </summary>
-        public DateTime ModifiedDate { get; set; }
+      //  public DateTime ModifiedDate { get; set; }
 
         public SalesOrderHeader SalesOrder { get; set; } = null!;
         public SalesReason SalesReason { get; set; } = null!;

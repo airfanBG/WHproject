@@ -33,6 +33,6 @@ namespace Data.Models
         public string? Style { get; set; }
         public string? RiderExperience { get; set; }
         public Guid Rowguid { get; set; }
-        public DateTime ModifiedDate { get; set; }
+      //  public DateTime ModifiedDate { get; set; }
     }
 }

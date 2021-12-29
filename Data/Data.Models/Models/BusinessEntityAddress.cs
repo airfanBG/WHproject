@@ -28,7 +28,7 @@ namespace Data.Models
         /// <summary>
         /// Date and time the record was last updated.
         /// </summary>
-        public DateTime ModifiedDate { get; set; }
+      //  public DateTime ModifiedDate { get; set; }
 
         public Address Address { get; set; } = null!;
         public AddressType AddressType { get; set; } = null!;

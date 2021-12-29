@@ -46,7 +46,7 @@ namespace Data.Models
         /// <summary>
         /// Date and time the record was last updated.
         /// </summary>
-        public DateTime ModifiedDate { get; set; }
+      //  public DateTime ModifiedDate { get; set; }
 
         public BusinessEntity BusinessEntity { get; set; } = null!;
         public ICollection<ProductVendor> ProductVendors { get; set; }

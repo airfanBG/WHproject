@@ -34,7 +34,7 @@ namespace Data.Models
         /// <summary>
         /// Date and time the record was last updated.
         /// </summary>
-        public DateTime ModifiedDate { get; set; }
+      //  public DateTime ModifiedDate { get; set; }
 
         public ICollection<ProductInventory> ProductInventories { get; set; }
         public ICollection<WorkOrderRouting> WorkOrderRoutings { get; set; }

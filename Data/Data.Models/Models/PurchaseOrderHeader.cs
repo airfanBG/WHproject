@@ -65,7 +65,7 @@ namespace Data.Models
         /// <summary>
         /// Date and time the record was last updated.
         /// </summary>
-        public DateTime ModifiedDate { get; set; }
+      //  public DateTime ModifiedDate { get; set; }
 
         public Employee Employee { get; set; } = null!;
         public ShipMethod ShipMethod { get; set; } = null!;

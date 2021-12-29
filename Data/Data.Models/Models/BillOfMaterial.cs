@@ -44,7 +44,7 @@ namespace Data.Models
         /// <summary>
         /// Date and time the record was last updated.
         /// </summary>
-        public DateTime ModifiedDate { get; set; }
+      //  public DateTime ModifiedDate { get; set; }
 
         public Product Component { get; set; } = null!;
         public Product? ProductAssembly { get; set; }

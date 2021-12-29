@@ -125,7 +125,7 @@ namespace Data.Models
         /// <summary>
         /// Date and time the record was last updated.
         /// </summary>
-        public DateTime ModifiedDate { get; set; }
+      //  public DateTime ModifiedDate { get; set; }
 
         public ProductModel? ProductModel { get; set; }
         public ProductSubcategory? ProductSubcategory { get; set; }

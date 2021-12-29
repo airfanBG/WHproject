@@ -27,7 +27,7 @@ namespace Data.Models
         /// <summary>
         /// Date and time the record was last updated.
         /// </summary>
-        public DateTime ModifiedDate { get; set; }
+      //  public DateTime ModifiedDate { get; set; }
 
         public ICollection<CountryRegionCurrency> CountryRegionCurrencies { get; set; }
         public ICollection<CurrencyRate> CurrencyRateFromCurrencyCodeNavigations { get; set; }
