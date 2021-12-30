@@ -74,43 +74,6 @@ namespace Utils.Services.DataServices
             _asyncDisposableResource = null;
             _disposableResource = null;
         }
-        //        public void Dispose()
-        //        {
-        //            Dispose(disposing: true);
-        //            GC.SuppressFinalize(this);
-        //        }
-
-        //        protected virtual void Dispose(bool disposing)
-        //        {
-        //            if (!this.disposed)
-        //            {
-        //                if (disposing)
-        //                {
-        //                    Context.Dispose();
-        //                }
-
-        //                disposed = true;
-        //            }
-        //        }
-        //        [System.Runtime.InteropServices.DllImport("Kernel32")]
-        //        private extern static Boolean CloseHandle(IntPtr handle);
-
-        //        public async ValueTask DisposeAsync()
-        //        {
-        //            await DisposeAsyncCore();
-
-        //            Dispose(disposing: false);
-        //#pragma warning disable CA1816 // Dispose methods should call SuppressFinalize
-        //            GC.SuppressFinalize(this);
-        //#pragma warning restore CA1816 // Dispose methods should call SuppressFinalize
-        //        }
-        //        protected virtual async ValueTask DisposeAsyncCore()
-        //        {
-        //            Context?.DisposeAsync();
-        //        }
-        //        ~ApplicationDbContext()
-        //        {
-        //            Dispose(disposing: false);
-        //        }
+       
     }
 }

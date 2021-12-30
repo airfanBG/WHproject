@@ -9,7 +9,7 @@ namespace ClientSide.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class RegionsController : ControllerBase
     {
         public IBasicWarehouseService<CountryRegion> Service { get; }
