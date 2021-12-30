@@ -256,8 +256,6 @@ The API address is : api/orders/place-order **POST** request . All other require
   ]
 }
 **Special offer** /api/specialoffer/all-offers **GET**
-
-```
 {
   "specialOfferId": 0,
   "description": null,
@@ -271,7 +269,6 @@ The API address is : api/orders/place-order **POST** request . All other require
 }
 
 **Product special offer** /api/specialoffer/product-special-offer/{productId} **GET**
-```
 {
   "specialOfferId": 0,
   "productId": 0
