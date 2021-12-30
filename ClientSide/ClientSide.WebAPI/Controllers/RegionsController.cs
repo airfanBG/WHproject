@@ -23,7 +23,7 @@ namespace ClientSide.WebAPI.Controllers
         [Route("all-countries")]
         public async Task<IActionResult> GetAll()
         {
-            var res = await Task.Run(() => Service.DatabaseService.Context.Set<CountryRegion>().Select(x => new CountryRegion()
+            var res = await Task.Run(() => Service.DatabaseService.Context.Set<CountryRegion>().AsNoTracking().Select(x => new CountryRegion()
             {
                 
                 CountryRegionCode = x.CountryRegionCode,
@@ -37,7 +37,7 @@ namespace ClientSide.WebAPI.Controllers
         [Route("country-regions/{countryCode}")]
         public async Task<IActionResult> GetRegionStates(string countryCode)
         {
-            var res = await Task.Run(() => Service.DatabaseService.Context.Set<StateProvince>().Where(x=>x.CountryRegionCode==countryCode).Select(z => new StateProvince()
+            var res = await Task.Run(() => Service.DatabaseService.Context.Set<StateProvince>().AsNoTracking().Where(x=>x.CountryRegionCode==countryCode).Select(z => new StateProvince()
             {
                 CountryRegionCode = z.CountryRegionCode,
                 Name = z.Name,
@@ -51,7 +51,7 @@ namespace ClientSide.WebAPI.Controllers
         [Route("addresses/{provinceId}")]
         public async Task<IActionResult> GetAddressess(int provinceId)
         {
-            var res = await Task.Run(() => Service.DatabaseService.Context.Set<Address>().Where(x=>x.StateProvinceId==provinceId).Select(a => new Address()
+            var res = await Task.Run(() => Service.DatabaseService.Context.Set<Address>().AsNoTracking().Where(x=>x.StateProvinceId==provinceId).Select(a => new Address()
             {
                 AddressId = a.AddressId,
                 AddressLine1 = a.AddressLine1,

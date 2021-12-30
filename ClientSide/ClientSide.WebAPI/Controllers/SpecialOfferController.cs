@@ -22,7 +22,7 @@ namespace ClientSide.WebAPI.Controllers
         [Route("all-offers")]
         public async Task<IActionResult> GetAll()
         {
-            var res = await Task.Run(() => Service.DatabaseService.Context.Set<SpecialOffer>().Select(x => new SpecialOffer()
+            var res = await Task.Run(() => Service.DatabaseService.Context.Set<SpecialOffer>().AsNoTracking().Select(x => new SpecialOffer()
             {
                 Category = x.Category,
                 Description = x.Description,
@@ -43,7 +43,7 @@ namespace ClientSide.WebAPI.Controllers
         [Route("product-special-offer/{productId}")]
         public async Task<IActionResult> GetOffer(int productId)
         {
-            var res = await Task.Run(() => Service.DatabaseService.Context.Set<SpecialOfferProduct>().Where(x=>x.ProductId==productId).Select(x => new SpecialOfferProduct()
+            var res = await Task.Run(() => Service.DatabaseService.Context.Set<SpecialOfferProduct>().AsNoTracking().Where(x=>x.ProductId==productId).Select(x => new SpecialOfferProduct()
             {
                 ProductId=x.ProductId,
                 SpecialOffer=new SpecialOffer()

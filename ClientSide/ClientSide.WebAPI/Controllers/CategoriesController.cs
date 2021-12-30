@@ -24,7 +24,7 @@ namespace ClientSide.WebAPI.Controllers
         {
             var models = await Task.Run(() => Service.DatabaseService
             .Context.Set<ProductCategory>()
-            .Include(x => x.ProductSubcategories)
+            .Include(x => x.ProductSubcategories).AsNoTracking()
             .Select(x => new ProductCategory()
             {
                 ProductCategoryId = x.ProductCategoryId,
