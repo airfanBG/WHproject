@@ -20,7 +20,7 @@ at: "/api/auth/register" you must send **POST** request with one of emails below
     "password":"12345",
     
 }
-```
+
 
 ## In progress...
 
@@ -179,22 +179,20 @@ rachel53@adventure-works.com
   "discontinuedDate": "0001-01-01T00:00:00",
   
 }
-```
 
 **ProductModel**
 /api/productmodels/all_models **GET**
-```
-{
+```{
   "productModelId": 0,
   "name": null,
   "catalogDescription": null,
   "instructions": null
 }
-
+```
 **ProductCategory**
 returns category and subcategory
 /api/categories/all_categories **GET**
-```{
+{
   "productCategoryId": 0,
   "name": null,
   "subCategories":[
