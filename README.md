@@ -13,7 +13,7 @@ at: "/api/auth/register" you must send **POST** request with one of emails below
     "password":"12345",
     "confirmpassword":"12345"
 }
-```
+
 -"/api/auth/login"-
 {
     "email":"ken0@adventure-works.com",
@@ -179,11 +179,9 @@ rachel53@adventure-works.com
   "discontinuedDate": "0001-01-01T00:00:00",
   
 }
-```
 
 **ProductModel**
 /api/productmodels/all_models **GET**
-```
 {
   "productModelId": 0,
   "name": null,
@@ -194,7 +192,7 @@ rachel53@adventure-works.com
 **ProductCategory**
 returns category and subcategory
 /api/categories/all_categories **GET**
-```
+
 {
   "productCategoryId": 0,
   "name": null,
@@ -208,6 +206,7 @@ returns category and subcategory
 	}
   ]
 }
+```
 
 #Order and it's relations#
 ![This is an image](https://user-images.githubusercontent.com/15988325/147693165-528905e8-fcb5-47b2-a651-7bb9d671eac6.png)
@@ -217,9 +216,7 @@ returns category and subcategory
 If you create order next schemas are required. Basic order is **SalesOrderHeader**
 The API address is : api/orders/place_order **POST** request . All other required data for this request can be reached at next url's:
 
-**
-
-SalesOrderHeader
+**SalesOrderHeader**
 ```
 {
   "orderDate": "0001-01-01T00:00:00",
@@ -277,7 +274,8 @@ SalesOrderHeader
 ```
 **Countries**
 /api/regions/all_countries **GET**
-```{
+```
+{
   "countryRegionCode": null,
   "name": null
 }
