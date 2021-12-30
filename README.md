@@ -182,7 +182,7 @@ rachel53@adventure-works.com
 
 **ProductModel**
 /api/productmodels/all_models **GET**
-```{
+{
   "productModelId": 0,
   "name": null,
   "catalogDescription": null,
