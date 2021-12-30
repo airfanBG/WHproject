@@ -13,14 +13,14 @@ at: "/api/auth/register" you must send **POST** request with one of emails below
     "password":"12345",
     "confirmpassword":"12345"
 }
-```
+
 -"/api/auth/login"-
 {
     "email":"ken0@adventure-works.com",
     "password":"12345",
     
 }
-
+```
 
 ## In progress...
 
@@ -182,7 +182,7 @@ rachel53@adventure-works.com
 
 **ProductModel**
 /api/productmodels/all_models **GET**
-```{
+{
   "productModelId": 0,
   "name": null,
   "catalogDescription": null,
@@ -205,7 +205,7 @@ returns category and subcategory
 	}
   ]
 }
-
+```
 #Order and it's relations#
 ![This is an image](https://user-images.githubusercontent.com/15988325/147693165-528905e8-fcb5-47b2-a651-7bb9d671eac6.png)
 
