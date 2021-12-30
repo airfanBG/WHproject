@@ -18,7 +18,7 @@ namespace ClientSide.WebAPI.Controllers
             Service = service;
         }
         [HttpGet]
-        [Route("all_models")]
+        [Route("all-models")]
         public async Task<IActionResult> GetAllModels()
         {
             var models = await Task.Run(() => Service.GetAllAsync().Result.Select(x => new ProductModel() { CatalogDescription = x.CatalogDescription, Instructions = x.Instructions, Name = x.Name, ProductModelId = x.ProductModelId }).ToList());

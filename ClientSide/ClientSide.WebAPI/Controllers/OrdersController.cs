@@ -38,7 +38,7 @@ namespace ClientSide.WebAPI.Controllers
             return new JsonResult(await Service.GetByIdAsync(orderId));
         }
         [HttpPost]
-        [Route("place_order")]
+        [Route("place-order")]
         public async Task<IActionResult> AddOrder([FromBody]SalesOrderHeader model)
         {
             Logger.LogInformation($"User {User?.Identity?.Name} call AddOrder action");

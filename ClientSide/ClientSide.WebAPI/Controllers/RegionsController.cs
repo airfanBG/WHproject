@@ -20,7 +20,7 @@ namespace ClientSide.WebAPI.Controllers
 
         }
         [HttpGet]
-        [Route("all_countries")]
+        [Route("all-countries")]
         public async Task<IActionResult> GetAll()
         {
             var res = await Task.Run(() => Service.DatabaseService.Context.Set<CountryRegion>().Select(x => new CountryRegion()
@@ -34,7 +34,7 @@ namespace ClientSide.WebAPI.Controllers
             return new JsonResult(res);
         }
         [HttpGet]
-        [Route("country_regions/{countryCode}")]
+        [Route("country-regions/{countryCode}")]
         public async Task<IActionResult> GetRegionStates(string countryCode)
         {
             var res = await Task.Run(() => Service.DatabaseService.Context.Set<StateProvince>().Where(x=>x.CountryRegionCode==countryCode).Select(z => new StateProvince()

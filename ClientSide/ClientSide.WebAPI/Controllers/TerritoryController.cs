@@ -17,7 +17,7 @@ namespace ClientSide.WebAPI.Controllers
             Service = service;
         }
         [HttpGet]
-        [Route("all_territories")]
+        [Route("all-territories")]
         public async Task<IActionResult> GetAll(int customerId)
         {
             var res = await Task.Run(() => Service.GetAllAsync().Result.Select(x => new SalesTerritory() {Group=x.Group,Name=x.Name,CountryRegionCode=x.CountryRegionCode,TerritoryId=x.TerritoryId }).ToList());

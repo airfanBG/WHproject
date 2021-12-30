@@ -151,7 +151,7 @@ rachel52@adventure-works.com
 cynthia23@adventure-works.com
 rachel53@adventure-works.com
 
-*Add new product schema (only for Employees):*
+*Add new product schema (only for Employees):* /api/products/add **POST**
 ```
 {
   "productId": 0,
@@ -181,7 +181,7 @@ rachel53@adventure-works.com
 }
 
 **ProductModel**
-/api/productmodels/all_models **GET**
+/api/productmodels/all-models **GET**
 {
   "productModelId": 0,
   "name": null,
@@ -191,7 +191,7 @@ rachel53@adventure-works.com
 
 **ProductCategory**
 returns category and subcategory
-/api/categories/all_categories **GET**
+/api/categories/all-categories **GET**
 
 {
   "productCategoryId": 0,
@@ -214,7 +214,7 @@ returns category and subcategory
 
 #Orders#
 If you create order next schemas are required. Basic order is **SalesOrderHeader**
-The API address is : api/orders/place_order **POST** request . All other required data for this request can be reached at next url's:
+The API address is : api/orders/place-order **POST** request . All other required data for this request can be reached at next url's:
 
 **SalesOrderHeader**
 ```
@@ -255,6 +255,31 @@ The API address is : api/orders/place_order **POST** request . All other require
 		}
   ]
 }
+**Special offer** /api/specialoffer/all-offers **GET**
+
+```
+{
+  "specialOfferId": 0,
+  "description": null,
+  "discountPct": 0.0,
+  "type": null,
+  "category": null,
+  "startDate": "0001-01-01T00:00:00",
+  "endDate": "0001-01-01T00:00:00",
+  "minQty": 0,
+  "maxQty": null
+}
+
+**Product special offer** /api/specialoffer/product-special-offer/{productId} **GET**
+```
+{
+  "specialOfferId": 0,
+  "productId": 0
+}
+
+
+
+
 **Customer**
 /api/customers/{customerId} **GET**
 ```{
@@ -273,7 +298,7 @@ The API address is : api/orders/place_order **POST** request . All other require
 }
 ```
 **Countries**
-/api/regions/all_countries **GET**
+/api/regions/all-countries **GET**
 ```
 {
   "countryRegionCode": null,
@@ -281,7 +306,7 @@ The API address is : api/orders/place_order **POST** request . All other require
 }
 ```
 **CountryRegions**
-/api/regions/country_regions/{countryCode} **GET** -countryCode is -countryRegionCode-
+/api/regions/country-regions/{countryCode} **GET** -countryCode is -countryRegionCode-
 ```
 {
   "stateProvinceId": 0,
@@ -304,7 +329,7 @@ The API address is : api/orders/place_order **POST** request . All other require
 }
 ```
 **Territory**
-/api/territories/all_territories **GET**
+/api/territories/all-territories **GET**
 ```
 {
   "territoryId": 0,

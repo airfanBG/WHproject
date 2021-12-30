@@ -22,7 +22,7 @@ namespace ClientSide.WebAPI.Controllers
 
    
         [HttpGet]
-        [Route("all_products")]
+        [Route("all-products")]
         public async Task<IActionResult> GetAllProducts()
         {
             Logger.LogInformation($"User {User?.Identity?.Name} call all products action");

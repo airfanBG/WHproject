@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Utils.Infrastructure.Interfaces.Models;
 
 namespace Data.Models
@@ -21,6 +22,7 @@ namespace Data.Models
         /// <summary>
         /// Product identification number. Foreign key to Product.ProductID.
         /// </summary>
+        [Required]
         public int ProductId { get; set; }
         /// <summary>
         /// ROWGUIDCOL number uniquely identifying the record. Used to support a merge replication sample.

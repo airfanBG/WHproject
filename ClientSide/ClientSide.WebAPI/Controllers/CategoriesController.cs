@@ -19,7 +19,7 @@ namespace ClientSide.WebAPI.Controllers
             Service = service;
         }
         [HttpGet]
-        [Route("all_categories")]
+        [Route("all-categories")]
         public async Task<IActionResult> GetAllModels()
         {
             var models = await Task.Run(() => Service.DatabaseService

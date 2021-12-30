@@ -19,7 +19,7 @@ namespace ClientSide.WebAPI.Controllers
         }
 
         [HttpGet]
-        [Route("all_offers")]
+        [Route("all-offers")]
         public async Task<IActionResult> GetAll()
         {
             var res = await Task.Run(() => Service.DatabaseService.Context.Set<SpecialOffer>().Select(x => new SpecialOffer()
@@ -40,7 +40,7 @@ namespace ClientSide.WebAPI.Controllers
             return new JsonResult(res);
         }
         [HttpGet]
-        [Route("product_special_offer/{productId}")]
+        [Route("product-special-offer/{productId}")]
         public async Task<IActionResult> GetOffer(int productId)
         {
             var res = await Task.Run(() => Service.DatabaseService.Context.Set<SpecialOfferProduct>().Where(x=>x.ProductId==productId).Select(x => new SpecialOfferProduct()
