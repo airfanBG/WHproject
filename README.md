@@ -192,7 +192,7 @@ rachel53@adventure-works.com
 **ProductCategory**
 returns category and subcategory
 /api/categories/all_categories **GET**
-```
+
 {
   "productCategoryId": 0,
   "name": null,
@@ -206,7 +206,7 @@ returns category and subcategory
 	}
   ]
 }
-
+```
 
 #Order and it's relations#
 ![This is an image](https://user-images.githubusercontent.com/15988325/147693165-528905e8-fcb5-47b2-a651-7bb9d671eac6.png)
