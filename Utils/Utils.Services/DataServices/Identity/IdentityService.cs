@@ -32,7 +32,7 @@ namespace Utils.Services.DataServices.Identity
 
                 await using (DatabaseService)
                 {
-                    var user = DatabaseService.Context.Set<EmailAddress>().Include(x=>x.BusinessEntity).FirstOrDefault(x => x.Email == model.Email);
+                    var user = DatabaseService.Context.Set<EmailAddress>().Include(x => x.BusinessEntity).FirstOrDefault(x => x.Email == model.Email);
                     if (user == null) return "";
                     else
                     {
@@ -45,7 +45,7 @@ namespace Utils.Services.DataServices.Identity
 
                             var tokenHandler = new JwtSecurityTokenHandler();
                             Claim customerClaimId = null;
-                            if (user.BusinessEntity.PersonType=="IN")
+                            if (user.BusinessEntity.PersonType == "IN")
                             {
                                 customerClaimId = new Claim("CustomerId", user.BusinessEntity.BusinessEntityId.ToString());
                             }
@@ -64,14 +64,14 @@ namespace Utils.Services.DataServices.Identity
                                 Audience = Configuration[ConfigurationKeys.JWT_ValidAudience],
                                 SigningCredentials = new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
                             };
-                            
+
                             var token = tokenHandler.CreateToken(tokenDescriptor);
 
                             return tokenHandler.WriteToken(token);
                         }
                     }
                 }
-                
+
             }
             catch (Exception)
             {
@@ -85,12 +85,12 @@ namespace Utils.Services.DataServices.Identity
             try
             {
 
-               await using (DatabaseService)
+                await using (DatabaseService)
                 {
                     var userExists = DatabaseService.Context.Set<EmailAddress>().FirstOrDefault(x => x.Email == model.Email);
-                    var username= DatabaseService.Context.Set<EmailAddress>().FirstOrDefault(x => x.Name == model.Name);
+                    var username = DatabaseService.Context.Set<EmailAddress>().FirstOrDefault(x => x.Name == model.Name);
 
-                    if (userExists != null && username==null)
+                    if (userExists != null && username == null)
                     {
                         Password password = DatabaseService.Context.Set<Password>().FirstOrDefault(x => x.BusinessEntityId == userExists.BusinessEntityId && x.isRegistered == false)!;
 
@@ -104,8 +104,8 @@ namespace Utils.Services.DataServices.Identity
                         password.ModifiedDate = DateTime.UtcNow;
                         password.isRegistered = true;
                         password.PasswordSalt = hashed.Item2;
-                        userExists.Name= model.Name;
-                  
+                        userExists.Name = model.Name;
+
                         DatabaseService.Context.Set<EmailAddress>().Update(userExists);
                         DatabaseService.Context.Set<Password>().Update(password);
                         DatabaseService.Context.SaveChanges();
@@ -113,7 +113,7 @@ namespace Utils.Services.DataServices.Identity
                     }
                     return 0;
                 }
-                
+
 
             }
             catch (Exception)

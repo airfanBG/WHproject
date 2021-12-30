@@ -215,14 +215,13 @@ returns category and subcategory
 
 #Orders#
 If you create order next schemas are required. Basic order is **SalesOrderHeader**
-The API address is : api/orders/customers/place_order **POST** request . All other required data for this request can be reached at next url's:
+The API address is : api/orders/place_order **POST** request . All other required data for this request can be reached at next url's:
 
 **
 
 SalesOrderHeader
 ```
 {
-  "salesOrderId": 0,
   "orderDate": "0001-01-01T00:00:00",
   "dueDate": "0001-01-01T00:00:00",
   "shipDate": "0001-01-01T00:00:00",
@@ -236,19 +235,16 @@ SalesOrderHeader
   "comment": null,
   "salesOrderDetails":[
 		{
-			"salesOrderId": 0,
-			"salesOrderDetailId": 0,
 			"orderQty": 0,
 			"productId": 0,
 			"specialOfferId": 0,
 			"unitPrice": 0.0,
 			"unitPriceDiscount": 0.0,
-			"lineTotal": 0.0,
 			"specialOfferProduct":{
 			"specialOfferId": 0,
 			"productId": 0,
 			"specialOffer":{ 
-							"specialOfferId": 0,
+							
 							"description": null,
 							"discountPct": 0.0,
 							"type": null,

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Utils.Infrastructure.Interfaces.Models;
 
 namespace Data.Models
@@ -24,10 +25,12 @@ namespace Data.Models
         /// <summary>
         /// Quantity ordered per product.
         /// </summary>
+        [Required]
         public short OrderQty { get; set; }
         /// <summary>
         /// Product sold to customer. Foreign key to Product.ProductID.
         /// </summary>
+        [Required]
         public int ProductId { get; set; }
         /// <summary>
         /// Promotional code. Foreign key to SpecialOffer.SpecialOfferID.

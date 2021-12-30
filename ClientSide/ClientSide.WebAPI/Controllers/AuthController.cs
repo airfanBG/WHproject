@@ -41,7 +41,7 @@ namespace ClientSide.WebAPI.Controllers
             {
                 var token = new JwtSecurityTokenHandler().ReadJwtToken(result);
                 var claimName = token.Claims.First(c => c.Type == "unique_name").Value;
-                var claimRole = token.Claims.First(c => c.Type == ClaimTypes.Role).Value;
+                var claimRole = token.Claims.First(c => c.Type == "role").Value;
                 User.AddIdentity(new ClaimsIdentity(new Claim[] { new Claim(ClaimTypes.Name, claimName.Trim()), new Claim(ClaimTypes.Role,claimRole)}));
                 
                 Logger.LogInformation($"User {claimName.Trim()} is logged.");

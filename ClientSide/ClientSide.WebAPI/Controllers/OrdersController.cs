@@ -39,7 +39,7 @@ namespace ClientSide.WebAPI.Controllers
         }
         [HttpPost]
         [Route("place_order")]
-        public async Task<IActionResult> AddOrder(SalesOrderHeader model)
+        public async Task<IActionResult> AddOrder([FromBody]SalesOrderHeader model)
         {
             Logger.LogInformation($"User {User?.Identity?.Name} call AddOrder action");
             model.PurchaseOrderNumber = Guid.NewGuid().ToString().Substring(0, 10);
@@ -50,6 +50,8 @@ namespace ClientSide.WebAPI.Controllers
             model.Status = 1;
             model.OnlineOrderFlag = true;
             model.ModifiedDate = DateTime.UtcNow;
+            model.SalesOrderDetails.Select(x=>x.CarrierTrackingNumber=Guid.NewGuid().ToString().Substring(0, 5)).ToList();
+
             return new JsonResult(await Service.Add(model));
         }
        

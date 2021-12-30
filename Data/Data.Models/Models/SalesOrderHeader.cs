@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Utils.Infrastructure.Interfaces.Models;
 
 namespace Data.Models
@@ -26,14 +27,17 @@ namespace Data.Models
         /// <summary>
         /// Dates the sales order was created.
         /// </summary>
+        [Required]
         public DateTime OrderDate { get; set; }
         /// <summary>
         /// Date the order is due to the customer.
         /// </summary>
+        [Required]
         public DateTime DueDate { get; set; }
         /// <summary>
         /// Date the order was shipped to the customer.
         /// </summary>
+        [Required]
         public DateTime? ShipDate { get; set; }
         /// <summary>
         /// Order current status. 1 = In process; 2 = Approved; 3 = Backordered; 4 = Rejected; 5 = Shipped; 6 = Cancelled
@@ -58,6 +62,7 @@ namespace Data.Models
         /// <summary>
         /// Customer identification number. Foreign key to Customer.BusinessEntityID.
         /// </summary>
+        [Required]
         public int CustomerId { get; set; }
         /// <summary>
         /// Sales person who created the sales order. Foreign key to SalesPerson.BusinessEntityID.
@@ -70,14 +75,17 @@ namespace Data.Models
         /// <summary>
         /// Customer billing address. Foreign key to Address.AddressID.
         /// </summary>
+        [Required]
         public int BillToAddressId { get; set; }
         /// <summary>
         /// Customer shipping address. Foreign key to Address.AddressID.
         /// </summary>
+        [Required]
         public int ShipToAddressId { get; set; }
         /// <summary>
         /// Shipping method. Foreign key to ShipMethod.ShipMethodID.
         /// </summary>
+        [Required]
         public int ShipMethodId { get; set; }
         /// <summary>
         /// Credit card identification number. Foreign key to CreditCard.CreditCardID.
@@ -94,18 +102,22 @@ namespace Data.Models
         /// <summary>
         /// Sales subtotal. Computed as SUM(SalesOrderDetail.LineTotal)for the appropriate SalesOrderID.
         /// </summary>
+        [Required]
         public decimal SubTotal { get; set; }
         /// <summary>
         /// Tax amount.
         /// </summary>
+        [Required]
         public decimal TaxAmt { get; set; }
         /// <summary>
         /// Shipping cost.
         /// </summary>
+        [Required]
         public decimal Freight { get; set; }
         /// <summary>
         /// Total due from customer. Computed as Subtotal + TaxAmt + Freight.
         /// </summary>
+        [Required]
         public decimal TotalDue { get; set; }
         /// <summary>
         /// Sales representative comments.
