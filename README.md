@@ -194,8 +194,7 @@ rachel53@adventure-works.com
 **ProductCategory**
 returns category and subcategory
 /api/categories/all_categories **GET**
-```
-{
+```{
   "productCategoryId": 0,
   "name": null,
   "subCategories":[
