@@ -182,7 +182,7 @@ rachel53@adventure-works.com
 
 **ProductModel**
 /api/productmodels/all_models **GET**
-{
+```{
   "productModelId": 0,
   "name": null,
   "catalogDescription": null,
@@ -192,6 +192,7 @@ rachel53@adventure-works.com
 **ProductCategory**
 returns category and subcategory
 /api/categories/all_categories **GET**
+```
 {
   "productCategoryId": 0,
   "name": null,
@@ -205,7 +206,7 @@ returns category and subcategory
 	}
   ]
 }
-```
+
 
 #Order and it's relations#
 ![This is an image](https://user-images.githubusercontent.com/15988325/147693165-528905e8-fcb5-47b2-a651-7bb9d671eac6.png)
@@ -277,7 +278,8 @@ The API address is : api/orders/customers/place_order **POST** request . All oth
 ```
 **Countries**
 /api/regions/all_countries **GET**
-```{
+```
+{
   "countryRegionCode": null,
   "name": null
 }
