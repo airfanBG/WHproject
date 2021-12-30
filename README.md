@@ -190,7 +190,6 @@ rachel53@adventure-works.com
   "catalogDescription": null,
   "instructions": null
 }
-```
 
 **ProductCategory**
 returns category and subcategory
@@ -209,7 +208,7 @@ returns category and subcategory
 	}
   ]
 }
-```
+
 #Order and it's relations#
 ![This is an image](https://user-images.githubusercontent.com/15988325/147693165-528905e8-fcb5-47b2-a651-7bb9d671eac6.png)
 
