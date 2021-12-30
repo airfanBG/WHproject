@@ -179,7 +179,7 @@ rachel53@adventure-works.com
   "discontinuedDate": "0001-01-01T00:00:00",
   
 }
-
+```
 **ProductModel**
 /api/productmodels/all_models **GET**
 {
@@ -188,7 +188,7 @@ rachel53@adventure-works.com
   "catalogDescription": null,
   "instructions": null
 }
-```
+
 **ProductCategory**
 returns category and subcategory
 /api/categories/all_categories **GET**
@@ -205,7 +205,7 @@ returns category and subcategory
 	}
   ]
 }
-```
+
 #Order and it's relations#
 ![This is an image](https://user-images.githubusercontent.com/15988325/147693165-528905e8-fcb5-47b2-a651-7bb9d671eac6.png)
 
@@ -214,9 +214,7 @@ returns category and subcategory
 If you create order next schemas are required. Basic order is **SalesOrderHeader**
 The API address is : api/orders/customers/place_order **POST** request . All other required data for this request can be reached at next url's:
 
-**
-
-SalesOrderHeader
+**SalesOrderHeader**
 ```
 {
   "salesOrderId": 0,
