@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using Utils.Infrastructure.Interfaces.Models;
 
 namespace Data.Models
 {
     /// <summary>
-    /// Displays the content from each element in the xml column CatalogDescription for each product in the Production.ProductModel table that has catalog data.
+    /// Displays the content from each element in the xml column CatalogDescription for each product in the Sales.ProductModel table that has catalog data.
     /// </summary>
-    public class VProductModelCatalogDescription : BaseModel
+    public partial class VProductModelCatalogDescription
     {
         public int ProductModelId { get; set; }
         public string Name { get; set; } = null!;
@@ -32,7 +31,7 @@ namespace Data.Models
         public string? ProductLine { get; set; }
         public string? Style { get; set; }
         public string? RiderExperience { get; set; }
-      //  public Guid Rowguid { get; set; }
-      //  public DateTime ModifiedDate { get; set; }
+        public Guid Rowguid { get; set; }
+        public DateTime ModifiedDate { get; set; }
     }
 }

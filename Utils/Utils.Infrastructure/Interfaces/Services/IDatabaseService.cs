@@ -11,5 +11,6 @@ namespace Utils.Infrastructure.Interfaces.Services
     public interface IDatabaseService : IAsyncDisposable, IDisposable
     {
         public DbContext Context { get; set; }
+        public int ExecuteNonEFquery(string query);
     }
 }

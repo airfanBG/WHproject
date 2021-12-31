@@ -1,22 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using Utils.Infrastructure.Interfaces.Models;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Data.Models
+namespace Utils.Infrastructure.Vmodels
 {
-    /// <summary>
-    /// Products sold or used in the manfacturing of sold products.
-    /// </summary>
-    public partial class Product : BaseModel
+    public class ProductVM
     {
-        public Product()
-        {
-            SalesOrderDetails = new HashSet<SalesOrderDetail>();
-        }
-
-        /// <summary>
-        /// Primary key for Product records.
-        /// </summary>
         public int ProductId { get; set; }
         /// <summary>
         /// Name of the product.
@@ -47,14 +38,6 @@ namespace Data.Models
         /// </summary>
         public decimal? Weight { get; set; }
         /// <summary>
-        /// Product is a member of this product category. Foreign key to ProductCategory.ProductCategoryID. 
-        /// </summary>
-        public int? ProductCategoryId { get; set; }
-        /// <summary>
-        /// Product is a member of this product model. Foreign key to ProductModel.ProductModelID.
-        /// </summary>
-        public int? ProductModelId { get; set; }
-        /// <summary>
         /// Date the product was available for sale.
         /// </summary>
         public DateTime SellStartDate { get; set; }
@@ -74,10 +57,9 @@ namespace Data.Models
         /// Small image file name.
         /// </summary>
         public string? ThumbnailPhotoFileName { get; set; }
-     
 
-        public virtual ProductCategory? ProductCategory { get; set; }
-        public virtual ProductModel? ProductModel { get; set; }
-        public virtual ICollection<SalesOrderDetail> SalesOrderDetails { get; set; }
+
+        public virtual ProductCategoryVM? ProductCategory { get; set; }
+        public virtual ProductModelVM? ProductModel { get; set; }
     }
 }

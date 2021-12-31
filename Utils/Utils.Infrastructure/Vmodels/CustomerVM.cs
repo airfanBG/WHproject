@@ -1,20 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using Utils.Infrastructure.Interfaces.Models;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Data.Models
+namespace Utils.Infrastructure.Vmodels
 {
-    /// <summary>
-    /// Customer information.
-    /// </summary>
-    public partial class Customer : BaseModel
+    public class CustomerVM
     {
-        public Customer()
-        {
-            CustomerAddresses = new HashSet<CustomerAddress>();
-            SalesOrderHeaders = new HashSet<SalesOrderHeader>();
-        }
-
         /// <summary>
         /// Primary key for Customer records.
         /// </summary>
@@ -69,7 +62,8 @@ namespace Data.Models
         public string PasswordSalt { get; set; } = null!;
 
         public bool isTaken { get; set; }
-        public virtual ICollection<CustomerAddress> CustomerAddresses { get; set; }
-        public virtual ICollection<SalesOrderHeader> SalesOrderHeaders { get; set; }
+        public virtual ICollection<CustomerAddressVM> CustomerAddresses { get; set; }
+        public virtual ICollection<SalesOrderHeaderVM> SalesOrderHeaders { get; set; }
+        public virtual SalesOrderHeaderVM SalesOrder { get; set; }
     }
 }

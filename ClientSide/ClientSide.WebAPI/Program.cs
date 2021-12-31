@@ -9,6 +9,7 @@ using System.Reflection;
 using System.Text;
 using System.Text.Json.Serialization;
 using Utils.Common.MagicStrings;
+using Utils.Common.SQLcommands;
 using Utils.Infrastructure.Interfaces.Services;
 using Utils.Services.DataServices;
 using Utils.Services.DataServices.Identity;
@@ -20,24 +21,26 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 
-//configuration
-IConfiguration configuration = new ConfigurationBuilder()
-       .SetBasePath(Directory.GetCurrentDirectory())
-       .AddJsonFile("appSettings.json", false)
-       .Build();
-builder.Services.AddSingleton<IConfiguration>(configuration);
+////configuration
+//IConfiguration configuration = new ConfigurationBuilder()
+//       .SetBasePath(Directory.GetCurrentDirectory())
+//       .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+//       .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true)
+//       .Build();
+
+//builder.Services.AddSingleton<IConfiguration>(configuration);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
 //Serilog
 
-builder.Host.UseSerilog((ctx,lc)=>
+builder.Host.UseSerilog((ctx, lc) =>
    lc.WriteTo.MSSqlServer(
-                   connectionString: configuration.GetConnectionString("DefaultConnection"),
-                   tableName: configuration.GetSection("Serilog:TableName").Value,
-                   appConfiguration: configuration,
+                   connectionString: builder.Configuration.GetConnectionString("DefaultConnection"),
+                   tableName: builder.Configuration.GetSection("Serilog:TableName").Value,
+                   appConfiguration: builder.Configuration,
                    autoCreateSqlTable: true,
-                   columnOptionsSection: configuration.GetSection("Serilog:ColumnOptions"),
-                   schemaName: configuration.GetSection("Serilog:SchemaName").Value)
+                   columnOptionsSection: builder.Configuration.GetSection("Serilog:ColumnOptions"),
+                   schemaName: builder.Configuration.GetSection("Serilog:SchemaName").Value)
                );
 
 
@@ -62,7 +65,7 @@ builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-   
+
 })
 
            // Adding Jwt Bearer  
@@ -73,7 +76,7 @@ builder.Services.AddAuthentication(options =>
 
                options.TokenValidationParameters = new TokenValidationParameters()
                {
-                  
+
                    ValidateIssuer = true,
                    ValidateAudience = true,
                    ValidAudience = builder.Configuration[ConfigurationKeys.JWT_ValidAudience],
@@ -84,6 +87,49 @@ builder.Services.AddAuthentication(options =>
            });
 builder.Services.AddAuthorization();
 var app = builder.Build();
+
+using (var scope=app.Services.CreateScope())
+{
+    var service= scope.ServiceProvider;
+    try
+    {
+        var context = service.GetRequiredService<IDatabaseService>();
+        if (context.Context.Database.EnsureCreated())
+        {
+
+            
+        }
+    }
+    catch (Exception)
+    {
+
+        throw;
+    }
+}
+//using (var scope = app.Services.CreateScope())
+//{
+//    var services = scope.ServiceProvider;
+
+//    try
+//    {
+//        var context = services.GetRequiredService<IDatabaseService>();
+//        var res=context.ExecuteNonEFquery(SqlFunctions.checkCreatedFunctions);
+
+//       // var addedFunctions = context.Database.ExecuteSqlRaw(SqlFunctions.checkCreatedCustomerOrderFunction);
+//        if (res==0)
+//        {
+//            await context.Context.Database.ExecuteSqlRawAsync(SqlFunctions.UserFunctions);
+//        }
+       
+
+//    }
+//    catch (Exception ex)
+//    {
+
+//        throw;
+//    }
+//}
+
 
 
 // Configure the HTTP request pipeline.

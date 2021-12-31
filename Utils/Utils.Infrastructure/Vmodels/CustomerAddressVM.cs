@@ -1,24 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using Utils.Infrastructure.Interfaces.Models;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Data.Models
+namespace Utils.Infrastructure.Vmodels
 {
-    /// <summary>
-    /// Street address information for customers.
-    /// </summary>
-    public partial class Address:BaseModel
+    public class CustomerAddressVM
     {
-        public Address()
-        {
-            CustomerAddresses = new HashSet<CustomerAddress>();
-            SalesOrderHeaderBillToAddresses = new HashSet<SalesOrderHeader>();
-            SalesOrderHeaderShipToAddresses = new HashSet<SalesOrderHeader>();
-        }
-
-        /// <summary>
-        /// Primary key for Address records.
-        /// </summary>
         public int AddressId { get; set; }
         /// <summary>
         /// First street address line.
@@ -41,10 +30,5 @@ namespace Data.Models
         /// Postal code for the street address.
         /// </summary>
         public string PostalCode { get; set; } = null!;
-       
-
-        public virtual ICollection<CustomerAddress> CustomerAddresses { get; set; }
-        public virtual ICollection<SalesOrderHeader> SalesOrderHeaderBillToAddresses { get; set; }
-        public virtual ICollection<SalesOrderHeader> SalesOrderHeaderShipToAddresses { get; set; }
     }
 }

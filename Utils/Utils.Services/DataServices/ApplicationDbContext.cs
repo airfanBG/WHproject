@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -28,6 +29,30 @@ namespace Utils.Services.DataServices
         {
             Context = dbContext;
         }
+
+        public int ExecuteNonEFquery(string query)
+        {
+            var context = Context.Database.GetDbConnection().ConnectionString;
+            using (SqlConnection conn=new SqlConnection(context))
+            {
+                using (SqlCommand cmd=new SqlCommand(query,conn))
+                {
+                    conn.Open();
+                    var res= cmd.ExecuteNonQuery();
+                    conn.Close();
+                    if (res>0)
+                    {
+                        return 1;
+                    }
+                    else
+                    {
+                        return 0;
+                    }
+                }
+            }
+        }
+
+
         public void Dispose()
         {
             Dispose(disposing: true);

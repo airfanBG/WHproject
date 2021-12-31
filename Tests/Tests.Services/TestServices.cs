@@ -26,7 +26,7 @@ namespace Tests.Services
 
             var services = new WarehouseService<Product>(db);
 
-            Assert.NotEmpty(await services.GetAllAsync());
+            Assert.NotEmpty(await services.GetAllAsync(null));
         }
         [Fact]
         public async Task Test_GetById_service()

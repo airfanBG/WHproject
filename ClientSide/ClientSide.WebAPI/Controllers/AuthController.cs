@@ -25,7 +25,7 @@ namespace ClientSide.WebAPI.Controllers
             var result =await Service.RegisterAsync(model);
             if (result == 1)
             {
-                Logger.LogInformation($"User {model.Name} is registered.");
+                Logger.LogInformation($"User {model.Email} is registered.");
                 return Ok();
             }
             return BadRequest();
@@ -40,7 +40,7 @@ namespace ClientSide.WebAPI.Controllers
             if (result!=null)
             {
                 var token = new JwtSecurityTokenHandler().ReadJwtToken(result);
-                var claimName = token.Claims.First(c => c.Type == "unique_name").Value;
+                var claimName = token.Claims.First(c => c.Type == "email").Value;
                 var claimRole = token.Claims.First(c => c.Type == "role").Value;
                 User.AddIdentity(new ClaimsIdentity(new Claim[] { new Claim(ClaimTypes.Name, claimName.Trim()), new Claim(ClaimTypes.Role,claimRole)}));
                 

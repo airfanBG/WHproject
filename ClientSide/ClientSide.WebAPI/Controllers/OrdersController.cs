@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Utils.Infrastructure.Interfaces.Services;
 
 namespace ClientSide.WebAPI.Controllers
@@ -27,7 +28,7 @@ namespace ClientSide.WebAPI.Controllers
         {
             Logger.LogInformation($"User {User?.Identity?.Name} call all GetAllOrders action");
 
-            return new JsonResult(await Service.GetAllAsync(x=>x.CustomerId==customerId));
+            return new JsonResult(await Service.GetAllAsync(x=>x.CustomerId==customerId).Result.ToListAsync());
         }
         [HttpGet]
         [Route("order/{orderId}")]
@@ -50,8 +51,7 @@ namespace ClientSide.WebAPI.Controllers
             model.Status = 1;
             model.OnlineOrderFlag = true;
             model.ModifiedDate = DateTime.UtcNow;
-            model.SalesOrderDetails.Select(x=>x.CarrierTrackingNumber=Guid.NewGuid().ToString().Substring(0, 5)).ToList();
-
+           
             return new JsonResult(await Service.Add(model));
         }
        

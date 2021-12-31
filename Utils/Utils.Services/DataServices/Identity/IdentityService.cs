@@ -32,12 +32,11 @@ namespace Utils.Services.DataServices.Identity
 
                 await using (DatabaseService)
                 {
-                    var user = DatabaseService.Context.Set<EmailAddress>().Include(x => x.BusinessEntity).FirstOrDefault(x => x.Email == model.Email);
+                    var user = DatabaseService.Context.Set<Customer>().FirstOrDefault(x => x.EmailAddress == model.Email);
                     if (user == null) return "";
                     else
                     {
-                        var userPass = DatabaseService.Context.Set<Password>().FirstOrDefault(x => x.BusinessEntityId == user.BusinessEntityId);
-                        var verify = SecurePasswordHasher.VerifyPassword(model.Password, userPass.PasswordHash, userPass.PasswordSalt);
+                        var verify = SecurePasswordHasher.VerifyPassword(model.Password, user.PasswordHash, user.PasswordSalt);
                         if (!verify) return "";
                         else
                         {
@@ -45,17 +44,14 @@ namespace Utils.Services.DataServices.Identity
 
                             var tokenHandler = new JwtSecurityTokenHandler();
                             Claim customerClaimId = null;
-                            if (user.BusinessEntity.PersonType == "IN")
-                            {
-                                customerClaimId = new Claim("CustomerId", user.BusinessEntity.BusinessEntityId.ToString());
-                            }
+                           
                             var tokenDescriptor = new SecurityTokenDescriptor
                             {
                                 Subject = new ClaimsIdentity(new Claim[]
                                 {
-                                    new Claim(ClaimTypes.Name, user.Name),
-                                    new Claim(ClaimTypes.Role, user.BusinessEntity.PersonType),
-                                    new Claim("Full_Name",String.Format($"{user.BusinessEntity.FirstName} {user.BusinessEntity.LastName}")),
+                                    new Claim(ClaimTypes.Role, "Customer"),
+                                    new Claim("email", model.Email),
+                                   
                                     customerClaimId ?? null!
                                 }),
 
@@ -87,27 +83,20 @@ namespace Utils.Services.DataServices.Identity
 
                 await using (DatabaseService)
                 {
-                    var userExists = DatabaseService.Context.Set<EmailAddress>().FirstOrDefault(x => x.Email == model.Email);
-                    var username = DatabaseService.Context.Set<EmailAddress>().FirstOrDefault(x => x.Name == model.Name);
+                    var userExists = DatabaseService.Context.Set<Customer>().FirstOrDefault(x => x.EmailAddress == model.Email && x.isTaken==false);
+                   
 
-                    if (userExists != null && username == null)
+                    if (userExists != null)
                     {
-                        Password password = DatabaseService.Context.Set<Password>().FirstOrDefault(x => x.BusinessEntityId == userExists.BusinessEntityId && x.isRegistered == false)!;
-
-                        if (password == null)
-                        {
-                            return 0;
-                        }
-
                         var hashed = SecurePasswordHasher.Hash(model.Password);
-                        password.PasswordHash = hashed.Item1;
-                        password.ModifiedDate = DateTime.UtcNow;
-                        password.isRegistered = true;
-                        password.PasswordSalt = hashed.Item2;
-                        userExists.Name = model.Name;
-
-                        DatabaseService.Context.Set<EmailAddress>().Update(userExists);
-                        DatabaseService.Context.Set<Password>().Update(password);
+                        userExists.PasswordHash = hashed.Item1;
+                        userExists.ModifiedDate = DateTime.UtcNow;
+                        userExists.isTaken = true;
+                   
+                        userExists.PasswordSalt = hashed.Item2;
+                     
+                        DatabaseService.Context.Set<Customer>().Update(userExists);
+                        
                         DatabaseService.Context.SaveChanges();
                         return 1;
                     }

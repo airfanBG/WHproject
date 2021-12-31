@@ -1,22 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using Utils.Infrastructure.Interfaces.Models;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Data.Models
+namespace Utils.Infrastructure.Vmodels
 {
-    /// <summary>
-    /// General sales order information.
-    /// </summary>
-    public partial class SalesOrderHeader : BaseModel
+    public class SalesOrderHeaderVM
     {
-        public SalesOrderHeader()
-        {
-            SalesOrderDetails = new HashSet<SalesOrderDetail>();
-        }
-
-        /// <summary>
-        /// Primary key.
-        /// </summary>
         public int SalesOrderId { get; set; }
         /// <summary>
         /// Incremental number to track changes to the sales order over time.
@@ -54,18 +45,7 @@ namespace Data.Models
         /// Financial accounting number reference.
         /// </summary>
         public string? AccountNumber { get; set; }
-        /// <summary>
-        /// Customer identification number. Foreign key to Customer.CustomerID.
-        /// </summary>
-        public int CustomerId { get; set; }
-        /// <summary>
-        /// The ID of the location to send goods.  Foreign key to the Address table.
-        /// </summary>
-        public int? ShipToAddressId { get; set; }
-        /// <summary>
-        /// The ID of the location to send invoices.  Foreign key to the Address table.
-        /// </summary>
-        public int? BillToAddressId { get; set; }
+        
         /// <summary>
         /// Shipping method. Foreign key to ShipMethod.ShipMethodID.
         /// </summary>
@@ -94,11 +74,6 @@ namespace Data.Models
         /// Sales representative comments.
         /// </summary>
         public string? Comment { get; set; }
-       
 
-        public virtual Address? BillToAddress { get; set; }
-        public virtual Customer Customer { get; set; } = null!;
-        public virtual Address? ShipToAddress { get; set; }
-        public virtual ICollection<SalesOrderDetail> SalesOrderDetails { get; set; }
     }
 }

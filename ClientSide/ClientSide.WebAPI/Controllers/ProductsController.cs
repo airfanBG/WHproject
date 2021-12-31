@@ -2,7 +2,10 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Utils.Common.Extensions;
 using Utils.Infrastructure.Interfaces.Services;
+using Utils.Infrastructure.Vmodels;
 
 namespace ClientSide.WebAPI.Controllers
 {
@@ -26,21 +29,21 @@ namespace ClientSide.WebAPI.Controllers
         public async Task<IActionResult> GetAllProducts()
         {
             Logger.LogInformation($"User {User?.Identity?.Name} call all products action");
-            return new JsonResult(await Service.GetAllAsync());
+            var products = await Service.GetAllAsync();
+
+            var productWIthCategory=products.Include(x=>x.ProductModel).ThenInclude(x=>x.ProductModelProductDescriptions).ThenInclude(x=>x.ProductDescription).Include(x=>x.ProductCategory).Select(x=>x.Product()).FirstOrDefault();
+            return new JsonResult(productWIthCategory);
         }
-        [HttpPost]
-        [Route("add")]
-        //[Authorize(Roles ="ЕМ")]
-        public async Task<IActionResult> AddProduct([FromBody] Product model)
+        [HttpGet]
+        [Route("product")]
+        public async Task<IActionResult> GetProduct(int productId)
         {
-            Logger.LogInformation($"User {User?.Identity?.Name} add product");
-            var res = await Service.Add(model);
-            if (res == 1)
-            {
-                return Ok();
-            }
-            return BadRequest();
+            Logger.LogInformation($"User {User?.Identity?.Name} call all products action");
+            var products = await Service.GetAllAsync(x=>x.ProductId==productId);
+
+            var productsWithCategory = products.Include(x => x.ProductModel).ThenInclude(x => x.ProductModelProductDescriptions).ThenInclude(x => x.ProductDescription).Include(x => x.ProductCategory).Select(x => x.Product()).ToListAsync();
+            return new JsonResult(productsWithCategory);
         }
-       
+
     }
 }
