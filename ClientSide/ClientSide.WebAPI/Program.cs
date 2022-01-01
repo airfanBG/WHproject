@@ -89,7 +89,8 @@ using (var scope = app.Services.CreateScope())
         var context = service.GetRequiredService<IDatabaseService>();
         if (!context.Context.Database.GetService<IRelationalDatabaseCreator>().Exists())
         {
-            SqlFunctions.RestoreDb("master", Path.Combine(builder.Environment.ContentRootPath, "DatabaseBackup\\AdventureWorksLT2019.sql"));
+            var connectionString = builder.Configuration["InitialConnection"];
+            SqlFunctions.RestoreDb(connectionString, Path.Combine(builder.Environment.ContentRootPath, "DatabaseBackup\\AdventureWorksLT2019.sql"));
         }
     }
     catch (Exception e)

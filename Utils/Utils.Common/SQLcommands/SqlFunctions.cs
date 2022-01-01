@@ -8,10 +8,8 @@ namespace Utils.Common.SQLcommands
 {
     public class SqlFunctions
     {
-        public static void RestoreDb(String databaseName, String backUpFile)
+        public static void RestoreDb(String connectionString, String backUpFile)
         {
-            var connectionString = $"Server=.;Integrated security=SSPI;database={databaseName}; Connect Timeout=30;";
-
             string script = File.ReadAllText(backUpFile);
 
             // split script on GO command
@@ -38,8 +36,9 @@ namespace Utils.Common.SQLcommands
                             }
                         }
                     }
-                    connection.Close();
+                   
                 }
+                connection.Close();
             }
         }
 
