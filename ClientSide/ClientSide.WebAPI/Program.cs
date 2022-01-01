@@ -23,16 +23,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 
-////configuration
-//IConfiguration configuration = new ConfigurationBuilder()
-//       .SetBasePath(Directory.GetCurrentDirectory())
-//       .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-//       .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true)
-//       .Build();
-
-//builder.Services.AddSingleton<IConfiguration>(configuration);
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-
 //Serilog
 
 builder.Host.UseSerilog((ctx, lc) =>
@@ -102,10 +92,9 @@ using (var scope = app.Services.CreateScope())
             SqlFunctions.RestoreDb("master", Path.Combine(builder.Environment.ContentRootPath, "DatabaseBackup\\AdventureWorksLT2019.sql"));
         }
     }
-    catch (Exception)
+    catch (Exception e)
     {
-
-        throw;
+        throw e;
     }
 }
 
@@ -115,11 +104,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.Use((i, o) =>
-{
-    var test = i;
-    return o.Invoke();
-});
+
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();

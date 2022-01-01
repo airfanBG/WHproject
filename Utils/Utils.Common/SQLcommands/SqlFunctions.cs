@@ -26,15 +26,22 @@ namespace Utils.Common.SQLcommands
                     {
                         using (var command = new SqlCommand(commandString, connection))
                         {
-                            command.ExecuteNonQuery();
+                            try
+                            {
+                                command.ExecuteNonQuery();
+                            }
+                            catch (SqlException ex)
+                            {
+                                string spError = commandString.Length > 100 ? commandString.Substring(0, 100) + " ...\n..." : commandString;
+                                throw new Exception(string.Format("Please check the SqlServer script.\nFile: {0} \nLine: {1} \nError: {2} \nSQL Command: \n{3}"));
 
+                            }
                         }
                     }
+                    connection.Close();
                 }
-                connection.Close();
             }
         }
-
 
     }
 }
