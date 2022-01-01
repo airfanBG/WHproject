@@ -72,22 +72,25 @@ vamsi1@adventure-works.com
 jane2@adventure-works.com
 
 ##
-Categories
+**Categories**
 "/api/Categories/all-categories" -returns all Categories
 "/api/Categories/all-categories-products" -returns all Products in categories
 "/api/Categories/category-products/{categoryId}" -returns all products in Category by Category ID
 
-##Customers##
+##
+**Customers**
  "/api/Customers/{customerId}" -returns Customer by ID
  "/api/Customers/customer-orders/{customerId}" -returns Customer orders
  "/api/Customers/customer-order/{customerId}/{orderId}" -returns data about customer and order
 
-##Orders##
+##
+**Orders**
  "/api/Orders/{customerId}/all" -returns all customer
  "/api/Orders/order/{orderId}" -returns Order info
   "/api/Orders/place-order" -Add order
 
-#Products##
+##
+**Products**
  "/api/Products/all-products" -returns all products
  "/api/Products/product/{poductId}" -returns concrete product
 
