@@ -91,24 +91,23 @@ builder.Services.AddAuthorization();
 var app = builder.Build();
 
 //TODO auto restore database
-//using (var scope=app.Services.CreateScope())
-//{
-//    var service= scope.ServiceProvider;
-//    try
-//    {
-//        var context = service.GetRequiredService<IDatabaseService>();
-//        if (!context.Context.Database.GetService<IRelationalDatabaseCreator>().Exists())
-//        {
-//            //SqlFunctions.RestoreDatabase(Path.Combine(builder.Environment.ContentRootPath, "DatabaseBackup/AdventureWorksLT2019.sql"), "AdventureWorksLT2019");
-//            SqlFunctions.RestoreDb("AdventureWorksLT2019", Path.Combine(builder.Environment.ContentRootPath, "DatabaseBackup\\AdventureWorksLT2019.sql"));
-//        }
-//    }
-//    catch (Exception)
-//    {
+using (var scope = app.Services.CreateScope())
+{
+    var service = scope.ServiceProvider;
+    try
+    {
+        var context = service.GetRequiredService<IDatabaseService>();
+        if (!context.Context.Database.GetService<IRelationalDatabaseCreator>().Exists())
+        {
+            SqlFunctions.RestoreDb("master", Path.Combine(builder.Environment.ContentRootPath, "DatabaseBackup\\AdventureWorksLT2019.sql"));
+        }
+    }
+    catch (Exception)
+    {
 
-//        throw;
-//    }
-//}
+        throw;
+    }
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

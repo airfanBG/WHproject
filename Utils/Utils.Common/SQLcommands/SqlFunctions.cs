@@ -2,6 +2,7 @@
 using Microsoft.SqlServer.Management.Common;
 using Microsoft.SqlServer.Management.Smo;
 using System.Data;
+using System.Text.RegularExpressions;
 
 namespace Utils.Common.SQLcommands
 {
@@ -9,86 +10,31 @@ namespace Utils.Common.SQLcommands
     {
         public static void RestoreDb(String databaseName, String backUpFile)
         {
-            var connectionString = "Server=.;Integrated security=SSPI;database=master";
-            
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            var connectionString = $"Server=.;Integrated security=SSPI;database={databaseName}; Connect Timeout=30;";
+
+            string script = File.ReadAllText(backUpFile);
+
+            // split script on GO command
+            System.Collections.Generic.IEnumerable<string> commandStrings = Regex.Split(script, @"^\s*GO\s*$",
+                                     RegexOptions.Multiline | RegexOptions.IgnoreCase);
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                //String str;
-                //str = $"CREATE DATABASE {databaseName}";
-
-                //SqlCommand myCommand = new SqlCommand(str, conn);
-                try
+                connection.Open();
+                foreach (string commandString in commandStrings)
                 {
-                    //conn.Open();
-                    //myCommand.ExecuteNonQuery();
-
-                }
-                catch (System.Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                   
-                    if (conn.State == ConnectionState.Open)
+                    if (commandString.Trim() != "")
                     {
-                        conn.Close();
+                        using (var command = new SqlCommand(commandString, connection))
+                        {
+                            command.ExecuteNonQuery();
+
+                        }
                     }
                 }
-
+                connection.Close();
             }
-
-            ServerConnection connection = new ServerConnection(".", "sa", "Damqnov84!");
-            Server sqlServer = new Server(connection);
-            Restore rstDatabase = new Restore();
-            rstDatabase.Action = RestoreActionType.Database;
-            rstDatabase.Database = databaseName;
-            BackupDeviceItem bkpDevice = new BackupDeviceItem(backUpFile, DeviceType.File);
-            rstDatabase.Devices.Add(bkpDevice);
-            rstDatabase.ReplaceDatabase = true;
-            rstDatabase.SqlRestore(sqlServer);
         }
 
-        public static void RestoreDatabase(string backupPath, string databaseName)
-        {
-            var connectionString = "Server=.;Integrated security=SSPI;database=master";
-            string script = File.ReadAllText(backupPath);
-
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                String str;
-                str = $"CREATE DATABASE {databaseName}";
-
-                SqlCommand myCommand = new SqlCommand(str, conn);
-                try
-                {
-                    conn.Open();
-                    myCommand.ExecuteNonQuery();
-                   
-                }
-                catch (System.Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                    FileInfo fileInfo = new FileInfo(backupPath);
-                    string sc = fileInfo.OpenText().ReadToEnd();
-                    using (SqlConnection connection = new SqlConnection(connectionString))
-                    {
-                        SqlCommand cmd = new SqlCommand(sc, conn);
-                        cmd.ExecuteNonQuery();
-                    }
-                    if (conn.State == ConnectionState.Open)
-                    {
-                        conn.Close();
-                    }
-                }
-              
-            }
-
-         
-        }
 
     }
 }
