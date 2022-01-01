@@ -45,9 +45,8 @@ namespace ClientSide.WebAPI.Controllers
                 return BadRequest();
             }
             Logger.LogInformation($"User {User?.Identity?.Name} call GetCustomer action");
-            var customer = await Service.GetAllAsync(x => x.CustomerId == customerId);
-            var res = customer.Include(x => x.SalesOrderHeaders).Select(x =>x.CustomerOrders()).ToList() ;
-            return new JsonResult(res);
+            var customer =await Task.Run(()=> Service.DatabaseService.Context.Set<Customer>().Where(x => x.CustomerId == customerId).Include(x => x.SalesOrderHeaders).Select(x =>x.CustomerOrders()).ToList()) ;
+            return new JsonResult(customer);
         }
         [HttpGet]
         [Route("customer-order/{customerId}/{orderId}")]
@@ -58,10 +57,9 @@ namespace ClientSide.WebAPI.Controllers
                 return BadRequest();
             }
             Logger.LogInformation($"User {User?.Identity?.Name} call GetCustomer action");
-            var customer = await Service.GetAllAsync(x => x.CustomerId == customerId);
-            var res =  customer.Include(x => x.SalesOrderHeaders).Select(x => x.CustomerOrder(orderId)).FirstOrDefault();
+            var customer = await Task.Run(() => Service.DatabaseService.Context.Set<Customer>().Where(x => x.CustomerId == customerId).Include(x => x.SalesOrderHeaders).Select(x => x.CustomerOrder(orderId)).FirstOrDefault());
             
-            return new JsonResult(res);
+            return new JsonResult(customer);
         }
        
     }

@@ -1,6 +1,8 @@
 using Data.WarehouseContext.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
@@ -88,49 +90,25 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddAuthorization();
 var app = builder.Build();
 
-using (var scope=app.Services.CreateScope())
-{
-    var service= scope.ServiceProvider;
-    try
-    {
-        var context = service.GetRequiredService<IDatabaseService>();
-        if (context.Context.Database.EnsureCreated())
-        {
-
-            
-        }
-    }
-    catch (Exception)
-    {
-
-        throw;
-    }
-}
-//using (var scope = app.Services.CreateScope())
+//TODO auto restore database
+//using (var scope=app.Services.CreateScope())
 //{
-//    var services = scope.ServiceProvider;
-
+//    var service= scope.ServiceProvider;
 //    try
 //    {
-//        var context = services.GetRequiredService<IDatabaseService>();
-//        var res=context.ExecuteNonEFquery(SqlFunctions.checkCreatedFunctions);
-
-//       // var addedFunctions = context.Database.ExecuteSqlRaw(SqlFunctions.checkCreatedCustomerOrderFunction);
-//        if (res==0)
+//        var context = service.GetRequiredService<IDatabaseService>();
+//        if (!context.Context.Database.GetService<IRelationalDatabaseCreator>().Exists())
 //        {
-//            await context.Context.Database.ExecuteSqlRawAsync(SqlFunctions.UserFunctions);
+//            //SqlFunctions.RestoreDatabase(Path.Combine(builder.Environment.ContentRootPath, "DatabaseBackup/AdventureWorksLT2019.sql"), "AdventureWorksLT2019");
+//            SqlFunctions.RestoreDb("AdventureWorksLT2019", Path.Combine(builder.Environment.ContentRootPath, "DatabaseBackup\\AdventureWorksLT2019.sql"));
 //        }
-       
-
 //    }
-//    catch (Exception ex)
+//    catch (Exception)
 //    {
 
 //        throw;
 //    }
 //}
-
-
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -150,3 +128,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+

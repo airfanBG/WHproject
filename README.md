@@ -1,6 +1,8 @@
-Web API project **Students Assignment** based on AdventureWorksLT2019 database.
+Web API project **Students Assignment** based on AdventureWorksLT2019 database. There is some changes from original DB so the Db is in *ClientSide.WebAPI/DatabaseBackup/AdventureWorksLT2019.bak** folder.
 If you want to consume API, first step is to get one Email from bottom emails and make registration. After that you must **Login** and take your **Bearer** token to login.
-# API routings:
+
+# API routings: 
+##All routes returns JSON formatted data
 ## register address 
 at: "/api/auth/register" you must send **POST** request with one of emails below (if you want to use Products API you must select one email from **Emails** . You must set { **Password, ConfirmPassword**} and send data as **JSON**. After status code **200** go to "/api/auth/login" with your email and password to get **bearer token**. Each route demands token authentication. 
 
@@ -70,8 +72,23 @@ vamsi1@adventure-works.com
 jane2@adventure-works.com
 
 
+##Categories##
+"/api/Categories/all-categories" -returns all Categories
+"/api/Categories/all-categories-products" -returns all Products in categories
+"/api/Categories/category-products/{categoryId}" -returns all products in Category by Category ID
 
-#Orders#
-If you create order next schemas are required. Basic order is **SalesOrderHeader**
-The API address is : api/orders/place-order **POST** request . All other required data for this request can be reached at next url's:
+##Customers##
+ "/api/Customers/{customerId}" -returns Customer by ID
+ "/api/Customers/customer-orders/{customerId}" -returns Customer orders
+ "/api/Customers/customer-order/{customerId}/{orderId}" -returns data about customer and order
+
+##Orders##
+ "/api/Orders/{customerId}/all" -returns all customer
+ "/api/Orders/order/{orderId}" -returns Order info
+  "/api/Orders/place-order" -Add order
+
+#Products##
+ "/api/Products/all-products" -returns all products
+ "/api/Products/product/{poductId}" -returns concrete product
+
 

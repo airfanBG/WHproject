@@ -3,13 +3,14 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Utils.Common.Extensions;
 using Utils.Infrastructure.Interfaces.Services;
 
 namespace ClientSide.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class OrdersController : ControllerBase
     {
         public IBasicWarehouseService<SalesOrderHeader> Service { get; }
@@ -28,7 +29,7 @@ namespace ClientSide.WebAPI.Controllers
         {
             Logger.LogInformation($"User {User?.Identity?.Name} call all GetAllOrders action");
 
-            return new JsonResult(await Service.GetAllAsync(x=>x.CustomerId==customerId).Result.ToListAsync());
+            return new JsonResult(await Task.Run(()=> Service.DatabaseService.Context.Set<SalesOrderHeader>().Where(x=>x.CustomerId==customerId).Include(x=>x.SalesOrderDetails).Select(x=>x.SalesOrder())));
         }
         [HttpGet]
         [Route("order/{orderId}")]
@@ -36,7 +37,7 @@ namespace ClientSide.WebAPI.Controllers
         {
             Logger.LogInformation($"User {User?.Identity?.Name} call GetOrder action");
 
-            return new JsonResult(await Service.GetByIdAsync(orderId));
+            return new JsonResult(await Task.Run(() => Service.DatabaseService.Context.Set<SalesOrderHeader>().Where(x => x.CustomerId == customerId).Include(x => x.SalesOrderDetails).Where(x=>x.SalesOrderId==orderId).Select(x => x.SalesOrder())));
         }
         [HttpPost]
         [Route("place-order")]

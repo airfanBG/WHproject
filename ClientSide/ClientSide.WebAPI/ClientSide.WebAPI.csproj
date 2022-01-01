@@ -21,4 +21,8 @@
     <ProjectReference Include="..\..\Utils\Utils.Services\Utils.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DatabaseBackup\" />
+  </ItemGroup>
+
 </Project>

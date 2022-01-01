@@ -74,6 +74,7 @@ namespace Utils.Infrastructure.Vmodels
         /// Sales representative comments.
         /// </summary>
         public string? Comment { get; set; }
+        public ICollection<SalesOrderDetailVM> SalesOrderDetails { get; set; }
 
     }
 }

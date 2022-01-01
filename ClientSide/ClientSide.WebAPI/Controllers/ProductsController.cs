@@ -11,7 +11,7 @@ namespace ClientSide.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class ProductsController : ControllerBase
     {
         public IBasicWarehouseService<Product> Service { get; }
@@ -29,20 +29,16 @@ namespace ClientSide.WebAPI.Controllers
         public async Task<IActionResult> GetAllProducts()
         {
             Logger.LogInformation($"User {User?.Identity?.Name} call all products action");
-            var products = await Service.GetAllAsync();
-
-            var productWIthCategory=products.Include(x=>x.ProductModel).ThenInclude(x=>x.ProductModelProductDescriptions).ThenInclude(x=>x.ProductDescription).Include(x=>x.ProductCategory).Select(x=>x.Product()).FirstOrDefault();
-            return new JsonResult(productWIthCategory);
+            var products = await Task.Run(()=>Service.DatabaseService.Context.Set<Product>().Include(x=>x.ProductModel).ThenInclude(x=>x.ProductModelProductDescriptions).ThenInclude(x=>x.ProductDescription).Include(x=>x.ProductCategory).Select(x=>x.Product()).FirstOrDefault());
+            return new JsonResult(products);
         }
         [HttpGet]
-        [Route("product")]
+        [Route("product/{productId}")]
         public async Task<IActionResult> GetProduct(int productId)
         {
             Logger.LogInformation($"User {User?.Identity?.Name} call all products action");
-            var products = await Service.GetAllAsync(x=>x.ProductId==productId);
-
-            var productsWithCategory = products.Include(x => x.ProductModel).ThenInclude(x => x.ProductModelProductDescriptions).ThenInclude(x => x.ProductDescription).Include(x => x.ProductCategory).Select(x => x.Product()).ToListAsync();
-            return new JsonResult(productsWithCategory);
+            var products = await Task.Run(() => Service.DatabaseService.Context.Set<Product>().Where(x=>x.ProductId==productId).Include(x => x.ProductModel).ThenInclude(x => x.ProductModelProductDescriptions).ThenInclude(x => x.ProductDescription).Include(x => x.ProductCategory).Select(x => x.Product()).ToListAsync());
+            return new JsonResult(products);
         }
 
     }

@@ -155,5 +155,36 @@ namespace Utils.Common.Extensions
 
             };
         }
+
+        public static SalesOrderHeaderVM SalesOrder(this SalesOrderHeader model)
+        {
+            return new SalesOrderHeaderVM()
+            {
+                AccountNumber = model.AccountNumber,
+                TaxAmt = model.TaxAmt,
+                Comment = model.Comment,
+                DueDate = model.DueDate,
+                Freight = model.Freight,
+                OnlineOrderFlag = model.OnlineOrderFlag,
+                OrderDate = model.OrderDate,
+                PurchaseOrderNumber = model.PurchaseOrderNumber,
+                RevisionNumber = model.RevisionNumber,
+                SalesOrderNumber = model.SalesOrderNumber,
+                ShipDate = model.ShipDate,
+                ShipMethod = model.ShipMethod,
+                Status = model.Status,
+                SubTotal = model.SubTotal,
+                TotalDue = model.TotalDue,
+                SalesOrderDetails=model.SalesOrderDetails.Select(x=> new SalesOrderDetailVM()
+                {
+                    LineTotal=x.LineTotal,
+                    OrderQty=x.OrderQty,
+                    ProductId=x.ProductId,
+                    SalesOrderId=x.SalesOrderId,
+                    UnitPrice   =x.UnitPrice,
+                    UnitPriceDiscount   =x.UnitPriceDiscount
+                }).ToList()
+            };
+        }
     }
 }
