@@ -71,8 +71,8 @@ jeffrey3@adventure-works.com
 vamsi1@adventure-works.com
 jane2@adventure-works.com
 
-
-##Categories##
+##
+Categories
 "/api/Categories/all-categories" -returns all Categories
 "/api/Categories/all-categories-products" -returns all Products in categories
 "/api/Categories/category-products/{categoryId}" -returns all products in Category by Category ID
