@@ -81,7 +81,9 @@ builder.Services.AddAuthorization();
 var app = builder.Build();
 
 //TODO auto restore database
-using (var scope = app.Services.CreateScope())
+if (builder.Environment.IsDevelopment())
+{
+    using (var scope = app.Services.CreateScope())
 {
     var service = scope.ServiceProvider;
     try
@@ -99,11 +101,14 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
+}
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseDeveloperExceptionPage();
 }
 
 app.UseHttpsRedirection();
