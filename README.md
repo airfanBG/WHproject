@@ -73,25 +73,25 @@ jane2@adventure-works.com
 
 ##
 **Categories** <br />
-"/api/Categories/all-categories" -returns all Categories <br />
-"/api/Categories/all-categories-products" -returns all Products in categories <br />
-"/api/Categories/category-products/{categoryId}" -returns all products in Category by Category ID <br />
+"/api/Categories/all-categories" *-returns all Categories* <br />
+"/api/Categories/all-categories-products" *-returns all Products in categories* <br />
+"/api/Categories/category-products/{categoryId}" *-returns all products in Category by Category ID* <br />
 
 ##
 **Customers** <br />
- "/api/Customers/{customerId}" -returns Customer by ID <br />
- "/api/Customers/customer-orders/{customerId}" -returns Customer orders <br />
- "/api/Customers/customer-order/{customerId}/{orderId}" -returns data about customer and order <br />
+ "/api/Customers/{customerId}" *-returns Customer by ID* <br />
+ "/api/Customers/customer-orders/{customerId}" *-returns Customer orders* <br />
+ "/api/Customers/customer-order/{customerId}/{orderId}" *-returns data about customer and order* <br />
 
 ##
 **Orders** <br />
- "/api/Orders/{customerId}/all" -returns all customer <br />
- "/api/Orders/order/{orderId}" -returns Order info <br />
-  "/api/Orders/place-order" -Add order <br />
+ "/api/Orders/{customerId}/all" *-returns all customer* <br />
+ "/api/Orders/order/{orderId}" *-returns Order info* <br />
+  "/api/Orders/place-order" *-Add order* <br />
 
 ##
 **Products** <br />
- "/api/Products/all-products" -returns all products <br />
- "/api/Products/product/{poductId}" -returns concrete product <br />
+ "/api/Products/all-products" *-returns all products* <br />
+ "/api/Products/product/{poductId}" *returns concrete product* <br />
 
 
