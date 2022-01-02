@@ -30,7 +30,7 @@ namespace ClientSide.WebAPI.Controllers
         {
             Logger.LogInformation($"User {User?.Identity?.Name} call all products action");
             var products = await Task.Run(()=>Service.DatabaseService.Context.Set<Product>().Include(x=>x.ProductModel).ThenInclude(x=>x.ProductModelProductDescriptions).ThenInclude(x=>x.ProductDescription).Include(x=>x.ProductCategory).Select(x=>x.Product()).FirstOrDefault());
-            return new JsonResult(products);
+            return new JsonResult(Service.DatabaseService.Context.Set<Product>().ToList());
         }
         [HttpGet]
         [Route("product/{productId}")]

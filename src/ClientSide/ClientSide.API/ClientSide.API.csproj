@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.13" />
+    <PackageReference Include="Serilog" Version="2.10.0" />
+    <PackageReference Include="Serilog.AspNetCore" Version="4.1.0" />
+    <PackageReference Include="Serilog.Sinks.MSSqlServer" Version="5.6.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Data\Data.Common\Data.Common.csproj" />
+    <ProjectReference Include="..\..\Data\Data.Infrastructure\Data.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Data\Data.Models\Data.Models.csproj" />
+    <ProjectReference Include="..\..\Data\Data.Services\Data.Services.csproj" />
+    <ProjectReference Include="..\..\Data\Data.WarehouseContext\Data.WarehouseContext.csproj" />
+  </ItemGroup>
+
+</Project>
