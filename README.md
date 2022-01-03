@@ -3,9 +3,9 @@ If you want to consume API, first step is to get one Email from bottom emails an
 **The API is deployed on students.vtuwork.com also.**
 
 The progect is optimizing regularly
-# API routings: 
+# API routings: 3
 ##All routes returns JSON formatted data
-**Register address
+Register address
 at: "/api/auth/register" you must send **POST** request with one of emails below (if you want to use Products API you must select one email from **Emails** . You must set { **Password, ConfirmPassword**} and send data as **JSON**. After status code **200** go to "/api/auth/login" with your email and password to get **bearer token**. Each route demands token authentication. 
 
 **Example**
