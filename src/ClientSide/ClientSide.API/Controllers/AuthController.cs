@@ -48,7 +48,7 @@ namespace ClientSide.API.Controllers
                 var claimRole = token.Claims.First(c => c.Type == "role").Value;
                 User.AddIdentity(new ClaimsIdentity(new Claim[] { new Claim("email", claimEmail.Trim()), new Claim(ClaimTypes.Role,claimRole),new Claim("userid",claimId)}));
                 
-                Logger.LogInformation("{UserName} {UserId}",claimEmail,claimId);
+                Logger.LogInformation("{Email} {UserId}",claimEmail,claimId);
                 return Ok(result);
             }
             return BadRequest();

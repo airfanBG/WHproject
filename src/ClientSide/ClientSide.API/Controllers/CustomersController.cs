@@ -33,7 +33,7 @@ namespace ClientSide.API.Controllers
             {
                 return BadRequest();
             }
-            Logger.LogInformation("{UserName} {UserId} Get Customer {customerId}", User.FindFirst("email"), User.FindFirst("userid"),customerId);
+            Logger.LogInformation("{Email} {UserId} Get Customer {customerId}", User.FindFirst("email"), User.FindFirst("userid"),customerId);
             var customer = await Service.GetAllAsync(x => x.CustomerId == customerId);
             var res= customer.Select(x => x.Customer()).FirstOrDefault();
             return new JsonResult(res);
@@ -46,7 +46,7 @@ namespace ClientSide.API.Controllers
             {
                 return BadRequest();
             }
-            Logger.LogInformation("{UserName} {UserId} Get Customer Orders {customerId}", User.FindFirst("email"), User.FindFirst("userid"), customerId);
+            Logger.LogInformation("{Email} {UserId} Get Customer Orders {customerId}", User.FindFirst("email"), User.FindFirst("userid"), customerId);
             var customer =await Task.Run(()=> Service.DatabaseService.Context.Set<Customer>().Where(x => x.CustomerId == customerId).Include(x => x.SalesOrderHeaders).Select(x =>x.CustomerOrders()).ToList()) ;
             return new JsonResult(customer);
         }
@@ -58,7 +58,7 @@ namespace ClientSide.API.Controllers
             {
                 return BadRequest();
             }
-            Logger.LogInformation("{UserName} {UserId} GetCustomer {customerId} {orderId}", User.FindFirst("email"), User.FindFirst("userid"), customerId,orderId);
+            Logger.LogInformation("{Email} {UserId} GetCustomer {customerId} {orderId}", User.FindFirst("email"), User.FindFirst("userid"), customerId,orderId);
             var customer = await Task.Run(() => Service.DatabaseService.Context.Set<Customer>().Where(x => x.CustomerId == customerId).Include(x => x.SalesOrderHeaders).Select(x => x.CustomerOrder(orderId)).FirstOrDefault());
             
             return new JsonResult(customer);
