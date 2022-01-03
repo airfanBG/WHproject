@@ -15,7 +15,7 @@ namespace ClientSide.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class OrdersController : ControllerBase
     {
         public IBasicWarehouseService<SalesOrderHeader> Service { get; }
@@ -32,7 +32,7 @@ namespace ClientSide.API.Controllers
         [Route("{customerId}/all")]
         public async Task<IActionResult> GetAllOrders(int customerId)
         {
-            Logger.LogInformation($"User {User?.Identity?.Name} call all GetAllOrders action");
+            Logger.LogInformation("{UserName} {UserId} All Orders {customerId}", User.FindFirst("email"), User.FindFirst("userid"), customerId);
 
             return new JsonResult(await Task.Run(()=> Service.DatabaseService.Context.Set<SalesOrderHeader>().Where(x=>x.CustomerId==customerId).Include(x=>x.SalesOrderDetails).Select(x=>x.SalesOrder())));
         }
@@ -40,7 +40,7 @@ namespace ClientSide.API.Controllers
         [Route("order/{orderId}")]
         public async Task<IActionResult> GetOrder(int customerId, int orderId)
         {
-            Logger.LogInformation($"User {User?.Identity?.Name} call GetOrder action");
+            Logger.LogInformation("{UserName} {UserId} Get Order {customerId} {orderId}", User.FindFirst("email"), User.FindFirst("userid"), customerId,orderId);
 
             return new JsonResult(await Task.Run(() => Service.DatabaseService.Context.Set<SalesOrderHeader>().Where(x => x.CustomerId == customerId).Include(x => x.SalesOrderDetails).Where(x=>x.SalesOrderId==orderId).Select(x => x.SalesOrder())));
         }
@@ -48,7 +48,7 @@ namespace ClientSide.API.Controllers
         [Route("place-order")]
         public async Task<IActionResult> AddOrder([FromBody]SalesOrderHeader model)
         {
-            Logger.LogInformation($"User {User?.Identity?.Name} call AddOrder action");
+            Logger.LogInformation("{UserName} {UserId} Add order", User.FindFirst("email"), User.FindFirst("userid"));
             model.PurchaseOrderNumber = Guid.NewGuid().ToString().Substring(0, 10);
             model.AccountNumber = Guid.NewGuid().ToString().Substring(0,5);
 

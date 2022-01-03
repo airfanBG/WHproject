@@ -13,8 +13,12 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Serilog;
+using Serilog.Sinks.MSSqlServer;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -30,9 +34,33 @@ namespace ClientSide.API
 {
     public class Startup
     {
+        private static ColumnOptions columns = new ColumnOptions
+        {
+            AdditionalColumns = new Collection<SqlColumn>
+            {
+                new SqlColumn
+                    {ColumnName = "Email", PropertyName = "Email", DataType = SqlDbType.NVarChar, DataLength = 64},
+
+                new SqlColumn
+                    {ColumnName = "UserId", DataType = SqlDbType.BigInt, NonClusteredIndex = true}
+            }
+        };
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            Log.Logger = new LoggerConfiguration()
+              .ReadFrom.Configuration(configuration)
+              .WriteTo.MSSqlServer(
+                               columnOptions: columns,
+                              
+                               connectionString: Configuration.GetConnectionString("DefaultConnection"),
+                               tableName: Configuration.GetSection("Serilog:TableName").Value,
+                               appConfiguration: Configuration,
+                               autoCreateSqlTable: true,
+                               columnOptionsSection: Configuration.GetSection("Serilog:ColumnOptions"),
+                               schemaName: Configuration.GetSection("Serilog:SchemaName").Value)
+
+              .CreateLogger();
         }
 
         public IConfiguration Configuration { get; }
@@ -80,7 +108,7 @@ namespace ClientSide.API
 
                        });
             services.AddAuthorization();
-
+            
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ClientSide.API", Version = "v1" });
@@ -124,7 +152,7 @@ namespace ClientSide.API
             app.UseAuthorization();
 
             app.UseHttpsRedirection();
-
+           
             app.UseRouting();
 
             app.UseAuthorization();

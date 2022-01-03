@@ -52,6 +52,7 @@ namespace Utils.Services.DataServices.Identity
                                 {
                                     new Claim(ClaimTypes.Role, "Customer"),
                                     new Claim("email", model.Email),
+                                    new Claim("userid", user.CustomerId.ToString()),
                                    
                                     customerClaimId ?? null!
                                 }),

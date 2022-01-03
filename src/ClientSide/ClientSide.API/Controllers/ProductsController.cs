@@ -31,7 +31,7 @@ namespace ClientSide.API.Controllers
         [Route("all-products")]
         public async Task<IActionResult> GetAllProducts()
         {
-            Logger.LogInformation($"User {User?.Identity?.Name} call all products action");
+            Logger.LogInformation("{UserName} {UserId} Get all products {customerId}", User.FindFirst("email"), User.FindFirst("userid"));
             var products = await Task.Run(()=>Service.DatabaseService.Context.Set<Product>().Include(x=>x.ProductModel).ThenInclude(x=>x.ProductModelProductDescriptions).ThenInclude(x=>x.ProductDescription).Include(x=>x.ProductCategory).Select(x=>x.Product()).FirstOrDefault());
             return new JsonResult(Service.DatabaseService.Context.Set<Product>().ToList());
         }
@@ -39,7 +39,7 @@ namespace ClientSide.API.Controllers
         [Route("product/{productId}")]
         public async Task<IActionResult> GetProduct(int productId)
         {
-            Logger.LogInformation($"User {User?.Identity?.Name} call all products action");
+            Logger.LogInformation("{UserName} {UserId} Get Product {productId}", User.FindFirst("email"), User.FindFirst("userid"), productId);
             var products = await Task.Run(() => Service.DatabaseService.Context.Set<Product>().Where(x=>x.ProductId==productId).Include(x => x.ProductModel).ThenInclude(x => x.ProductModelProductDescriptions).ThenInclude(x => x.ProductDescription).Include(x => x.ProductCategory).Select(x => x.Product()).ToListAsync());
             return new JsonResult(products);
         }
