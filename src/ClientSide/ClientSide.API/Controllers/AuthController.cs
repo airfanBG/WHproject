@@ -46,7 +46,7 @@ namespace ClientSide.API.Controllers
                 var claimEmail = token.Claims.First(c => c.Type == "email").Value;
                 var claimId = token.Claims.First(c => c.Type == "userid").Value;
                 var claimRole = token.Claims.First(c => c.Type == "role").Value;
-                User.AddIdentity(new ClaimsIdentity(new Claim[] { new Claim(ClaimTypes.Email, claimEmail.Trim()), new Claim(ClaimTypes.Role,claimRole),new Claim("id",claimId)}));
+                User.AddIdentity(new ClaimsIdentity(new Claim[] { new Claim("email", claimEmail.Trim()), new Claim(ClaimTypes.Role,claimRole),new Claim("userid",claimId)}));
                 
                 Logger.LogInformation("{UserName} {UserId}",claimEmail,claimId);
                 return Ok(result);
