@@ -24,6 +24,7 @@ namespace Data.WarehouseContext.Models
         }
 
         public virtual DbSet<Address> Addresses { get; set; } = null!;
+        public virtual DbSet<Log> Logs { get; set; } = null!;
         public virtual DbSet<BuildVersion> BuildVersions { get; set; } = null!;
         public virtual DbSet<Customer> Customers { get; set; } = null!;
         public virtual DbSet<CustomerAddress> CustomerAddresses { get; set; } = null!;
