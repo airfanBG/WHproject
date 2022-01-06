@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Data.Infrastructure.Interfaces.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Utils.Infrastructure.Vmodels
 {
-    public class ProductVM
+    public class ProductVM : IVmodel
     {
         public int ProductId { get; set; }
         /// <summary>

@@ -47,7 +47,7 @@ namespace ClientSide.API.Controllers
                 return BadRequest();
             }
             Logger.LogInformation("{Email} {UserId} Get Customer Orders {customerId}", User.FindFirst("email"), User.FindFirst("userid"), customerId);
-            var customer =await Task.Run(()=> Service.DatabaseService.Context.Set<Customer>().Where(x => x.CustomerId == customerId).Include(x => x.SalesOrderHeaders).Select(x =>x.CustomerOrders()).ToList()) ;
+            var customer =await Task.Run(()=> Service.DatabaseService.Context.Set<Customer>().Where(x => x.CustomerId == customerId).Include(x => x.SalesOrderHeaders).Select(x =>x.CustomerOrders()).AsNoTracking().ToList()) ;
             return new JsonResult(customer);
         }
         [HttpGet]

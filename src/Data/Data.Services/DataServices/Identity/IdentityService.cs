@@ -30,7 +30,10 @@ namespace Utils.Services.DataServices.Identity
         {
             try
             {
-
+                if (model==null)
+                {
+                    return "";
+                }
                 await using (DatabaseService)
                 {
                     var user = DatabaseService.Context.Set<Customer>().FirstOrDefault(x => x.EmailAddress == model.Email);
@@ -82,7 +85,10 @@ namespace Utils.Services.DataServices.Identity
         {
             try
             {
-
+                if (model==null)
+                {
+                    return 0;
+                }
                 await using (DatabaseService)
                 {
                     var userExists = DatabaseService.Context.Set<Customer>().FirstOrDefault(x => x.EmailAddress == model.Email && x.isTaken==false);
@@ -114,9 +120,6 @@ namespace Utils.Services.DataServices.Identity
             }
 
         }
-        //private async Task<Person> GetPersonId()
-        //{
-
-        //}
+       
     }
 }

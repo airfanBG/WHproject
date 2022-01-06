@@ -1,6 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Data.Infrastructure.Interfaces.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Utils.Common.Extensions;
 using Utils.Infrastructure.Interfaces.Models;
@@ -16,7 +20,61 @@ namespace Utils.Services.DataServices
         {
             this.DatabaseService = databaseService;
         }
+        public List<IVmodel> GetAll(Expression<Func<T, IVmodel>> selector,
+                                          Expression<Func<T, bool>> predicate = null,
+                                          Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
+                                          Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null,
+                                          bool disableTracking = true)
+        {
+            IQueryable<T> query = DatabaseService.Context.Set<T>();
+            if (disableTracking)
+            {
+                query = query.AsNoTracking();
+            }
 
+            if (include != null)
+            {
+                query = include(query);
+            }
+
+            if (predicate != null)
+            {
+                query = query.Where(predicate);
+            }
+
+            if (orderBy != null)
+            {
+                return orderBy(query).Select(selector).ToList();
+            }
+            else
+            {
+                return query.Select(selector).ToList();
+            }
+        }
+        public  IQueryable<T> GetAll(Expression<Func<T, bool>> predicate=null, params Expression<Func<T, object>>[] includes)
+        {
+            var query = DatabaseService.Context.Set<T>().AsQueryable();
+           
+            foreach (var include in includes)
+            {
+                var memberExpression = include.Body as MemberExpression;
+
+                if (memberExpression != null)
+                    query = query.Include(memberExpression.Member.Name);
+            }
+            IQueryable<T> result =null;
+            if (predicate!=null)
+            {
+               result= query.Where(predicate).AsNoTracking();
+            }
+            else
+            {
+                result = query.AsNoTracking();
+            }
+            
+
+            return result;
+        }
         public async Task<IQueryable<T>> GetAllAsync(Func<T,bool> func)
         {
             try

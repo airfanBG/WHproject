@@ -69,7 +69,7 @@ namespace ClientSide.API
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
 
             services.AddScoped(typeof(IBasicWarehouseService<>), typeof(WarehouseService<>));
             services.AddScoped<IuserIdentityService, IdentityService>();

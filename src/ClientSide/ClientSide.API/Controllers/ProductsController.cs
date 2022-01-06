@@ -1,10 +1,15 @@
-﻿using Data.Models;
+﻿using Data.Infrastructure.Interfaces.Models;
+using Data.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Utils.Common.Extensions;
 using Utils.Infrastructure.Interfaces.Services;
@@ -14,7 +19,7 @@ namespace ClientSide.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+   // [Authorize]
     public class ProductsController : ControllerBase
     {
         public IBasicWarehouseService<Product> Service { get; }
@@ -33,17 +38,19 @@ namespace ClientSide.API.Controllers
         {
            
             Logger.LogInformation("{Email} {UserId} Get all products", User.FindFirst("email"), User.FindFirst("userid"));
-          
-            var products = await Task.Run(()=>Service.DatabaseService.Context.Set<Product>().Include(x=>x.ProductModel).ThenInclude(x=>x.ProductModelProductDescriptions).ThenInclude(x=>x.ProductDescription).Include(x=>x.ProductCategory).Select(x=>x.Product()).FirstOrDefault());
-            return new JsonResult(Service.DatabaseService.Context.Set<Product>().ToList());
+          var res=await Task.Run(() => Service.GetAll(predicate: null, selector: x => x.Product(), include: a => a.Include(o => o.ProductModel).ThenInclude(o => o.ProductModelProductDescriptions).ThenInclude(o => o.ProductDescription).Include(o => o.ProductCategory)));
+            
+            return Ok(res);
         }
         [HttpGet]
         [Route("product/{productId}")]
         public async Task<IActionResult> GetProduct(int productId)
         {
             Logger.LogInformation("{Email} {UserId} Get Product {productId}", User.FindFirst("email"), User.FindFirst("userid"), productId);
-            var products = await Task.Run(() => Service.DatabaseService.Context.Set<Product>().Where(x=>x.ProductId==productId).Include(x => x.ProductModel).ThenInclude(x => x.ProductModelProductDescriptions).ThenInclude(x => x.ProductDescription).Include(x => x.ProductCategory).Select(x => x.Product()).ToListAsync());
-            return new JsonResult(products);
+
+            var res=await Task.Run(()=> Service.GetAll(predicate: x => x.ProductId == productId, selector: z => z.Product(), include: a => a.Include(o => o.ProductModel).ThenInclude(o => o.ProductModelProductDescriptions).ThenInclude(o => o.ProductDescription).Include(o => o.ProductCategory)));
+          
+            return Ok(res);
         }
 
     }

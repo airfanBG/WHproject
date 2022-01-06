@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Data.Infrastructure.Interfaces.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Utils.Infrastructure.Vmodels
 {
-    public class SalesOrderDetailVM
+    public class SalesOrderDetailVM : IVmodel
     {
         /// <summary>
         /// Primary key. Foreign key to SalesOrderHeader.SalesOrderID.

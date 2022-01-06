@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Data.Infrastructure.Interfaces.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Utils.Infrastructure.Vmodels
 {
-    public class RegisterModel
+    public class RegisterModel : IVmodel
     {
         
         [Required]

@@ -13,7 +13,7 @@ namespace ClientSide.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class CategoriesController : ControllerBase
     {
         public IBasicWarehouseService<ProductCategory> Service { get; }
@@ -34,7 +34,7 @@ namespace ClientSide.API.Controllers
         [Route("all-categories-products")]
         public async Task<IActionResult> GetAllCategoriesWithProducts()
         {
-            var categories = await Task.Run(() => Service.DatabaseService.Context.Set<ProductCategory>().Include(x => x.Products).Select(x => x.CategoryWithProducts()).ToList());
+            var categories = await Task.Run(() => Service.GetAll(null,x=>x.Products).Select(x => x.CategoryWithProducts()).AsNoTracking().ToList());
 
             return new JsonResult(categories);
         }
@@ -42,9 +42,12 @@ namespace ClientSide.API.Controllers
         [Route("category-products/{categoryId}")]
         public async Task<IActionResult> GetCategoryProducts(int categoryId)
         {
-            var categories = await Task.Run(() => Service.DatabaseService.Context.Set<ProductCategory>().Where(x=>x.ProductCategoryId==categoryId).Include(x => x.Products).Select(x => x.CategoryWithProducts()).ToList());
+
+            var categories =await Task.Run(()=> Service.GetAll(x => x.ProductCategoryId == categoryId, z => z.Products).Select(x => x.CategoryWithProducts()).ToList());
 
             return new JsonResult(categories);
         }
+
     }
+
 }
