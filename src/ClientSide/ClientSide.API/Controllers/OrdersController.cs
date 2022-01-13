@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Diagnostics;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace ClientSide.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class OrdersController : ControllerBase
     {
         public IBasicWarehouseService<SalesOrderHeader> Service { get; }
@@ -34,7 +35,12 @@ namespace ClientSide.API.Controllers
         {
             Logger.LogInformation("{Email} {UserId} All Orders {customerId}", User.FindFirst("email"), User.FindFirst("userid"), customerId);
            
-            return new JsonResult(await Task.Run(() => Service.QuerySelector(selector: z => z.SalesOrder(), predicate: x => x.CustomerId == customerId, include: z => z.Include(a => a.SalesOrderDetails), disableTracking: true)));
+            var res=await Task.Run(() => Service.QuerySelector(selector: z => z.SalesOrder(), predicate: x => x.CustomerId == customerId, include: z => z.Include(a => a.SalesOrderDetails), disableTracking: true));
+            var json = JsonConvert.SerializeObject(res, Formatting.Indented, new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Ignore
+            });
+            return Ok(json);
         }
      
         [HttpGet]
@@ -44,7 +50,12 @@ namespace ClientSide.API.Controllers
             int customerId =int.Parse( User.FindFirst("userid").Value);
             Logger.LogInformation("{Email} {UserId} Get Order {customerId} {orderId}", User.FindFirst("email"), User.FindFirst("userid"),customerId ,orderId);
 
-            return new JsonResult(await Task.Run(() => Service.QuerySelector(selector: z => z.SalesOrder(), predicate: x => x.SalesOrderId == orderId, include: z => z.Include(a => a.SalesOrderDetails), disableTracking: true)));
+            var res=await Task.Run(() => Service.QuerySelector(selector: z => z.SalesOrder(), predicate: x => x.SalesOrderId == orderId, include: z => z.Include(a => a.SalesOrderDetails), disableTracking: true));
+            var json = JsonConvert.SerializeObject(res, Formatting.Indented, new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Ignore
+            });
+            return Ok(json);
         }
         [HttpPost]
         [Route("place-order")]

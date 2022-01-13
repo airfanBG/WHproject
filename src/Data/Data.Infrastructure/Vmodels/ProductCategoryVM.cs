@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Utils.Infrastructure.Vmodels
 {
+    
     public class ProductCategoryVM : IVmodel
     {
         public int ProductCategoryId { get; set; }
@@ -18,7 +19,7 @@ namespace Utils.Infrastructure.Vmodels
         /// Category description.
         /// </summary>
         public string Name { get; set; } = null!;
-
+       
         public virtual ICollection<ProductVM> Products { get; set; }
     }
 }

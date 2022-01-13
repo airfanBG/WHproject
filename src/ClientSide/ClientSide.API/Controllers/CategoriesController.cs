@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System.Linq;
 using System.Threading.Tasks;
 using Utils.Common.Extensions;
@@ -13,7 +14,7 @@ namespace ClientSide.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class CategoriesController : ControllerBase
     {
         public IBasicWarehouseService<ProductCategory> Service { get; }
@@ -27,16 +28,23 @@ namespace ClientSide.API.Controllers
         public async Task<IActionResult> GetAllCategories()
         {
             var categories = await Task.Run(()=> Service.GetAllAsync().Result.Select(x=>x.Category()).ToList());
-           
-            return new JsonResult(categories);
+
+            var json = JsonConvert.SerializeObject(categories, Formatting.Indented, new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Ignore
+            });
+            return Ok(json);
         }
         [HttpGet]
         [Route("all-categories-products")]
         public async Task<IActionResult> GetAllCategoriesWithProducts()
         {
             var categories = await Task.Run(() => Service.QuerySelector(selector: x=>x.Category(),include: x=>x.Include(z=>z.Products),disableTracking:false).ToList());
-
-            return new JsonResult(categories);
+            var json=JsonConvert.SerializeObject(categories, Formatting.Indented, new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Ignore
+            });
+            return Ok(json);
         }
         [HttpGet]
         [Route("category-products/{categoryId}")]
@@ -44,8 +52,11 @@ namespace ClientSide.API.Controllers
         {
 
             var categories =await Task.Run(()=> Service.QuerySelector(predicate: x => x.ProductCategoryId == categoryId,include: z => z.Include(a=>a.Products),selector: x => x.CategoryWithProducts()).ToList());
-
-            return new JsonResult(categories);
+            var json = JsonConvert.SerializeObject(categories, Formatting.Indented, new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Ignore
+            });
+            return Ok(json);
         }
 
     }

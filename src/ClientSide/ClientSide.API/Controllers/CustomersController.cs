@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System.Linq;
 using System.Threading.Tasks;
 using Utils.Common.Extensions;
@@ -14,7 +15,7 @@ namespace ClientSide.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class CustomersController : ControllerBase
     {
         public IBasicWarehouseService<Customer> Service { get; }
@@ -36,7 +37,11 @@ namespace ClientSide.API.Controllers
             Logger.LogInformation("{Email} {UserId} Get Customer {customerId}", User.FindFirst("email"), User.FindFirst("userid"),customerId);
             var customer =await Task.Run(()=> Service.GetAll(predicate: x => x.CustomerId == customerId));
             var res= customer.Select(x => x.Customer()).FirstOrDefault();
-            return new JsonResult(res);
+            var json = JsonConvert.SerializeObject(res, Formatting.Indented, new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Ignore
+            });
+            return Ok(json);
         }
         [HttpGet]
         [Route("customer-orders/{customerId}")]
@@ -48,8 +53,13 @@ namespace ClientSide.API.Controllers
             }
             Logger.LogInformation("{Email} {UserId} Get Customer Orders {customerId}", User.FindFirst("email"), User.FindFirst("userid"), customerId);
 
-            var customer = await Task.Run(() => Service.QuerySelector(selector: x => x.Customer(), predicate: x => x.CustomerId == customerId, include: i => i.Include(z => z.SalesOrderHeaders), disableTracking: true).ToList()); 
-            return new JsonResult(customer);
+            var customer = await Task.Run(() => Service.QuerySelector(selector: x => x.CustomerOrders(), predicate: x => x.CustomerId == customerId, include: i => i.Include(z => z.SalesOrderHeaders), disableTracking: true).ToList());
+
+            var json = JsonConvert.SerializeObject(customer, Formatting.Indented, new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Ignore
+            });
+            return Ok(json);
         }
         [HttpGet]
         [Route("customer-order/{customerId}/{orderId}")]
@@ -62,8 +72,12 @@ namespace ClientSide.API.Controllers
             Logger.LogInformation("{Email} {UserId} GetCustomer {customerId} {orderId}", User.FindFirst("email"), User.FindFirst("userid"), customerId,orderId);
             
             var customer = await Task.Run(() => Service.QuerySelector(selector: x => x.CustomerOrder(orderId), predicate: z => z.CustomerId == customerId, include: i => i.Include(x => x.SalesOrderHeaders)).FirstOrDefault());
-            
-            return new JsonResult(customer);
+
+            var json = JsonConvert.SerializeObject(customer, Formatting.Indented, new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Ignore
+            });
+            return Ok(json);
         }
        
     }

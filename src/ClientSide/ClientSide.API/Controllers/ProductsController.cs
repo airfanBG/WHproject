@@ -39,8 +39,12 @@ namespace ClientSide.API.Controllers
            
             Logger.LogInformation("{Email} {UserId} Get all products", User.FindFirst("email"), User.FindFirst("userid"));
           var res=await Task.Run(() => Service.QuerySelector(predicate: null, selector: x => x.Product(), include: a => a.Include(o => o.ProductModel).ThenInclude(o => o.ProductModelProductDescriptions.Where(x=>x.Culture==culture)).ThenInclude(o => o.ProductDescription).Include(o => o.ProductCategory)));
-            
-            return Ok(res);
+
+            var json = JsonConvert.SerializeObject(res, Formatting.Indented, new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Ignore
+            });
+            return Ok(json);
         }
         [HttpGet]
         [Route("product/{productId}")]
@@ -49,8 +53,12 @@ namespace ClientSide.API.Controllers
             Logger.LogInformation("{Email} {UserId} Get Product {productId}", User.FindFirst("email"), User.FindFirst("userid"), productId);
 
             var res=await Task.Run(()=> Service.QuerySelector(predicate: x => x.ProductId == productId, selector: z => z.Product(), include: a => a.Include(o => o.ProductModel).ThenInclude(o => o.ProductModelProductDescriptions).ThenInclude(o => o.ProductDescription).Include(o => o.ProductCategory)));
-          
-            return Ok(res);
+
+            var json = JsonConvert.SerializeObject(res, Formatting.Indented, new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Ignore
+            });
+            return Ok(json);
         }
 
     }

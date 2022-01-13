@@ -68,19 +68,17 @@ namespace ClientSide.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            services.AddControllers().AddNewtonsoftJson();
-
+          
             services.AddScoped(typeof(IBasicWarehouseService<>), typeof(WarehouseService<>));
             services.AddScoped<IuserIdentityService, IdentityService>();
             services.AddScoped<IDatabaseService, ApplicationDbContext>();
             services.AddScoped<DbContext, AdventureWorks2019Context>();
             services.AddDbContext<AdventureWorks2019Context>(o => { o.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")); });
 
-            services.AddControllers().AddJsonOptions(options =>
+            services.AddControllers().AddNewtonsoftJson().AddJsonOptions(a =>
             {
-                options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
-                options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault;
+                a.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+                a.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
             });
             //JWT
             services.AddAuthentication(options =>
