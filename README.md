@@ -86,7 +86,7 @@ jane2@adventure-works.com
 
 ##
 **Orders** <br />
- "/api/Orders/{customerId}/all" *-returns all customer* <br />
+ "/api/Orders/{customerId}/all" *-returns all customers* <br />
  "/api/Orders/order/{orderId}" *-returns Order info* <br />
   "/api/Orders/place-order" *-Add order* <br />
 
