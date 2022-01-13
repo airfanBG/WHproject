@@ -41,7 +41,7 @@ namespace Utils.Services.DataServices
             {
                 query = query.Where(predicate);
             }
-
+           
             if (orderBy != null)
             {
                 return orderBy(query).Select(selector).ToList();
@@ -50,6 +50,7 @@ namespace Utils.Services.DataServices
             {
                 return query.Select(selector).ToList();
             }
+           
         }
         public  IQueryable<T> GetAll(Expression<Func<T, bool>> predicate=null, params Expression<Func<T, object>>[] includes)
         {

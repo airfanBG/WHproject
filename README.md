@@ -125,6 +125,8 @@ jane2@adventure-works.com
 **Products** <br />
  "/api/Products/all-products/{string:culture}" *-returns all products*  **By default you do not need to send culture, default is "en". Other cultures are: ("ar" "fr" "th" "he" "zh-cht")<br />
  "/api/Products/product/{poductId}" *returns concrete product* <br />
+ "/api/Products/product/top-twenty" *returns top 20 most selled* <br />
+ "/api/Products/product/top-ten/{categoryId}" *returns most selled by category* <br />
 
 
 
