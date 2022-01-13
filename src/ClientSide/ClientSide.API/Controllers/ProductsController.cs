@@ -19,7 +19,7 @@ namespace ClientSide.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class ProductsController : ControllerBase
     {
         public IBasicWarehouseService<Product> Service { get; }

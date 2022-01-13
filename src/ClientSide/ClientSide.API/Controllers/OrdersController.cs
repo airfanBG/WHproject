@@ -16,7 +16,7 @@ namespace ClientSide.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class OrdersController : ControllerBase
     {
         public IBasicWarehouseService<SalesOrderHeader> Service { get; }
