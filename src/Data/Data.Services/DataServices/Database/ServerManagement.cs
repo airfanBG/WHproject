@@ -16,7 +16,7 @@ namespace Data.Services.DataServices.Database
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string backupQuery = $"BACKUP DATABASE {databaseName} TO DISK='{bckpDir}-{DateTime.Now.ToShortDateString()}'";
+                string backupQuery = $"BACKUP DATABASE {databaseName} TO DISK='{bckpDir}-{DateTime.Now.ToShortDateString()}.bak'";
                 using (SqlCommand command = new SqlCommand(backupQuery, connection))
                 {
                     try
