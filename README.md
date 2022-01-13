@@ -6,7 +6,7 @@ The progect is optimizing regularly
 # API routings: 
 All routes returns JSON formatted data. First step is to register yourself with an email from list.
 Register address
-at: "/api/auth/register" you must send **POST** request with one of emails below (if you want to use Products API you must select one email from **Emails** . You must set { **Password, ConfirmPassword**} and send data as **JSON**. After status code **200** go to "/api/auth/login" with your email and password to get **bearer token**. Each route demands token authentication. 
+at: "/api/auth/register" you must send **POST** request with one of emails below (if you want to use Products API you must select one email from **Emails** . You must set { **Password, ConfirmPassword**} and send data as **JSON**. After status code **200** go to "/api/auth/login" with your email and password to get **bearer token**. Each route demands token authentication. Token expiration time is set of 60minutes. 
 
 **Example**
 ```

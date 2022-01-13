@@ -104,6 +104,7 @@ namespace ClientSide.API
                                ValidAudience = Configuration[ConfigurationKeys.JWT_ValidAudience],
                                ValidIssuer = Configuration[ConfigurationKeys.JWT_ValidIssuer],
                                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration[ConfigurationKeys.JWT_TokenSecret]))
+                               
                            };
 
                        });
