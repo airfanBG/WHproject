@@ -92,7 +92,33 @@ jane2@adventure-works.com
   "/api/Orders/place-order" *-Add order* <br />
 
   If you place an order the required data format is:
-
+  SalesOrderHeader
+```
+{
+  "orderDate": "0001-01-01T00:00:00",
+  "dueDate": "0001-01-01T00:00:00",
+  "shipDate": "0001-01-01T00:00:00",
+  "status": Order current status. 1 = In process; 2 = Approved; 3 = Backordered; 4 = Rejected; 5 = Shipped; 6 = Cancelled,
+  "customerId": 0,
+  "billToAddressId": 0,
+  "shipToAddressId": 0,
+  "onlineOrderFlag": 0 = Order placed by sales person. 1 = Order placed online by customer.,
+  "taxAmt": 0.0,
+  "subTotal": 0.0,
+  "freight": 0.0,
+  "totalDue": 0.0,
+  "comment": null,
+  "salesOrderDetails":[
+		{
+			"orderQty": 0,
+			"productId": 0,
+			"unitPrice": 0.0,
+			"unitPriceDiscount": 0.0,
+			"lineTotal": 0.0,
+			
+		}
+  ]
+}
 
 
 
