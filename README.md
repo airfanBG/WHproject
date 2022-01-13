@@ -1,12 +1,11 @@
 Web API project **Students Assignment** based on AdventureWorksLT2019 database. There is some changes from original DB so the Db is in *ClientSide.WebAPI/DatabaseBackup/AdventureWorksLT2019.bak** folder. When load project for the first time it automatically creates database in SQL if not exists.
 If you want to consume API, first step is to get one Email from bottom emails and make registration. After that you must **Login** and take your **Bearer** token to login.
-**The API is deployed on students.vtuwork.com also.**
+**The API is deployed on students.vtuwork.com .**
 
 The progect is optimizing regularly
 # API routings: 
-All routes returns JSON formatted data. First step is to register yourself with an email from list.
-Register address
-at: "/api/auth/register" you must send **POST** request with one of emails below (if you want to use Products API you must select one email from **Emails** . You must set { **Password, ConfirmPassword**} and send data as **JSON**. After status code **200** go to "/api/auth/login" with your email and password to get **bearer token**. Each route demands token authentication. Token expiration time is set of 60minutes. 
+All routes returns JSON formatted data. First step is to register a user with an email from list <b>Emails customer</b>.
+Register address at: "/api/auth/register" you must send **POST** request with one of emails below (if you want to use Products API you must select one email from **Emails** . You must set { **Password, ConfirmPassword**} and send data as **JSON**. After status code **200** go to "/api/auth/login" with your email and password to get **bearer token**. Each route demands token authentication. Token expiration time is set of 60 minutes. 
 
 **Example**
 ```
