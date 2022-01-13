@@ -34,7 +34,7 @@ namespace ClientSide.API.Controllers
                 return BadRequest();
             }
             Logger.LogInformation("{Email} {UserId} Get Customer {customerId}", User.FindFirst("email"), User.FindFirst("userid"),customerId);
-            var customer = await Service.GetAllAsync(x => x.CustomerId == customerId);
+            var customer =await Task.Run(()=> Service.GetAll(predicate: x => x.CustomerId == customerId));
             var res= customer.Select(x => x.Customer()).FirstOrDefault();
             return new JsonResult(res);
         }
@@ -47,7 +47,8 @@ namespace ClientSide.API.Controllers
                 return BadRequest();
             }
             Logger.LogInformation("{Email} {UserId} Get Customer Orders {customerId}", User.FindFirst("email"), User.FindFirst("userid"), customerId);
-            var customer =await Task.Run(()=> Service.DatabaseService.Context.Set<Customer>().Where(x => x.CustomerId == customerId).Include(x => x.SalesOrderHeaders).Select(x =>x.CustomerOrders()).AsNoTracking().ToList()) ;
+
+            var customer = await Task.Run(() => Service.QuerySelector(selector: x => x.Customer(), predicate: x => x.CustomerId == customerId, include: i => i.Include(z => z.SalesOrderHeaders), disableTracking: true).ToList()); 
             return new JsonResult(customer);
         }
         [HttpGet]
@@ -59,7 +60,8 @@ namespace ClientSide.API.Controllers
                 return BadRequest();
             }
             Logger.LogInformation("{Email} {UserId} GetCustomer {customerId} {orderId}", User.FindFirst("email"), User.FindFirst("userid"), customerId,orderId);
-            var customer = await Task.Run(() => Service.DatabaseService.Context.Set<Customer>().Where(x => x.CustomerId == customerId).Include(x => x.SalesOrderHeaders).Select(x => x.CustomerOrder(orderId)).FirstOrDefault());
+            
+            var customer = await Task.Run(() => Service.QuerySelector(selector: x => x.CustomerOrder(orderId), predicate: z => z.CustomerId == customerId, include: i => i.Include(x => x.SalesOrderHeaders)).FirstOrDefault());
             
             return new JsonResult(customer);
         }

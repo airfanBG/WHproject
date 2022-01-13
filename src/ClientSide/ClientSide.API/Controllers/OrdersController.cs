@@ -33,16 +33,18 @@ namespace ClientSide.API.Controllers
         public async Task<IActionResult> GetAllOrders(int customerId)
         {
             Logger.LogInformation("{Email} {UserId} All Orders {customerId}", User.FindFirst("email"), User.FindFirst("userid"), customerId);
-
-            return new JsonResult(await Task.Run(()=> Service.DatabaseService.Context.Set<SalesOrderHeader>().Where(x=>x.CustomerId==customerId).Include(x=>x.SalesOrderDetails).Select(x=>x.SalesOrder()).AsNoTracking()));
+           
+            return new JsonResult(await Task.Run(() => Service.QuerySelector(selector: z => z.SalesOrder(), predicate: x => x.CustomerId == customerId, include: z => z.Include(a => a.SalesOrderDetails), disableTracking: true)));
         }
+     
         [HttpGet]
         [Route("order/{orderId}")]
-        public async Task<IActionResult> GetOrder(int customerId, int orderId)
+        public async Task<IActionResult> GetOrder(int orderId)
         {
-            Logger.LogInformation("{Email} {UserId} Get Order {customerId} {orderId}", User.FindFirst("email"), User.FindFirst("userid"), customerId,orderId);
+            int customerId =int.Parse( User.FindFirst("userid").Value);
+            Logger.LogInformation("{Email} {UserId} Get Order {customerId} {orderId}", User.FindFirst("email"), User.FindFirst("userid"),customerId ,orderId);
 
-            return new JsonResult(await Task.Run(() => Service.DatabaseService.Context.Set<SalesOrderHeader>().Where(x => x.CustomerId == customerId).Include(x => x.SalesOrderDetails).Where(x=>x.SalesOrderId==orderId).Select(x => x.SalesOrder())));
+            return new JsonResult(await Task.Run(() => Service.QuerySelector(selector: z => z.SalesOrder(), predicate: x => x.SalesOrderId == orderId, include: z => z.Include(a => a.SalesOrderDetails), disableTracking: true)));
         }
         [HttpPost]
         [Route("place-order")]

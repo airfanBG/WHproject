@@ -20,7 +20,7 @@ namespace Utils.Services.DataServices
         {
             this.DatabaseService = databaseService;
         }
-        public List<IVmodel> GetAll(Expression<Func<T, IVmodel>> selector,
+        public List<IVmodel> QuerySelector(Expression<Func<T, IVmodel>> selector,
                                           Expression<Func<T, bool>> predicate = null,
                                           Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
                                           Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null,

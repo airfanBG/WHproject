@@ -13,7 +13,7 @@ namespace Utils.Infrastructure.Interfaces.Services
     public interface IBasicWarehouseService<T> where T : BaseModel
     {
         public IDatabaseService DatabaseService { get; set; }
-        public List<IVmodel> GetAll(Expression<Func<T, IVmodel>> selector,
+        public List<IVmodel> QuerySelector(Expression<Func<T, IVmodel>> selector,
                                           Expression<Func<T, bool>> predicate = null,
                                           Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
                                           Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null,

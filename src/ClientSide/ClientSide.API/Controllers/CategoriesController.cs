@@ -34,7 +34,7 @@ namespace ClientSide.API.Controllers
         [Route("all-categories-products")]
         public async Task<IActionResult> GetAllCategoriesWithProducts()
         {
-            var categories = await Task.Run(() => Service.GetAll(null,x=>x.Products).Select(x => x.CategoryWithProducts()).AsNoTracking().ToList());
+            var categories = await Task.Run(() => Service.QuerySelector(selector: x=>x.Category(),include: x=>x.Include(z=>z.Products),disableTracking:false).ToList());
 
             return new JsonResult(categories);
         }
@@ -43,7 +43,7 @@ namespace ClientSide.API.Controllers
         public async Task<IActionResult> GetCategoryProducts(int categoryId)
         {
 
-            var categories =await Task.Run(()=> Service.GetAll(x => x.ProductCategoryId == categoryId, z => z.Products).Select(x => x.CategoryWithProducts()).ToList());
+            var categories =await Task.Run(()=> Service.QuerySelector(predicate: x => x.ProductCategoryId == categoryId,include: z => z.Include(a=>a.Products),selector: x => x.CategoryWithProducts()).ToList());
 
             return new JsonResult(categories);
         }
