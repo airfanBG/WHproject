@@ -91,9 +91,16 @@ jane2@adventure-works.com
  "/api/Orders/order/{orderId}" *-returns Order info* <br />
   "/api/Orders/place-order" *-Add order* <br />
 
+  If you place an order the required data format is:
+
+
+
+
 ##
 **Products** <br />
  "/api/Products/all-products/{string:culture}" *-returns all products*  **By default you do not need to send culture, default is "en". Other cultures are: ("ar" "fr" "th" "he" "zh-cht")<br />
  "/api/Products/product/{poductId}" *returns concrete product* <br />
+
+
 
 
