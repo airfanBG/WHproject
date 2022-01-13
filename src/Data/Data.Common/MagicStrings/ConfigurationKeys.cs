@@ -12,5 +12,9 @@ namespace Utils.Common.MagicStrings
         public static string JWT_ValidIssuer = "JWT:ValidIssuer";
         public static string JWT_ValidAudience = "JWT:ValidAudience";
         public static string JWT_Expiration = "JWT:Expiration";
+        public static string BackupDir = "BackupDir";
+        public static string DatabaseName = "DatabaseName";
+        public static string QuartzJob = "Quartz:quartz.scheduler.instanceName";
+        public static string QuartzTimeBackupExecute = "Quartz:timeBackupExecute";
     }
 }

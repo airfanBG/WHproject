@@ -1,3 +1,4 @@
+using ClientSide.API.Qscheduler;
 using Data.WarehouseContext.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -13,6 +14,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Quartz;
 using Serilog;
 using Serilog.Sinks.MSSqlServer;
 using System;
@@ -106,6 +108,41 @@ namespace ClientSide.API
                            };
 
                        });
+            //quartz
+            //services.AddQuartzHostedService(q =>
+            //{
+            //    q.WaitForJobsToComplete = true;
+            //});
+            //string jobName = typeof(Qjob).Name;
+
+            //var jobKey = new JobKey(jobName);
+
+            //// ASP.NET Core hosting
+            //services.AddQuartz(q =>
+            //{
+            //    q.SchedulerId = "Scheduler-Core";
+
+            //    q.UseMicrosoftDependencyInjectionJobFactory();
+
+            //    q.UseSimpleTypeLoader();
+            //    q.UseInMemoryStore();
+            //    q.UseDefaultThreadPool(tp =>
+            //    {
+            //        tp.MaxConcurrency = 10;
+            //    });
+            //    q.ScheduleJob<Qjob>(trigger => trigger
+            //        .WithIdentity("Combined Configuration Trigger")
+                    
+            //        .WithDailyTimeIntervalSchedule(x => x.WithInterval(1, IntervalUnit.Minute))
+            //        .WithDescription("trigger was called")
+            //    );
+            //    q.AddJob<Qjob>(j => j
+            //        .StoreDurably()
+            //        .WithDescription("run job")
+            //    );
+               
+            //});
+
             services.AddAuthorization();
             
             services.AddSwaggerGen(c =>
