@@ -33,12 +33,12 @@ namespace ClientSide.API.Controllers
 
    
         [HttpGet]
-        [Route("all-products")]
-        public async Task<IActionResult> GetAllProducts()
+        [Route("all-products/{string:culture}")]
+        public async Task<IActionResult> GetAllProducts(string culture="en")
         {
            
             Logger.LogInformation("{Email} {UserId} Get all products", User.FindFirst("email"), User.FindFirst("userid"));
-          var res=await Task.Run(() => Service.QuerySelector(predicate: null, selector: x => x.Product(), include: a => a.Include(o => o.ProductModel).ThenInclude(o => o.ProductModelProductDescriptions).ThenInclude(o => o.ProductDescription).Include(o => o.ProductCategory)));
+          var res=await Task.Run(() => Service.QuerySelector(predicate: null, selector: x => x.Product(), include: a => a.Include(o => o.ProductModel).ThenInclude(o => o.ProductModelProductDescriptions.Where(x=>x.Culture==culture)).ThenInclude(o => o.ProductDescription).Include(o => o.ProductCategory)));
             
             return Ok(res);
         }
