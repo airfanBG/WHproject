@@ -58,13 +58,13 @@ namespace ClientSide.API.Controllers
             return Ok(json);
         }
         [HttpPost]
-        [Route("place-order")]
+        [Route("order/place-order")]
         public async Task<IActionResult> AddOrder([FromBody]SalesOrderHeader model)
         {
             Logger.LogInformation("{Email} {UserId} Add order", User.FindFirst("email"), User.FindFirst("userid"));
-            model.PurchaseOrderNumber = Guid.NewGuid().ToString().Substring(0, 10);
+            model.PurchaseOrderNumber ="PO"+ Guid.NewGuid().ToString().Substring(0, 10);
             model.AccountNumber = Guid.NewGuid().ToString().Substring(0,5);
-
+           
             model.Rowguid = Guid.NewGuid();
             model.RevisionNumber = 8;
             model.Status = 1;
@@ -73,6 +73,7 @@ namespace ClientSide.API.Controllers
            
             return new JsonResult(await Service.Add(model));
         }
-       
+    
+
     }
 }

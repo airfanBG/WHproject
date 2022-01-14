@@ -26,7 +26,6 @@ Register address at: "/api/auth/register" you must send **POST** request with on
 ```
 
 ## In progress...
-
 <b>Emails customer</b>:
 orlando0@adventure-works.com
 keith0@adventure-works.com

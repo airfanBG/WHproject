@@ -27,6 +27,7 @@ namespace Utils.Services.DataServices
                                           bool disableTracking = true)
         {
             IQueryable<T> query = DatabaseService.Context.Set<T>();
+          
             if (disableTracking)
             {
                 query = query.AsNoTracking();
