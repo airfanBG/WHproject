@@ -26,49 +26,91 @@ namespace Utils.Services.DataServices.Identity
         private IConfiguration Configuration { get; }
         private IDatabaseService DatabaseService { get; }
 
-        public async Task<string> LoginAsync(LoginModel model)
+        public async Task<string> LoginAsync(LoginModel model, bool isCustomer)
         {
             try
             {
-                if (model==null)
+                if (model == null)
                 {
                     return "";
                 }
                 await using (DatabaseService)
                 {
-                    var user = DatabaseService.Context.Set<Customer>().FirstOrDefault(x => x.EmailAddress == model.Email);
-                    if (user == null) return "";
-                    else
+                    if (isCustomer)
                     {
-                        var verify = SecurePasswordHasher.VerifyPassword(model.Password, user.PasswordHash, user.PasswordSalt);
-                        if (!verify) return "";
+                        var user = DatabaseService.Context.Set<Customer>().FirstOrDefault(x => x.EmailAddress == model.Email);
+                        if (user == null) return "";
                         else
                         {
-                            var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration[ConfigurationKeys.JWT_TokenSecret]));
-
-                            var tokenHandler = new JwtSecurityTokenHandler();
-                            Claim customerClaimId = null;
-                           
-                            var tokenDescriptor = new SecurityTokenDescriptor
+                            var verify = SecurePasswordHasher.VerifyPassword(model.Password, user.PasswordHash, user.PasswordSalt);
+                            if (!verify) return "";
+                            else
                             {
-                                Subject = new ClaimsIdentity(new Claim[]
+                                var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration[ConfigurationKeys.JWT_TokenSecret]));
+
+                                var tokenHandler = new JwtSecurityTokenHandler();
+                                Claim customerClaimId = null;
+
+                                var tokenDescriptor = new SecurityTokenDescriptor
                                 {
+                                    Subject = new ClaimsIdentity(new Claim[]
+                                    {
                                     new Claim(ClaimTypes.Role, "Customer"),
                                     new Claim("email", model.Email),
                                     new Claim("userid", user.CustomerId.ToString()),
-                                   
+
                                     customerClaimId ?? null!
-                                }),
+                                    }),
 
-                                Expires = DateTime.UtcNow.AddMinutes(int.Parse(Configuration[ConfigurationKeys.JWT_Expiration])),
-                                Issuer = Configuration[ConfigurationKeys.JWT_ValidIssuer],
-                                Audience = Configuration[ConfigurationKeys.JWT_ValidAudience],
-                                SigningCredentials = new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
-                            };
+                                    Expires = DateTime.UtcNow.AddMinutes(int.Parse(Configuration[ConfigurationKeys.JWT_Expiration])),
+                                    Issuer = Configuration[ConfigurationKeys.JWT_ValidIssuer],
+                                    Audience = Configuration[ConfigurationKeys.JWT_ValidAudience],
+                                    SigningCredentials = new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
+                                };
 
-                            var token = tokenHandler.CreateToken(tokenDescriptor);
+                                var token = tokenHandler.CreateToken(tokenDescriptor);
 
-                            return tokenHandler.WriteToken(token);
+                                return tokenHandler.WriteToken(token);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        var user = DatabaseService.Context.Set<User>().FirstOrDefault(x => x.Email == model.Email);
+                        if (user == null)return "";
+                        else
+                        {
+                            var verify = SecurePasswordHasher.VerifyPassword(model.Password, user.Password, user.PasswordSalt);
+                            if (!verify) return "";
+                            else
+                            {
+                                var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration[ConfigurationKeys.JWT_TokenSecret]));
+
+                                var tokenHandler = new JwtSecurityTokenHandler();
+                                Claim customerClaimId = null;
+
+                                var tokenDescriptor = new SecurityTokenDescriptor
+                                {
+                                    Subject = new ClaimsIdentity(new Claim[]
+                                    {
+                                    new Claim(ClaimTypes.Role, "Admin"),
+                                    new Claim("email", model.Email),
+                                    new Claim("userid", user.UserId.ToString()),
+
+                                    customerClaimId ?? null!
+                                    }),
+
+                                    Expires = DateTime.UtcNow.AddMinutes(int.Parse(Configuration[ConfigurationKeys.JWT_Expiration])),
+                                    Issuer = Configuration[ConfigurationKeys.JWT_ValidIssuer],
+                                    Audience = Configuration[ConfigurationKeys.JWT_ValidAudience],
+                                    SigningCredentials = new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
+                                };
+
+                                var token = tokenHandler.CreateToken(tokenDescriptor);
+
+                                return tokenHandler.WriteToken(token);
+                            }
+
                         }
                     }
                 }
@@ -81,34 +123,53 @@ namespace Utils.Services.DataServices.Identity
             }
         }
 
-        public async Task<int> RegisterAsync(RegisterModel model)
+        public async Task<int> RegisterAsync(RegisterModel model, bool isCustomer)
         {
             try
             {
-                if (model==null)
+                if (model == null)
                 {
                     return 0;
                 }
                 await using (DatabaseService)
                 {
-                    var userExists = DatabaseService.Context.Set<Customer>().FirstOrDefault(x => x.EmailAddress == model.Email && x.isTaken==false);
-                   
-
-                    if (userExists != null)
+                    if (isCustomer)
                     {
-                        var hashed = SecurePasswordHasher.Hash(model.Password);
-                        userExists.PasswordHash = hashed.Item1;
-                        userExists.ModifiedDate = DateTime.UtcNow;
-                        userExists.isTaken = true;
-                   
-                        userExists.PasswordSalt = hashed.Item2;
-                     
-                        DatabaseService.Context.Set<Customer>().Update(userExists);
-                        
-                        DatabaseService.Context.SaveChanges();
-                        return 1;
+                        var userExists = DatabaseService.Context.Set<Customer>().FirstOrDefault(x => x.EmailAddress == model.Email && x.isTaken == false);
+
+
+                        if (userExists != null)
+                        {
+                            var hashed = SecurePasswordHasher.Hash(model.Password);
+                            userExists.PasswordHash = hashed.Item1;
+                            userExists.ModifiedDate = DateTime.UtcNow;
+                            userExists.isTaken = true;
+
+                            userExists.PasswordSalt = hashed.Item2;
+
+                            DatabaseService.Context.Set<Customer>().Update(userExists);
+
+                            DatabaseService.Context.SaveChanges();
+                            return 1;
+                        }
+                        return 0;
                     }
-                    return 0;
+                    else
+                    {
+                        var userExists = DatabaseService.Context.Set<User>().FirstOrDefault(x => x.Email == model.Email);
+                        if (userExists == null)
+                        {
+                            var hashed = SecurePasswordHasher.Hash(model.Password);
+                            userExists.Password = hashed.Item1;
+                            userExists.ModifiedDate = DateTime.UtcNow;
+                            userExists.PasswordSalt = hashed.Item2;
+
+                            await DatabaseService.Context.Set<User>().AddAsync(userExists);
+                            DatabaseService.Context.SaveChanges();
+                            return 1;
+                        }
+                        return 0;
+                    }
                 }
 
 
@@ -120,6 +181,6 @@ namespace Utils.Services.DataServices.Identity
             }
 
         }
-       
+
     }
 }

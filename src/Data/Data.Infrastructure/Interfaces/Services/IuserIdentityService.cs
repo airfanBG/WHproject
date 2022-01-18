@@ -6,7 +6,7 @@ namespace Utils.Infrastructure.Interfaces.Services
 {
     public interface IuserIdentityService
     {
-        public Task<string> LoginAsync(LoginModel model);
-        public Task<int> RegisterAsync(RegisterModel model);
+        public Task<string> LoginAsync(LoginModel model, bool isCustomer);
+        public Task<int> RegisterAsync(RegisterModel model, bool isCustomer);
     }
 }

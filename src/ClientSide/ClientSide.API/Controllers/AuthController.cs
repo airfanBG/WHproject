@@ -22,10 +22,10 @@ namespace ClientSide.API.Controllers
             Logger = logger;
         }
         [HttpPost]
-        [Route("register")]
+        [Route("register-customer")]
         public async Task<IActionResult> Register([FromBody] RegisterModel model)
         {
-            var result =await Service.RegisterAsync(model);
+            var result =await Service.RegisterAsync(model,true);
             if (result == 1)
             {
                 Logger.LogInformation($"User {model.Email} is registered.");
@@ -34,13 +34,25 @@ namespace ClientSide.API.Controllers
             return BadRequest();
         }
         [HttpPost]
-        [Route("login")]
+        [Route("register-user")]
+        public async Task<IActionResult> RegisterUser([FromBody] RegisterModel model)
+        {
+            var result = await Service.RegisterAsync(model, false);
+            if (result == 1)
+            {
+                Logger.LogInformation($"User {model.Email} is registered.");
+                return Ok();
+            }
+            return BadRequest();
+        }
+        [HttpPost]
+        [Route("login-customer")]
         public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
 
-            var result = await Service.LoginAsync(model);
+            var result = await Service.LoginAsync(model,true);
            
-            if (result!=null)
+            if (!string.IsNullOrEmpty(result))
             {
                 var token = new JwtSecurityTokenHandler().ReadJwtToken(result);
                 var claimEmail = token.Claims.First(c => c.Type == "email").Value;
@@ -49,6 +61,26 @@ namespace ClientSide.API.Controllers
                 User.AddIdentity(new ClaimsIdentity(new Claim[] { new Claim("email", claimEmail.Trim()), new Claim(ClaimTypes.Role,claimRole),new Claim("userid",claimId)}));
                 
                 Logger.LogInformation("{Email} {UserId}",claimEmail,claimId);
+                return Ok(result);
+            }
+            return BadRequest();
+        }
+        [HttpPost]
+        [Route("login-user")]
+        public async Task<IActionResult> LoginUser([FromBody] LoginModel model)
+        {
+
+            var result = await Service.LoginAsync(model, false);
+
+            if (!string.IsNullOrEmpty(result))
+            {
+                var token = new JwtSecurityTokenHandler().ReadJwtToken(result);
+                var claimEmail = token.Claims.First(c => c.Type == "email").Value;
+                var claimId = token.Claims.First(c => c.Type == "userid").Value;
+                var claimRole = token.Claims.First(c => c.Type == "role").Value;
+                User.AddIdentity(new ClaimsIdentity(new Claim[] { new Claim("email", claimEmail.Trim()), new Claim(ClaimTypes.Role, claimRole), new Claim("userid", claimId) }));
+
+                Logger.LogInformation("{Email} {UserId}", claimEmail, claimId);
                 return Ok(result);
             }
             return BadRequest();

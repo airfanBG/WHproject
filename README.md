@@ -4,12 +4,13 @@ If you want to consume API, first step is to get one Email from bottom emails an
 
 The progect is optimizing regularly
 # API routings: 
-All routes returns JSON formatted data. First step is to register a user with an email from list <b>Emails customer</b>.
-Register address at: "/api/auth/register" you must send **POST** request with one of emails below (if you want to use Products API you must select one email from **Emails** . You must set { **Password, ConfirmPassword**} and send data as **JSON**. After status code **200** go to "/api/auth/login" with your email and password to get **bearer token**. Each route demands token authentication. Token expiration time is set of 60 minutes. 
+All routes returns JSON formatted data. First step is to register a customer with an email from list <b>Emails</b>.
+Register address at: "/api/auth/register" you must send **POST** request with one of emails below (if you want to use Products API you must select one email from **Emails** . You must set { **Password, ConfirmPassword**} and send data as **JSON**. After status code **200** go to "/api/auth/login" with your email and password to get **bearer token**. Each route demands token authentication. Token expiration time is set of 60 minutes.  If you want to consume all data from API you must register a new login account at:
+"/api/auth/register-user" and login at "/api/auth/login-user"
 
 **Example**
 ```
--"/api/auth/register"-
+-"/api/auth/register-customer"-
 {
     "email":"ken0@adventure-works.com",
 	"name":"George Orwell",
@@ -17,7 +18,7 @@ Register address at: "/api/auth/register" you must send **POST** request with on
     "confirmpassword":"12345"
 }
 
--"/api/auth/login"-
+-"/api/auth/login-customer"-
 {
     "email":"ken0@adventure-works.com",
     "password":"12345",
@@ -26,7 +27,7 @@ Register address at: "/api/auth/register" you must send **POST** request with on
 ```
 
 ## In progress...
-<b>Emails customer</b>:
+<b>Emails</b>:
 orlando0@adventure-works.com
 keith0@adventure-works.com
 donna0@adventure-works.com

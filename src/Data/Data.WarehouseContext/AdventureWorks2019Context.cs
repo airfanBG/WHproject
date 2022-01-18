@@ -22,7 +22,7 @@ namespace Data.WarehouseContext.Models
             : base(options)
         {
         }
-
+        public virtual DbSet<User> Users { get; set; } = null!;
         public virtual DbSet<Address> Addresses { get; set; } = null!;
         public virtual DbSet<Log> Logs { get; set; } = null!;
         public virtual DbSet<BuildVersion> BuildVersions { get; set; } = null!;
