@@ -49,7 +49,6 @@ namespace ClientSide.API.Controllers
         [Route("login-customer")]
         public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
-
             var result = await Service.LoginAsync(model,true);
            
             if (!string.IsNullOrEmpty(result))
@@ -61,9 +60,11 @@ namespace ClientSide.API.Controllers
                 User.AddIdentity(new ClaimsIdentity(new Claim[] { new Claim("email", claimEmail.Trim()), new Claim(ClaimTypes.Role,claimRole),new Claim("userid",claimId)}));
                 
                 Logger.LogInformation("{Email} {UserId}",claimEmail,claimId);
+            
+             
                 return Ok(result);
             }
-            return BadRequest();
+            return Unauthorized();
         }
         [HttpPost]
         [Route("login-user")]
@@ -81,9 +82,11 @@ namespace ClientSide.API.Controllers
                 User.AddIdentity(new ClaimsIdentity(new Claim[] { new Claim("email", claimEmail.Trim()), new Claim(ClaimTypes.Role, claimRole), new Claim("userid", claimId) }));
 
                 Logger.LogInformation("{Email} {UserId}", claimEmail, claimId);
+
+                
                 return Ok(result);
             }
-            return BadRequest();
+            return Unauthorized();
         }
 
     }

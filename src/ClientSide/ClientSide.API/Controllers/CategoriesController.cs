@@ -14,7 +14,7 @@ namespace ClientSide.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+   // [Authorize]
     public class CategoriesController : ControllerBase
     {
         public IBasicWarehouseService<ProductCategory> Service { get; }
@@ -51,7 +51,7 @@ namespace ClientSide.API.Controllers
         public async Task<IActionResult> GetCategoryProducts(int categoryId)
         {
 
-            var categories =await Task.Run(()=> Service.QuerySelector(predicate: x => x.ProductCategoryId == categoryId,include: z => z.Include(a=>a.Products),selector: x => x.CategoryWithProducts()).ToList());
+            var categories =await Task.Run(()=> Service.QuerySelector(predicate: x => x.ProductCategoryId == categoryId,include: z => z.Include(a=>a.Products),selector: x => x.CategoryWithProducts()).FirstOrDefault());
             var json = JsonConvert.SerializeObject(categories, Formatting.Indented, new JsonSerializerSettings
             {
                 NullValueHandling = NullValueHandling.Ignore

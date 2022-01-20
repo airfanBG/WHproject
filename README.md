@@ -4,8 +4,8 @@ If you want to consume API, first step is to get one Email from bottom emails an
 
 The progect is optimizing regularly
 # API routings: 
-All routes returns JSON formatted data. First step is to register a customer with an email from list <b>Emails</b>.
-Register address at: "/api/auth/register" you must send **POST** request with one of emails below (if you want to use Products API you must select one email from **Emails** . You must set { **Password, ConfirmPassword**} and send data as **JSON**. After status code **200** go to "/api/auth/login" with your email and password to get **bearer token**. Each route demands token authentication. Token expiration time is set of 60 minutes.  If you want to consume all data from API you must register a new login account at:
+All routes returns JSON formatted data. First step is to register a customer with an email from list <b>Emails</b>. If you want to register as User the email must be different from list.
+Register address at: "/api/auth/register" you must send **POST** request with one of the emails below (if you want to use Products API you must select one email from **Emails** . You must set { **Password, ConfirmPassword**} and send data as **JSON**. After status code **200** go to "/api/auth/login" with your email and password to get **bearer token**. If login is successful you will receive status code 200 and bearer jwt. Token expiration time is set of 60 minutes.  If you want to consume all data from API you must register a new login account at:
 "/api/auth/register-user" and login at "/api/auth/login-user"
 
 **Example**
@@ -73,7 +73,7 @@ vamsi1@adventure-works.com
 jane2@adventure-works.com
 
 ##
-**Categories** <br />
+**Categories** -not requires a Authentication<br />
 "/api/Categories/all-categories" *-returns all Categories* <br />
 "/api/Categories/all-categories-products" *-returns all Products in categories* <br />
 "/api/Categories/category-products/{categoryId}" *-returns all products in Category by Category ID* <br />
@@ -122,7 +122,7 @@ jane2@adventure-works.com
 
 
 ##
-**Products** <br />
+**Products** -not requires a Authentication<br />
  "/api/Products/all-products/{string:culture}" *-returns all products*  **By default you do not need to send culture, default is "en". Other cultures are: ("ar" "fr" "th" "he" "zh-cht")<br />
  "/api/Products/product/{poductId}" *returns concrete product* <br />
  "/api/Products/product/top-twenty" *returns top 20 most selled* <br />
