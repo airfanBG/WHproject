@@ -1,5 +1,7 @@
-Web API project **Students Assignment** based on AdventureWorksLT2019 database. There is some changes from original DB so the Db is in *ClientSide.WebAPI/DatabaseBackup/AdventureWorksLT2019.bak** folder. When load project for the first time it automatically creates database in SQL if not exists.
-If you want to consume API, first step is to get one Email from bottom emails and make registration. After that you must **Login** and take your **Bearer** token to login.
+This Web API project is part of **Student Assignment** about Web project based on AdventureWorksLT2019 database. There is some changes from original DB so the Db is in *ClientSide.WebAPI/DatabaseBackup/AdventureWorksLT2019.bak** folder. Students must create their onw web project which consumes WEB API data.
+When load api project for the first time it automatically creates database in SQL if not exists.
+
+If you want to consume API, first step is to select an Email from bottom emails and make registration. After that you must **Login** and take your **Bearer** token to login.
 **The API is deployed on students.vtuwork.com .**
 
 The progect is optimizing regularly
@@ -13,7 +15,7 @@ Register address at: "/api/auth/register" you must send **POST** request with on
 -"/api/auth/register-customer"-
 {
     "email":"ken0@adventure-works.com",
-	"name":"George Orwell",
+	"name":"Ken Orwell",
     "password":"12345",
     "confirmpassword":"12345"
 }
@@ -123,9 +125,9 @@ jane2@adventure-works.com
 
 ##
 **Products** -not requires a Authentication<br />
- "/api/Products/all-products/{string:culture}" *-returns all products*  **By default you do not need to send culture, default is "en". Other cultures are: ("ar" "fr" "th" "he" "zh-cht")<br />
+ "/api/Products/all-products/{string:culture}" *-returns all products*  **By default you do not need to send culture, by default is "en". Other cultures are: ("ar" "fr" "th" "he" "zh-cht")<br />
  "/api/Products/product/{poductId}" *returns concrete product* <br />
- "/api/Products/product/top-twenty" *returns top 20 most selled* <br />
+ "/api/Products/product/top-twenty" *returns top 20 selled* <br />
  "/api/Products/product/top-ten/{categoryId}" *returns most selled by category* <br />
 
 
