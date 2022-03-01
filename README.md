@@ -1,4 +1,4 @@
-This Web API project is part of **Student Assignment** about Web project based on AdventureWorksLT2019 database. There is some changes from original DB so the Db is in *ClientSide.WebAPI/DatabaseBackup/AdventureWorksLT2019.bak** folder. Students must create their onw web project which consumes WEB API data.
+This Web API project is part of **Student Assignment** about Web project based on AdventureWorksLT2019 database. Products have an images stored in db as binary data. This is original data format from MS. Some requests with huge amount of data are slow, have in mind this. There is some changes from original DB so the Db is in *ClientSide.WebAPI/DatabaseBackup/AdventureWorksLT2019.bak** folder. Students must create their onw web project which consumes WEB API data.
 When load api project for the first time it automatically creates database in SQL if not exists.
 
 If you want to consume API, first step is to select an Email from bottom emails and make registration. After that you must **Login** and take your **Bearer** token to login.
@@ -74,7 +74,7 @@ jeffrey3@adventure-works.com
 vamsi1@adventure-works.com
 jane2@adventure-works.com
 
-"Products have an images stored in db as binary data. This is original data format from MS. Some requests with huge amount of data are slow, have in mind this."
+
 ##
 **Categories** -not requires a Authentication<br />
 "/api/Categories/all-categories" *-returns all Categories* <br />
