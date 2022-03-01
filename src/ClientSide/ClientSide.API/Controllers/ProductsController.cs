@@ -19,6 +19,7 @@ namespace ClientSide.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+   
     //[Authorize]
     public class ProductsController : ControllerBase
     {
@@ -40,11 +41,7 @@ namespace ClientSide.API.Controllers
             Logger.LogInformation("{Email} {UserId} Get all products", User.FindFirst("email"), User.FindFirst("userid"));
           var res=await Task.Run(() => Service.QuerySelector(predicate: null, selector: x => x.Product(), include: a => a.Include(o => o.ProductModel).ThenInclude(o => o.ProductModelProductDescriptions.Where(x=>x.Culture==culture)).ThenInclude(o => o.ProductDescription).Include(o => o.ProductCategory)));
 
-            var json = JsonConvert.SerializeObject(res, Formatting.Indented, new JsonSerializerSettings
-            {
-                NullValueHandling = NullValueHandling.Ignore
-            });
-            return Ok(json);
+            return Ok(res);
         }
         [HttpGet]
         [Route("product/{productId}/{culture}")]
@@ -52,13 +49,9 @@ namespace ClientSide.API.Controllers
         {
             Logger.LogInformation("{Email} {UserId} Get Product {productId}", User.FindFirst("email"), User.FindFirst("userid"), productId);
 
-            var res=await Task.Run(()=> Service.QuerySelector(predicate: x => x.ProductId == productId, selector: z => z.Product(), include: a => a.Include(o => o.ProductModel).ThenInclude(o => o.ProductModelProductDescriptions.Where(x=>x.Culture==culture)).ThenInclude(o => o.ProductDescription).Include(o => o.ProductCategory)));
+            var res=await Task.Run(()=> Service.QuerySelector(predicate: x => x.ProductId == productId, selector: z => z.Product(), include: a => a.Include(o => o.ProductModel).ThenInclude(o => o.ProductModelProductDescriptions.Where(x=>x.Culture==culture)).ThenInclude(o => o.ProductDescription).Include(o => o.ProductCategory)).FirstOrDefault());
 
-            var json = JsonConvert.SerializeObject(res, Formatting.Indented, new JsonSerializerSettings
-            {
-                NullValueHandling = NullValueHandling.Ignore
-            });
-            return Ok(json);
+            return Ok(res);
         }
         [HttpGet]
         [Route("product/top-twenty")]
@@ -69,11 +62,7 @@ namespace ClientSide.API.Controllers
 
             var res = await Task.Run(() => Service.DatabaseService.Context.Set<Product>().Include(x => x.SalesOrderDetails).Include(z => z.ProductModel).Include(x => x.ProductCategory).Select(x => new { Product = x.Product(), TotalSaleCount = x.SalesOrderDetails.Sum(x => x.OrderQty) }).OrderByDescending(x => x.TotalSaleCount).Take(20).ToList());
 
-            var json = JsonConvert.SerializeObject(res, Formatting.Indented, new JsonSerializerSettings
-            {
-                NullValueHandling = NullValueHandling.Ignore
-            });
-            return Ok(json);
+            return Ok(res);
         }
         [HttpGet]
         [Route("product/top-ten/{categoryId}")]
@@ -82,13 +71,9 @@ namespace ClientSide.API.Controllers
             Logger.LogInformation("{Email} {UserId} Get Top products", User.FindFirst("email"), User.FindFirst("userid"));
 
 
-            var res =await Task.Run(()=> Service.DatabaseService.Context.Set<Product>().Include(x => x.SalesOrderDetails).Include(z => z.ProductModel).Include(x => x.ProductCategory).Where(x=>x.ProductCategoryId==categoryId).Select(x => new { Product = x.Product(), TotalSaleCount = x.SalesOrderDetails.Sum(x => x.OrderQty) }).OrderByDescending(x => x.TotalSaleCount).Take(20).ToList());
+            var res =await Task.Run(()=> Service.DatabaseService.Context.Set<Product>().Include(x => x.SalesOrderDetails).Include(z => z.ProductModel).Include(x => x.ProductCategory).Where(x=>x.ProductCategoryId==categoryId).Select(x => new { Product = x.Product(), TotalSalesCount = x.SalesOrderDetails.Sum(x => x.OrderQty) }).OrderByDescending(x => x.TotalSalesCount).Take(20).ToList());
 
-            var json = JsonConvert.SerializeObject(res, Formatting.Indented, new JsonSerializerSettings
-            {
-                NullValueHandling = NullValueHandling.Ignore
-            });
-            return Ok(json);
+            return Ok(res);
         }
 
     }

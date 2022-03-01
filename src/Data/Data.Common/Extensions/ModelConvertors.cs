@@ -69,6 +69,8 @@ namespace Utils.Common.Extensions
                 Title = model.Title,
                 SalesOrder = model.SalesOrderHeaders.Where(z => z.SalesOrderId == orderId).Select(x => new SalesOrderHeaderVM()
                 {
+                    SalesOrderId=x.SalesOrderId,
+                    RevisionNumber=x.RevisionNumber,
                     AccountNumber = x.AccountNumber,
                     OrderDate = x.OrderDate,
                     ShipDate = x.ShipDate,
@@ -105,12 +107,12 @@ namespace Utils.Common.Extensions
                     ProductModelId = model.ProductModel.ProductModelId,
                     ProductModelProductDescriptions = model.ProductModel.ProductModelProductDescriptions.Select(z => new ProductModelDescriptionVM()
                     {
+                        ProductDescriptionId=z.ProductDescriptionId,
                         Description = z.ProductDescription.Description
                     }).ToList()
                 },
                 StandardCost = model.StandardCost,
-                ThumbnailPhotoFileName = model.ThumbnailPhotoFileName,
-                ThumbNailPhoto = model.ThumbNailPhoto,
+                ThumbNailPhoto = model.PhotoBytes,
                 ProductCategory = new ProductCategoryVM()
                 {
                     Name = model.ProductCategory.Name,
@@ -149,8 +151,7 @@ namespace Utils.Common.Extensions
                     DiscontinuedDate = z.DiscontinuedDate,
                     Weight = z.Weight,
                     StandardCost = z.StandardCost,
-                    ThumbnailPhotoFileName = z.ThumbnailPhotoFileName,
-                    ThumbNailPhoto = z.ThumbNailPhoto,
+                    ThumbNailPhoto = z.PhotoBytes,
                 }).ToList()
 
             };
@@ -160,6 +161,7 @@ namespace Utils.Common.Extensions
         {
             return new SalesOrderHeaderVM()
             {
+                SalesOrderId = model.SalesOrderId,
                 AccountNumber = model.AccountNumber,
                 TaxAmt = model.TaxAmt,
                 Comment = model.Comment,
@@ -177,6 +179,7 @@ namespace Utils.Common.Extensions
                 TotalDue = model.TotalDue,
                 SalesOrderDetails=model.SalesOrderDetails.Select(x=> new SalesOrderDetailVM()
                 {
+                    SalesOrderDetailId = x.SalesOrderId,
                     LineTotal=x.LineTotal,
                     OrderQty=x.OrderQty,
                     ProductId=x.ProductId,

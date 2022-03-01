@@ -54,7 +54,7 @@ namespace ClientSide.API
               .ReadFrom.Configuration(configuration)
               .WriteTo.MSSqlServer(
                                columnOptions: columns,
-                              
+
                                connectionString: Configuration.GetConnectionString("DefaultConnection"),
                                tableName: Configuration.GetSection("Serilog:TableName").Value,
                                appConfiguration: Configuration,
@@ -70,18 +70,25 @@ namespace ClientSide.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-          
+
             services.AddScoped(typeof(IBasicWarehouseService<>), typeof(WarehouseService<>));
             services.AddScoped<IuserIdentityService, IdentityService>();
             services.AddScoped<IDatabaseService, ApplicationDbContext>();
             services.AddScoped<DbContext, AdventureWorks2019Context>();
             services.AddDbContext<AdventureWorks2019Context>(o => { o.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")); });
 
-            services.AddControllers().AddNewtonsoftJson().AddJsonOptions(a =>
+            services.AddControllers().AddNewtonsoftJson(x =>
             {
+                x.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
+                x.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
+            })
+                .AddJsonOptions(a =>
+            {
+
                 a.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
                 a.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
             });
+
             //JWT
             services.AddAuthentication(options =>
             {
@@ -104,7 +111,7 @@ namespace ClientSide.API
                                ValidAudience = Configuration[ConfigurationKeys.JWT_ValidAudience],
                                ValidIssuer = Configuration[ConfigurationKeys.JWT_ValidIssuer],
                                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration[ConfigurationKeys.JWT_TokenSecret]))
-                               
+
                            };
 
                        });
@@ -132,7 +139,7 @@ namespace ClientSide.API
             //    });
             //    q.ScheduleJob<Qjob>(trigger => trigger
             //        .WithIdentity("Combined Configuration Trigger")
-                    
+
             //        .WithDailyTimeIntervalSchedule(x => x.WithInterval(1, IntervalUnit.Minute))
             //        .WithDescription("trigger was called")
             //    );
@@ -140,11 +147,11 @@ namespace ClientSide.API
             //        .StoreDurably()
             //        .WithDescription("run job")
             //    );
-               
+
             //});
 
             services.AddAuthorization();
-            
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ClientSide.API", Version = "v1" });
@@ -188,7 +195,7 @@ namespace ClientSide.API
             app.UseAuthorization();
 
             app.UseHttpsRedirection();
-           
+
             app.UseRouting();
 
             app.UseAuthorization();

@@ -33,18 +33,15 @@ namespace ClientSide.API.Controllers
             {
                 NullValueHandling = NullValueHandling.Ignore
             });
-            return Ok(json);
+            return Ok(categories);
         }
         [HttpGet]
         [Route("all-products-by-category")]
         public async Task<IActionResult> GetAllCategoriesWithProducts()
         {
             var categories = await Task.Run(() => Service.QuerySelector(selector: x=>x.CategoryWithProducts(),include: x=>x.Include(z=>z.Products),disableTracking:true).ToList());
-            var json=JsonConvert.SerializeObject(categories, Formatting.Indented, new JsonSerializerSettings
-            {
-                NullValueHandling = NullValueHandling.Ignore
-            });
-            return Ok(json);
+          
+            return Ok(categories);
         }
         [HttpGet]
         [Route("category-products/{categoryId}")]
@@ -52,11 +49,8 @@ namespace ClientSide.API.Controllers
         {
 
             var categories =await Task.Run(()=> Service.QuerySelector(disableTracking:true,predicate: x => x.ProductCategoryId == categoryId,include: z => z.Include(a=>a.Products),selector: x => x.CategoryWithProducts()).FirstOrDefault());
-            var json = JsonConvert.SerializeObject(categories, Formatting.Indented, new JsonSerializerSettings
-            {
-                NullValueHandling = NullValueHandling.Ignore
-            });
-            return Ok(json);
+           
+            return Ok(categories);
         }
 
     }

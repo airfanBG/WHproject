@@ -78,7 +78,7 @@ jane2@adventure-works.com
 ##
 **Categories** -not requires a Authentication<br />
 "/api/Categories/all-categories" *-returns all Categories* <br />
-"/api/Categories/all-products-by-category" *-returns all Products in categories* <br />
+"/api/Categories/all-products-by-category" *-returns all Products in categories. Returns a huge amount of data. Use it once and store data in local Db.* <br />
 "/api/Categories/category-products/{categoryId}" *-returns all products in Category by Category ID* <br />
 
 ##
@@ -127,7 +127,7 @@ jane2@adventure-works.com
 ##
 **Products** -not requires a Authentication<br />
 Product description is available in ("ar" "fr" "th" "he" "zh-cht"), but "ar", "th","he","zh-cht" are deleted from Db because of encoding problems.
- "/api/Products/all-products/{string:culture}" *-returns all products*  **By default you do not need to send culture, by default is "en". Other cultures are: ("ar" "fr" "th" "he" "zh-cht")<br />
+ "/api/Products/all-products/{string:culture}" *-returns all products*  **By default you do not need to send culture, by default is "en". Other cultures are: ("ar" "fr" "th" "he" "zh-cht"). Returns a huge amount of data. Use it once and store data in local Db.<br />
  "/api/Products/product/{poductId}/("ar" "fr" "th" "he" "zh-cht") -this is optional" *returns concrete product* <br />
  "/api/Products/product/top-twenty" *returns top 20 selled* <br />
  "/api/Products/product/top-ten/{categoryId}" *returns most selled by category* <br />

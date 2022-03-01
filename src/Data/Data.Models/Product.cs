@@ -69,11 +69,8 @@ namespace Data.Models
         /// <summary>
         /// Small image of the product.
         /// </summary>
-        public byte[]? ThumbNailPhoto { get; set; }
-        /// <summary>
-        /// Small image file name.
-        /// </summary>
-        public string? ThumbnailPhotoFileName { get; set; }
+        public byte[]? PhotoBytes { get; set; }
+       
      
 
         public virtual ProductCategory? ProductCategory { get; set; }

@@ -36,26 +36,19 @@ namespace ClientSide.API.Controllers
             Logger.LogInformation("{Email} {UserId} All Orders {customerId}", User.FindFirst("email"), User.FindFirst("userid"), customerId);
            
             var res=await Task.Run(() => Service.QuerySelector(selector: z => z.SalesOrder(), predicate: x => x.CustomerId == customerId, include: z => z.Include(a => a.SalesOrderDetails), disableTracking: true));
-            var json = JsonConvert.SerializeObject(res, Formatting.Indented, new JsonSerializerSettings
-            {
-                NullValueHandling = NullValueHandling.Ignore
-            });
-            return Ok(json);
+          
+            return Ok(res);
         }
      
         [HttpGet]
         [Route("order/{orderId}")]
         public async Task<IActionResult> GetOrder(int orderId)
         {
-            int customerId =int.Parse( User.FindFirst("userid").Value);
-            Logger.LogInformation("{Email} {UserId} Get Order {customerId} {orderId}", User.FindFirst("email"), User.FindFirst("userid"),customerId ,orderId);
+            Logger.LogInformation("{Email} {UserId} Get order {orderId}", User.FindFirst("email"), User.FindFirst("userid"), orderId);
 
             var res=await Task.Run(() => Service.QuerySelector(selector: z => z.SalesOrder(), predicate: x => x.SalesOrderId == orderId, include: z => z.Include(a => a.SalesOrderDetails), disableTracking: true));
-            var json = JsonConvert.SerializeObject(res, Formatting.Indented, new JsonSerializerSettings
-            {
-                NullValueHandling = NullValueHandling.Ignore
-            });
-            return Ok(json);
+           
+            return Ok(res);
         }
         [HttpPost]
         [Route("order/place-order")]

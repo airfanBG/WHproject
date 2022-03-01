@@ -37,11 +37,8 @@ namespace ClientSide.API.Controllers
             Logger.LogInformation("{Email} {UserId} Get Customer {customerId}", User.FindFirst("email"), User.FindFirst("userid"),customerId);
             var customer =await Task.Run(()=> Service.GetAll(predicate: x => x.CustomerId == customerId));
             var res= customer.Select(x => x.Customer()).FirstOrDefault();
-            var json = JsonConvert.SerializeObject(res, Formatting.Indented, new JsonSerializerSettings
-            {
-                NullValueHandling = NullValueHandling.Ignore
-            });
-            return Ok(json);
+       
+            return Ok(res);
         }
         [HttpGet]
         [Route("customer-orders/{customerId}")]
@@ -55,11 +52,7 @@ namespace ClientSide.API.Controllers
 
             var customer = await Task.Run(() => Service.QuerySelector(selector: x => x.CustomerOrders(), predicate: x => x.CustomerId == customerId, include: i => i.Include(z => z.SalesOrderHeaders), disableTracking: true).ToList());
 
-            var json = JsonConvert.SerializeObject(customer, Formatting.Indented, new JsonSerializerSettings
-            {
-                NullValueHandling = NullValueHandling.Ignore
-            });
-            return Ok(json);
+            return Ok(customer);
         }
         [HttpGet]
         [Route("customer-order/{customerId}/{orderId}")]
@@ -73,11 +66,7 @@ namespace ClientSide.API.Controllers
             
             var customer = await Task.Run(() => Service.QuerySelector(selector: x => x.CustomerOrder(orderId), predicate: z => z.CustomerId == customerId, include: i => i.Include(x => x.SalesOrderHeaders)).FirstOrDefault());
 
-            var json = JsonConvert.SerializeObject(customer, Formatting.Indented, new JsonSerializerSettings
-            {
-                NullValueHandling = NullValueHandling.Ignore
-            });
-            return Ok(json);
+            return Ok(customer);
         }
        
     }

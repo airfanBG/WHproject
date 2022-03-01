@@ -385,9 +385,9 @@ namespace Data.WarehouseContext.Models
                     .HasColumnType("money")
                     .HasComment("Standard cost of the product.");
 
-                entity.Property(e => e.ThumbNailPhoto).HasComment("Small image of the product.");
+                entity.Property(e => e.PhotoBytes).HasComment("Small image of the product.");
 
-                entity.Property(e => e.ThumbnailPhotoFileName)
+                entity.Property(e => e.PhotoBytes)
                     .HasMaxLength(50)
                     .HasComment("Small image file name.");
 
