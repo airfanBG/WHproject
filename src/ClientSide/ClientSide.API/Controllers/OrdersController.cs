@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -51,19 +52,27 @@ namespace ClientSide.API.Controllers
             return Ok(res);
         }
         [HttpPost]
-        [Route("order/place-order")]
+        [Route("place-order")]
         public async Task<IActionResult> AddOrder([FromBody]SalesOrderHeader model)
         {
+            int id= int.Parse(User.FindFirst("userid").Value);
+           
             Logger.LogInformation("{Email} {UserId} Add order", User.FindFirst("email"), User.FindFirst("userid"));
             model.PurchaseOrderNumber ="PO"+ Guid.NewGuid().ToString().Substring(0, 10);
             model.AccountNumber = Guid.NewGuid().ToString().Substring(0,5);
-           
+            model.CustomerId = id;
             model.Rowguid = Guid.NewGuid();
             model.RevisionNumber = 8;
             model.Status = 1;
             model.OnlineOrderFlag = true;
             model.ModifiedDate = DateTime.UtcNow;
-           
+            model.OrderDate= DateTime.UtcNow;
+            model.OnlineOrderFlag = User.IsInRole("Customer") ? true : false;
+            model.DueDate =model.DueDate==default ? DateTime.UtcNow.AddDays(7) : model.DueDate ;
+            model.ShipToAddressId = model.ShipToAddressId;
+            model.BillToAddressId = model.BillToAddressId;
+            model.ShipMethod = "CARGO TRANSPORT 5";
+            
             return new JsonResult(await Service.Add(model));
         }
     

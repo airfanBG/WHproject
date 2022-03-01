@@ -58,7 +58,7 @@ namespace Utils.Services.DataServices.Identity
                                     new Claim(ClaimTypes.Role, "Customer"),
                                     new Claim("email", model.Email),
                                     new Claim("userid", user.CustomerId.ToString()),
-
+                               
                                     customerClaimId ?? null!
                                     }),
 
@@ -80,7 +80,7 @@ namespace Utils.Services.DataServices.Identity
                         if (user == null)return "";
                         else
                         {
-                            var verify = SecurePasswordHasher.VerifyPassword(model.Password, user.Password, user.PasswordSalt);
+                            var verify = SecurePasswordHasher.VerifyPassword(model.Password, user.PasswordHash, user.PasswordSalt);
                             if (!verify) return "";
                             else
                             {
@@ -96,7 +96,7 @@ namespace Utils.Services.DataServices.Identity
                                     new Claim(ClaimTypes.Role, "Admin"),
                                     new Claim("email", model.Email),
                                     new Claim("userid", user.UserId.ToString()),
-
+                                   
                                     customerClaimId ?? null!
                                     }),
 
@@ -133,6 +133,7 @@ namespace Utils.Services.DataServices.Identity
                 }
                 await using (DatabaseService)
                 {
+                    //This is when user register as customer and method executes check in db if email exists. 
                     if (isCustomer)
                     {
                         var userExists = DatabaseService.Context.Set<Customer>().FirstOrDefault(x => x.EmailAddress == model.Email && x.isTaken == false);
@@ -156,15 +157,18 @@ namespace Utils.Services.DataServices.Identity
                     }
                     else
                     {
-                        var userExists = DatabaseService.Context.Set<User>().FirstOrDefault(x => x.Email == model.Email);
-                        if (userExists == null)
+                        //This code register user of application
+                        User user = DatabaseService.Context.Set<User>().FirstOrDefault(x => x.Email == model.Email);
+                        if (user == null)
                         {
+                            user = new User();
                             var hashed = SecurePasswordHasher.Hash(model.Password);
-                            userExists.Password = hashed.Item1;
-                            userExists.ModifiedDate = DateTime.UtcNow;
-                            userExists.PasswordSalt = hashed.Item2;
+                            user.PasswordHash = hashed.Item1;
+                            user.ModifiedDate = DateTime.UtcNow;
+                            user.PasswordSalt = hashed.Item2;
+                            user.Email=model.Email;
 
-                            await DatabaseService.Context.Set<User>().AddAsync(userExists);
+                            await DatabaseService.Context.Set<User>().AddAsync(user);
                             DatabaseService.Context.SaveChanges();
                             return 1;
                         }
