@@ -36,10 +36,10 @@ namespace ClientSide.API.Controllers
             return Ok(json);
         }
         [HttpGet]
-        [Route("all-categories-products")]
+        [Route("all-products-by-category")]
         public async Task<IActionResult> GetAllCategoriesWithProducts()
         {
-            var categories = await Task.Run(() => Service.QuerySelector(selector: x=>x.Category(),include: x=>x.Include(z=>z.Products),disableTracking:false).ToList());
+            var categories = await Task.Run(() => Service.QuerySelector(selector: x=>x.CategoryWithProducts(),include: x=>x.Include(z=>z.Products),disableTracking:true).ToList());
             var json=JsonConvert.SerializeObject(categories, Formatting.Indented, new JsonSerializerSettings
             {
                 NullValueHandling = NullValueHandling.Ignore
@@ -51,7 +51,7 @@ namespace ClientSide.API.Controllers
         public async Task<IActionResult> GetCategoryProducts(int categoryId)
         {
 
-            var categories =await Task.Run(()=> Service.QuerySelector(predicate: x => x.ProductCategoryId == categoryId,include: z => z.Include(a=>a.Products),selector: x => x.CategoryWithProducts()).FirstOrDefault());
+            var categories =await Task.Run(()=> Service.QuerySelector(disableTracking:true,predicate: x => x.ProductCategoryId == categoryId,include: z => z.Include(a=>a.Products),selector: x => x.CategoryWithProducts()).FirstOrDefault());
             var json = JsonConvert.SerializeObject(categories, Formatting.Indented, new JsonSerializerSettings
             {
                 NullValueHandling = NullValueHandling.Ignore

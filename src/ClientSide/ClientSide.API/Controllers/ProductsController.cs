@@ -34,7 +34,7 @@ namespace ClientSide.API.Controllers
    
         [HttpGet]
         [Route("all-products/{culture}")]
-        public async Task<IActionResult> GetAllProducts(string culture="en")
+        public async Task<IActionResult> GetAllProducts([FromRoute]string culture="en")
         {
            
             Logger.LogInformation("{Email} {UserId} Get all products", User.FindFirst("email"), User.FindFirst("userid"));
@@ -47,12 +47,12 @@ namespace ClientSide.API.Controllers
             return Ok(json);
         }
         [HttpGet]
-        [Route("product/{productId}")]
-        public async Task<IActionResult> GetProduct(int productId)
+        [Route("product/{productId}/{culture}")]
+        public async Task<IActionResult> GetProduct(int productId,string culture="en")
         {
             Logger.LogInformation("{Email} {UserId} Get Product {productId}", User.FindFirst("email"), User.FindFirst("userid"), productId);
 
-            var res=await Task.Run(()=> Service.QuerySelector(predicate: x => x.ProductId == productId, selector: z => z.Product(), include: a => a.Include(o => o.ProductModel).ThenInclude(o => o.ProductModelProductDescriptions).ThenInclude(o => o.ProductDescription).Include(o => o.ProductCategory)));
+            var res=await Task.Run(()=> Service.QuerySelector(predicate: x => x.ProductId == productId, selector: z => z.Product(), include: a => a.Include(o => o.ProductModel).ThenInclude(o => o.ProductModelProductDescriptions.Where(x=>x.Culture==culture)).ThenInclude(o => o.ProductDescription).Include(o => o.ProductCategory)));
 
             var json = JsonConvert.SerializeObject(res, Formatting.Indented, new JsonSerializerSettings
             {
