@@ -7,7 +7,7 @@ If you want to consume API, first step is to select an Email from bottom emails 
 The progect is optimizing regularly
 # API routings: 
 All routes returns JSON formatted data. First step is to register a customer with an email from list <b>Emails</b>. If you want to register as User the email must be different from list.
-If you want to register a customer, register address is at: "/api/Auth/register-customer" ("/api/Auth/register-user"-as user (seller) respectively) you must send **POST** request with one of the emails below (if you want to use Products API you must select one email from **Emails** . You must set { **Password, ConfirmPassword**} and send data as **JSON**. After status code **200** go to "/api/Auth/login-customer"-"/api/Auth/login-user" with your email and password to get **bearer token**. If login is successful you will receive status code 200 and bearer jwt. Token expiration time is set of 60 minutes.  
+If you want to register a customer, register address is at: <b>"/api/Auth/register-customer"</b> <b>("/api/Auth/register-user"-as user (seller) respectively)</b> you must send **POST** request with one of the emails below (if you want to use Products API you must select one email from **Emails** . You must set { **Password, ConfirmPassword**} and send data as **JSON**. After status code **200** go to "/api/Auth/login-customer"-"/api/Auth/login-user" with your email and password to get **bearer token**. If login is successful you will receive status code 200 and bearer jwt. Token expiration time is set of 60 minutes.  
 
 **Example**
 ```
