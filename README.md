@@ -7,8 +7,7 @@ If you want to consume API, first step is to select an Email from bottom emails 
 The progect is optimizing regularly
 # API routings: 
 All routes returns JSON formatted data. First step is to register a customer with an email from list <b>Emails</b>. If you want to register as User the email must be different from list.
-Register address at: "/api/auth/register" you must send **POST** request with one of the emails below (if you want to use Products API you must select one email from **Emails** . You must set { **Password, ConfirmPassword**} and send data as **JSON**. After status code **200** go to "/api/auth/login" with your email and password to get **bearer token**. If login is successful you will receive status code 200 and bearer jwt. Token expiration time is set of 60 minutes.  If you want to consume all data from API you must register a new login account at:
-"/api/auth/register-user" and login at "/api/auth/login-user"
+If you want to register a customer, register address is at: "/api/Auth/register-customer" ("/api/Auth/register-user"-as user (seller) respectively) you must send **POST** request with one of the emails below (if you want to use Products API you must select one email from **Emails** . You must set { **Password, ConfirmPassword**} and send data as **JSON**. After status code **200** go to "/api/Auth/login-customer"-"/api/Auth/login-user" with your email and password to get **bearer token**. If login is successful you will receive status code 200 and bearer jwt. Token expiration time is set of 60 minutes.  
 
 **Example**
 ```
@@ -145,7 +144,7 @@ jane2@adventure-works.com
 ```
 
 ##
-**Products** -not requires a Authentication<br />
+**Products** -not requires an Authentication<br />
 Product description is available in ("ar" "fr" "th" "he" "zh-cht"), but "ar", "th","he","zh-cht" are deleted from Db because of encoding problems.
  "/api/Products/all-products/{string:culture}" *-returns all products*  **By default you do not need to send culture, by default is "en". Other cultures are: ("ar" "fr" "th" "he" "zh-cht"). Returns a huge amount of data. Use it once and store data in local Db.<br />
  "/api/Products/product/{poductId}/("ar" "fr" "th" "he" "zh-cht") -this is optional" *returns concrete product* <br />
