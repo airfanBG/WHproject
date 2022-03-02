@@ -34,7 +34,7 @@ namespace ClientSide.API.Controllers
 
    
         [HttpGet]
-        [Route("all-products/{culture}")]
+        [Route("all-products/{culture?}")]
         public async Task<IActionResult> GetAllProducts([FromRoute]string culture="en")
         {
            
@@ -44,7 +44,7 @@ namespace ClientSide.API.Controllers
             return Ok(res);
         }
         [HttpGet]
-        [Route("product/{productId}/{culture}")]
+        [Route("product/{productId}/{culture?}")]
         public async Task<IActionResult> GetProduct(int productId,string culture="en")
         {
             Logger.LogInformation("{Email} {UserId} Get Product {productId}", User.FindFirst("email"), User.FindFirst("userid"), productId);
