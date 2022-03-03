@@ -84,11 +84,11 @@ namespace Utils.Services.DataServices
                 IQueryable<T> res=null;
                 if (func==null)
                 {
-                   res = this.DatabaseService.Context.Set<T>().AsNoTracking().AsQueryable<T>();
+                   res =await Task.Run(()=> this.DatabaseService.Context.Set<T>().AsNoTracking().AsQueryable<T>());
                 }
                 else
                 {
-                    res = this.DatabaseService.Context.Set<T>().AsNoTracking().Where(func).AsQueryable<T>();
+                    res = await Task.Run(() => this.DatabaseService.Context.Set<T>().AsNoTracking().Where(func).AsQueryable<T>());
                 }
                 
                 return res;
@@ -104,7 +104,7 @@ namespace Utils.Services.DataServices
         {
             try
             {
-                var entity = this.DatabaseService.Context.Set<T>().FirstOrDefault(x => CompareIds(id));
+                var entity =await this.DatabaseService.Context.Set<T>().FirstOrDefaultAsync(x => CompareIds(id));
                 return entity;
             }
             catch (Exception)

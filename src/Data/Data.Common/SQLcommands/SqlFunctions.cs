@@ -28,7 +28,7 @@ namespace Utils.Common.SQLcommands
                             {
                                 command.ExecuteNonQuery();
                             }
-                            catch (SqlException ex)
+                            catch (SqlException)
                             {
                                 string spError = commandString.Length > 100 ? commandString.Substring(0, 100) + " ...\n..." : commandString;
                                 throw new Exception(string.Format("Please check the SqlServer script.\nFile: {0} \nLine: {1} \nError: {2} \nSQL Command: \n{3}"));
